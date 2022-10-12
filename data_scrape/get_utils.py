@@ -85,10 +85,34 @@ def get_audio_link(url, driver):
     return download_url
     #returns 'https://www.supremecourt.gov/media/audio/mp3files/15-420.mp3'
 
+def count_cases_on_scotus_site(driver):
+    years_arr = get_list_of_available_years(driver)
+    url_dict_by_year = get_scotus_site_url_dict(years_arr, driver)
+    return count_urls_from_year_dict(url_dict_by_year)
+
+def get_scotus_site_url_dict(years_arr, driver):
+    url_dict_by_year = {}
+    for year in years_arr:
+        year = str(year)
+        urls_for_year_arr = get_case_urls_from_year_page(year, driver)
+        url_dict_by_year[year] = urls_for_year_arr
+    return url_dict_by_year
+
+def count_urls_from_year_dict(year_dict):
+    urls_count = 0
+    for year in year_dict.keys():
+        urls_count += len(year_dict[year])
+    return urls_count
 
 
-
-
+def get_list_of_available_years(driver):
+    driver.get('https://www.supremecourt.gov/oral_arguments/argument_audio.aspx')
+    elems = driver.find_elements("xpath", "//*[contains(@id, 'ctl00_ctl00_MainEditable_mainContent_Repeater1_ctl')]")
+    years_arr = []
+    for el in elems:
+        if len(el.text) == 4:
+            years_arr.append(el.text)
+    return years_arr
 
 #below here are save utils, no longer needed as of now but may be useful one day:
 

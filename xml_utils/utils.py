@@ -24,7 +24,10 @@ def add_ns(root, ns):
         root.set(full_name, ns[name])
         root.set(full_name, ns[name])
 
-def save_file_to_local(url, full_path_to_dir, parser):
+def save_xml_file_to_local(url, full_path_to_dir, parser):
+    """
+    get xml from internet and save at local location
+    """
     document = requests.get(url)
     soup= BeautifulSoup(document.content,"lxml-xml")
     el = soup.find('rss')
@@ -36,7 +39,8 @@ def save_file_to_local(url, full_path_to_dir, parser):
     f.write(parser.get_parsed_string())
     f.close()
 
-def get_urls_present_in_file_for_year(year, url, path):
+
+def get_urls_present_in_local_prod_xml_file_for_year(year, path):
     year = str(year)
     soup = BeautifulSoup(open(path, encoding='utf-8'), 'lxml-xml')
     episode_arr = soup.find_all("itunes:season", text=year)
@@ -48,6 +52,17 @@ def get_urls_present_in_file_for_year(year, url, path):
         if par.name == 'item' and year_in_link==year:
             link_arr.append(par.link.text)
     return link_arr
+
+def count_items_on_prod_feed(prod_xml_url):
+    document = requests.get(prod_xml_url)
+    soup= BeautifulSoup(document.content,"lxml-xml")
+    episode_arr = soup.find_all("item")
+    checked_arr = []
+    for epi in episode_arr:
+        if 'audio/mpeg' == epi.enclosure.get('type'):
+            checked_arr.append(epi)
+    return len(checked_arr)
+
 
 
 

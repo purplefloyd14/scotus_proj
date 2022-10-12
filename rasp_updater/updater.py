@@ -13,7 +13,7 @@ from parser import MyHTMLParser
 
 
 def get_prod_xml_url():
-    return 'https://purplefloyd14.github.io/third.xml'
+    return 'https://purplefloyd14.github.io/prod.xml'
 
 def get_temp_file_info_dict():
     info = {}
@@ -22,6 +22,53 @@ def get_temp_file_info_dict():
     info['temp_file'] = 'temp.xml'
     return info
 
+
+
+
+def update_needed_bool():
+    #do we need to do an update
+    prod_xml_url = get_prod_xml_url()
+    driver = ds_get_utils.open_driver()
+    driver.delete_all_cookies()
+    number_of_items_on_scotus_site = ds_get_utils.count_cases_on_scotus_site(driver)
+    number_of_items_on_prod_xml_feed = xml_utils.count_items_on_prod_feed(prod_xml_url)
+    ds_get_utils.close_driver(driver)
+    if number_of_items_on_scotus_site == number_of_items_on_prod_xml_feed:
+        print('were good - no update needed')
+        return False #no update needed
+    elif number_of_items_on_scotus_site > number_of_items_on_prod_xml_feed:
+        diff = number_of_items_on_scotus_site - number_of_items_on_prod_xml_feed
+        print(f"we need to update. XML is missing {diff} items")
+        return True #update needed
+
+
+def update():
+    we_need_to_update = update_needed_bool()
+    if we_need_to_update:
+        save_file_to_local()
+        add_new_episodes_to_local_prod_xml()
+
+
+def add_new_episodes_to_local_prod_xml():
+    driver = ds_get_utils.open_driver()
+    url = get_prod_xml_url()
+    years_arr = ds_get_utils.get_list_of_available_years(driver)
+    years_arr_high_first = sorted(years_arr, reverse=True)
+    info = get_temp_file_info_dict()
+    temp_dir = info['temp_dir']
+    temp_loc = info['temp_loc']
+    temp_file = info['temp_file']
+    full_path_to_temp_dir = os.path.join(temp_loc, temp_dir, temp_file)
+    for year in years_arr_high_first:
+        urls_on_site = ds_get_utils.get_case_urls_from_year_page(year, driver)
+        urls_on_local_prod_xml_feed = xml_utils.get_urls_present_in_local_prod_xml_file_for_year(year, full_path_to_temp_dir)
+        if len(urls_on_site) == len(urls_on_local_prod_xml_feed):
+            continue
+        elif len(urls_on_site) > len(urls_on_local_prod_xml_feed):
+            print(f"making updates for {year}")
+            add_new_elements(year)
+    print('updates complete')
+    ds_get_utils.close_driver(driver)
 
 def save_file_to_local():
     info = get_temp_file_info_dict()
@@ -32,7 +79,7 @@ def save_file_to_local():
     full_path_to_temp_dir = os.path.join(temp_loc, temp_dir, temp_file)
     url=get_prod_xml_url()
     ds_get_utils.create_folder(temp_dir, temp_loc)
-    xml_utils.save_file_to_local(url, full_path_to_temp_dir, parser)
+    xml_utils.save_xml_file_to_local(url, full_path_to_temp_dir, parser)
 
 
 def add_new_elements(year):
@@ -43,7 +90,7 @@ def add_new_elements(year):
     full_path_to_temp_dir = os.path.join(temp_loc, temp_dir, temp_file)
     url = get_prod_xml_url()
     driver = ds_get_utils.open_driver()
-    xml_urls = xml_utils.get_urls_present_in_file_for_year(year, url, full_path_to_temp_dir)
+    xml_urls = xml_utils.get_urls_present_in_local_prod_xml_file_for_year(year, full_path_to_temp_dir)
     scotus_urls = ds_get_utils.get_case_urls_from_year_page(year, driver)
     missing_urls = [x for x in scotus_urls if x not in xml_urls]
     for url in missing_urls:
@@ -51,6 +98,7 @@ def add_new_elements(year):
         case_info_dict = ds_get.create_episode_dict_from_case_url(url, driver)
         xml_utils.insert_episode(case_info_dict, full_path_to_temp_dir)
     print("done")
+    ds_get_utils.close_driver(driver)
 
 def upload_file_to_github():
     return
