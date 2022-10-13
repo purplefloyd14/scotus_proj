@@ -10,10 +10,10 @@ import xml.etree.ElementTree as ET
 import time
 import os
 from parser import MyHTMLParser
-
+from github_upload import push_utils
 
 def get_prod_xml_url():
-    return 'https://purplefloyd14.github.io/prod.xml'
+    return 'https://purplefloyd14.github.io/dev.xml'
 
 def get_temp_file_info_dict():
     info = {}
@@ -21,9 +21,6 @@ def get_temp_file_info_dict():
     info['temp_loc'] = os.getcwd()
     info['temp_file'] = 'temp.xml'
     return info
-
-
-
 
 def update_needed_bool():
     #do we need to do an update
@@ -46,20 +43,38 @@ def update():
     we_need_to_update = update_needed_bool()
     if we_need_to_update:
         save_file_to_local()
-        add_new_episodes_to_local_prod_xml()
+        add_new_episodes_to_local_prod_xml(new_first=True)
+        # info = get_temp_file_info_dict()
+        # push_utils.push_local_prod_to_github(info)
 
 
-def add_new_episodes_to_local_prod_xml():
+def att():
+    info = get_temp_file_info_dict()
+    push_utils.push_local_prod_to_github(info)
+
+
+def populate():
+    #should only be run when there is a new (unpopulated template)
+    #if running this, template should be @ dev.xml, so point URL there
+    we_need_to_update = update_needed_bool()
+    if we_need_to_update:
+        save_file_to_local()
+        add_new_episodes_to_local_prod_xml(new_first=False)
+
+
+def add_new_episodes_to_local_prod_xml(new_first):
     driver = ds_get_utils.open_driver()
     url = get_prod_xml_url()
-    years_arr = ds_get_utils.get_list_of_available_years(driver)
-    years_arr_high_first = sorted(years_arr, reverse=True)
+    years_arr = sorted(ds_get_utils.get_list_of_available_years(driver))
+    if new_first:
+        #work from newest recent to oldest
+        years_arr = sorted(years_arr, reverse=True)
     info = get_temp_file_info_dict()
     temp_dir = info['temp_dir']
     temp_loc = info['temp_loc']
     temp_file = info['temp_file']
     full_path_to_temp_dir = os.path.join(temp_loc, temp_dir, temp_file)
-    for year in years_arr_high_first:
+    for year in years_arr:
         urls_on_site = ds_get_utils.get_case_urls_from_year_page(year, driver)
         urls_on_local_prod_xml_feed = xml_utils.get_urls_present_in_local_prod_xml_file_for_year(year, full_path_to_temp_dir)
         if len(urls_on_site) == len(urls_on_local_prod_xml_feed):
@@ -76,10 +91,10 @@ def save_file_to_local():
     temp_loc = info['temp_loc']
     temp_file = info['temp_file']
     parser = MyHTMLParser()
-    full_path_to_temp_dir = os.path.join(temp_loc, temp_dir, temp_file)
+    full_path_to_temp_file = os.path.join(temp_loc, temp_dir, temp_file)
     url=get_prod_xml_url()
     ds_get_utils.create_folder(temp_dir, temp_loc)
-    xml_utils.save_xml_file_to_local(url, full_path_to_temp_dir, parser)
+    xml_utils.save_xml_file_to_local(url, full_path_to_temp_file, parser)
 
 
 def add_new_elements(year):

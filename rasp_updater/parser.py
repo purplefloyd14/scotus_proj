@@ -15,6 +15,8 @@ class MyHTMLParser(HTMLParser):
         return ' '.join('{}="{}"'.format(name, escape(value)) for (name, value) in attrs)
 
     def handle_starttag(self, tag, attrs):
+        if tag == 'pubdate':
+            tag = 'pubDate'
         if tag != self.__current_tag:
             self.lines += [self.__current_line]
 
@@ -23,6 +25,8 @@ class MyHTMLParser(HTMLParser):
         self.__t += 1
 
     def handle_endtag(self, tag):
+        if tag == 'pubdate':
+            tag = 'pubDate'
         self.__t -= 1
         if tag != self.__current_tag:
             self.lines += [self.__current_line]
@@ -33,7 +37,10 @@ class MyHTMLParser(HTMLParser):
         self.__current_line = ''
 
     def handle_data(self, data):
-        self.__current_line += data
+        if '&' in data:
+            self.__current_line += data.replace('&', '&amp;')
+        else:
+            self.__current_line += data
 
     def get_parsed_string(self):
         return ''.join(l for l in self.lines if l)
