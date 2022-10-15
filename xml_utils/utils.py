@@ -4,6 +4,7 @@ import datetime
 import os
 import requests
 from bs4 import BeautifulSoup
+import time
 
 #pub date must be expressed in the following mannor:
 #Tue, 30 Nov 2004 13:43:02 CST
@@ -34,10 +35,19 @@ def save_xml_file_to_local(url, full_path_to_dir, parser):
     el.attrs['xmlns:content'] = "http://purl.org/rss/1.0/modules/content/"
     el.attrs['xmlns:itunes'] = "http://www.itunes.com/dtds/podcast-1.0.dtd"
     f = open(full_path_to_dir, "w")
-    # parser.feed('<?xml version="1.0" encoding="UTF-8"?>')
     parser.feed('<?xml version="1.0" encoding="UTF-8"?> \n' + str(soup))
-    f.write(parser.get_parsed_string())
+    parsed_string = parser.get_parsed_string()
+    f.write(parsed_string)
     f.close()
+
+def get_parsed_xml_from_local(full_path_to_dir, parser):
+    """
+    return parsed xml from local
+    """
+    f = open(full_path_to_dir, "r")
+    parser.feed('<?xml version="1.0" encoding="UTF-8"?> \n' + str(f.read()))
+    parsed_string = parser.get_parsed_string()
+    return parsed_string
 
 
 def get_urls_present_in_local_prod_xml_file_for_year(year, path):
@@ -64,8 +74,6 @@ def count_items_on_prod_feed(prod_xml_url):
     return len(checked_arr)
 
 
-
-
 def stub_episode_dict():
     episode_dict={}
     now = datetime.datetime.now()
@@ -84,13 +92,14 @@ def insert_episode(episode_dict, feed):
     # episode_dict = stub_episode_dict()
     episode_xml_item = generate_xml_for_episode(episode_dict)
     register_all_namespaces(feed)
-    tree = ET.parse(feed)
+    tree = ET.parse(feed,ET.XMLParser(encoding='utf-8'))
     root = tree.getroot()
     channel = root.find('channel')
     entry_index = determine_entry_index(root, channel)
     channel.insert(entry_index, episode_xml_item)
     ET.indent(tree, '  ')
     tree.write(feed, xml_declaration=True, encoding="UTF-8")
+    time.sleep(1)
     return
 
 def determine_entry_index(root, channel):

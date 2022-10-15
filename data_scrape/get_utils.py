@@ -48,9 +48,10 @@ def get_pub_date(date):
     month = int(split_date[0])
     day = int(split_date[1])
     year = int('20' + split_date[2])
-    hour = randint(10, 16)
-    minute = randint(5, 55)
-    seconds = randint(2, 57)
+    now = datetime.now()
+    hour = now.hour
+    minute = now.minute
+    seconds = now.second
     dt = datetime(year=year, month=month, day=day, hour=hour, minute=minute, second=seconds)
     tup = dt.timetuple()
     stamp=time.mktime(tup)
