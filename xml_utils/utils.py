@@ -28,16 +28,17 @@ def add_ns(root, ns):
 def save_xml_file_to_local(url, full_path_to_dir, parser):
     """
     get xml from internet and save at local location
+    url = url of xml feed on github
     """
     document = requests.get(url)
     soup= BeautifulSoup(document.content,"lxml-xml")
     el = soup.find('rss')
-    el.attrs['xmlns:content'] = "http://purl.org/rss/1.0/modules/content/"
+    el.attrs['xmlns:content'] = "http://purl.org/rss/1.0/modules/content/" #gets removed anyways, useless
     el.attrs['xmlns:itunes'] = "http://www.itunes.com/dtds/podcast-1.0.dtd"
     f = open(full_path_to_dir, "w")
     parser.feed('<?xml version="1.0" encoding="UTF-8"?> \n' + str(soup))
     parsed_string = parser.get_parsed_string()
-    f.write(parsed_string)
+    f.write(parsed_string) #write xml from github to local file 
     f.close()
 
 def get_parsed_xml_from_local(full_path_to_dir, parser):

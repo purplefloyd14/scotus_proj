@@ -8,11 +8,16 @@ from parser import MyHTMLParser
 from xml_utils import utils as xml_utils
 from private import secrets
 from rasp_updater import updater
+import datetime
+import logging
 
 
 
 def push_local_prod_to_github(info):
-    print("Starting push to github")
+    time_stamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    msg = f"Starting push to github"
+    logging.info(msg)
+    print(msg)
     temp_dir = info['temp_dir']
     temp_loc = info['temp_loc']
     temp_file = info['temp_file']
@@ -22,9 +27,14 @@ def push_local_prod_to_github(info):
     repo = g.get_user().get_repo("purplefloyd14.github.io")
     parser = MyHTMLParser()
     parsed_xml = xml_utils.get_parsed_xml_from_local(path_to_local_prod_xml_file, parser)
-    environment_file = updater.get_prod_xml_url().split('github.io/')[1]
+    prod_xml_url = updater.get_prod_xml_url()
+    environment_file = prod_xml_url.split('github.io/')[1]
+    msg2 = f'Pushing local xml to: {prod_xml_url}'
+    print(msg2)
+    logging.info(msg2)
     file = repo.get_contents(environment_file)
-    time_stamp= datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
     rel_path = f'./{file.path}'
-    repo.update_file(rel_path, f"committing files {time_stamp}", parsed_xml, file.sha, branch="main")
-    print("github push complete")
+    repo.update_file(rel_path, f"Updated XML on: {time_stamp}", parsed_xml, file.sha, branch="main")
+    info = f"{time_stamp} | github push complete"
+    print(info)
+    logging.info(info)

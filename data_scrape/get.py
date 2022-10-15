@@ -4,6 +4,9 @@ import os
 
 
 def create_episode_dict_from_case_url(url, driver):
+    '''
+    creates a dictionary based on the episode (single case) info
+    '''
     episode_dict = {}
     driver.get(url)
     date_in_site_format = get_date(url, driver)
@@ -70,6 +73,7 @@ def populate_backlog(base_location='.'):
 
 
 def handle_year_for_save(year, media_directory_location):
+    #util for saving an mp3. not used
     year = str(year)
     create_folder(year, media_directory_location)
     year_directory_location = os.path.join(media_directory_location, year)
