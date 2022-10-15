@@ -57,7 +57,7 @@ def update_needed_bool():
 
 def update():
     time_stamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    out_str = f"{time_stamp} | Starting Update Process.."
+    out_str = f" ------------------------------------------------------------------ \n{time_stamp} | Starting Update Process.."
     print(out_str)
     logging.info(out_str)
     #this is the main function that the program runs. This kicks everything off.
