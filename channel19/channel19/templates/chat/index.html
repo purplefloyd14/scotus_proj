@@ -1,0 +1,12 @@
+<h1>Welcome to the home page</h1>
+<br/>
+
+
+
+<form action="{% url 'chat:generate' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Generate Room!">
+</form>
+
+
+
