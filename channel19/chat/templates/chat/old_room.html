@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <h1>You made it to Room #{{ room_name }}</h1>
+    {% csrf_token %}
 </head>
 <body>
     <textarea id="chat-log" cols="100" rows="20"></textarea><br>
