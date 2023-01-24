@@ -17,8 +17,8 @@ import logging
 logging.basicConfig(filename="../prod.log", level=logging.INFO)
 
 def get_prod_xml_url():
-    return 'https://purplefloyd14.github.io/dev.xml'
-    #this is very important
+    return 'https://purplefloyd14.github.io/prod.xml'
+    #this is very important | /dev.xml or /prod.xml
     #this controls where things happen
     #downloads from github and uploads to github occur from this address
 
@@ -53,6 +53,10 @@ def update_needed_bool():
         print(info_str2)
         logging.info(info_str2)
         return True #update needed
+    else:
+        problem = "Something is wrong: The Court's site has less items than the XML does."
+        print(problem)
+        logging.info(problem)
 
 
 def update():
