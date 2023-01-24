@@ -28,7 +28,6 @@ def instance(request, uuid):
     try: 
         room = Room.objects.get(uuid=uuid)
     except Room.DoesNotExist:
-        raise Http404("Room does not exist.")
-    return render(request, 'chat/room.html', {
-            'room_name': uuid,
-        })
+        raise Http404("Room does not exist!")
+    context = {'room_name': room.uuid,}
+    return render(request, 'chat/room.html', context=context) 
