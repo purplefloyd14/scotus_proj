@@ -38,6 +38,7 @@ class ChatConsumer(WebsocketConsumer):
 
     # Receive message from WebSocket
     def receive(self, text_data):
+        #when a user receives info, it forwards it on to every other peer user  
         text_data_json = json.loads(text_data) #deserialize our text_data (json format) into a python dictionary 
         message = text_data_json["message"]
         
