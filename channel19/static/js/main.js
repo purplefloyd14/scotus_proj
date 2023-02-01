@@ -162,7 +162,33 @@ function createOfferer(peerUsername, receiverChannelName){
     //for the purposes of learning this webapp will only be able to connect divices on the same network 
     //in production there should be a TURN/STUN server which allows for ICE to coordinate everything around firewalls
     //if we are trying to get out of network, we need to replace null below with a dictionary that specifies the TURN and STUN server credentials 
-    var peer = new RTCPeerConnection(null); 
+
+    var iceConfig = { 
+        iceServers: [
+        {
+            urls: "stun:stun.l.google.com:19302"
+        },
+        // {
+        //   urls: "turn:relay.metered.ca:80",
+        //   username: "ef5589e9789a32dcd988dd3b",
+        //   credential: "3WfeszWRhZ9QOyiz"
+        // },
+        // {
+        //     urls: "turn:relay.metered.ca:443",
+        //     username: "ef5589e9789a32dcd988dd3b",
+        //     credential: "3WfeszWRhZ9QOyiz"
+        //   }
+        ]
+      };
+    
+    
+    var peer = new RTCPeerConnection(iceConfig); 
+
+    peer.addEventListener('iceconnectionstatechange', function() {
+        console.log('ICE connection state:', peer.iceConnectionState);
+      });
+
+    
 
     addLocalTracks(peer);  //takes local audio and video tracks and adds it to peer connection
 
@@ -222,8 +248,26 @@ function createOfferer(peerUsername, receiverChannelName){
 
 function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
 
+    var iceConfig = { 
+        iceServers: [
+        {
+            urls: "stun:stun.l.google.com:19302"
+        },
+        // {
+        //   urls: "turn:relay.metered.ca:80",
+        //   username: "ef5589e9789a32dcd988dd3b",
+        //   credential: "3WfeszWRhZ9QOyiz"
+        // },
+        // {
+        //     urls: "turn:relay.metered.ca:443",
+        //     username: "ef5589e9789a32dcd988dd3b",
+        //     credential: "3WfeszWRhZ9QOyiz"
+        //   }
+        ]
+      };
+
     //if we are trying to get out of network, we need to replace null below with a dictionary that specifies the TURN and STUN server credentials 
-    var peer = new RTCPeerConnection(null);  
+    var peer = new RTCPeerConnection(iceConfig);  
 
     addLocalTracks(peer);  //takes local audio and video tracks and adds it to peer connection
 

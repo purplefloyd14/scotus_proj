@@ -10,7 +10,7 @@ The db settings are there, db is postgres
 
 to expose to the world I used 'ngrok http 8000'
 
-there is a redis thing that needs to be active for this to work. The command for that is 'docker run -p 6379:6379 -d redis:5'
+there is a redis thing that needs to be active for this to work. The command for that is 'docker run -p 6379:6379 -d redis:5'. In order for that to work I need to run docker on my comptuer such that the desktop software is running and there is a symbol up near the other symbols (time, nord, volume, etc) on the top right of the screen. 
 
 there is also a docker desktop client, and sometimes the task gets stale and has to be killed there before it is restarted cleanly 
 
