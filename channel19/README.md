@@ -1,4 +1,8 @@
 # cb_proj
+followed this tutorial: 
+
+https://www.youtube.com/watch?v=MBOlZMLaQ8g
+
 
 localhost runserver is overridden by daphne which triggers asgi mode for websockets
 
@@ -14,7 +18,7 @@ there is a redis thing that needs to be active for this to work. The command for
 
 there is also a docker desktop client, and sometimes the task gets stale and has to be killed there before it is restarted cleanly 
 
-
+here is the website where I have an account set up for a free turn Server: https://dashboard.metered.ca/turnserver/app/63da0b1e217036507c2f976d the password is saved in chrome. 
 
 if you want to go live on ngrok, you need to go into the room.html file and change the ws:// to wss:// because in the wild clients demand the extra s, which is the same extra s as https and I think stands for 'secure' 
 
@@ -22,3 +26,9 @@ You need to change ALLOWED_HOSTS and CSRF_TRUSTED_HOSTS in settings.py to use ng
 
 1/23/23:
 Ended at 1:37:00 (before chat was implemented)
+
+names: (.com)
+ch31 - $400 
+ch14 - min. $250 
+ch48 - $400 
+channel14 - 8k 

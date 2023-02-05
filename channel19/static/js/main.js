@@ -7,6 +7,12 @@ var mapPeers = {};
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");
 var btnJoin = document.querySelector("#btn-join");
+var userCount = document.getElementById("connected-user-count");
+var roomName = document.getElementById('room-name').innerHTML;
+
+var xhttp = new XMLHttpRequest();
+
+var btnGetData = document.querySelector("#btn-get-active")
 
 var username; 
 
@@ -20,7 +26,7 @@ function webSocketOnMessage(event){
     //this message is relayed to every peer on the group, so we end up receiving our own messages
     //in order to account for this, we return if we are the peer in the message (we are receiving our own letter)
     //in practice, this should really be handled on the back end, TODO 
-    //see tutorial at 1:06
+    //see tutorial at 1:06:00
     if(username == peerUsername){
         return;
     }
@@ -48,6 +54,18 @@ function webSocketOnMessage(event){
         return;
     }
 }
+
+
+
+function updateActiveTalkers(){
+    xhttp.open('GET', `https://6fd7-217-114-38-163.ngrok.io/cb/${roomName}/get_active`, false);
+    xhttp.send();
+    numUsersConnected = JSON.parse(xhttp.responseText);
+    userCount.innerHTML = numUsersConnected.talker_count;
+    console.log("number of users here: " + numUsersConnected.talker_count)
+}
+
+var t=setInterval(updateActiveTalkers,5000);
 
 btnJoin.addEventListener('click', () => {
     username = usernameInput.value;
@@ -199,7 +217,8 @@ function createOfferer(peerUsername, receiverChannelName){
     data_channel.addEventListener('message', dcOnMessage); //whenever we get a message through this data channel it is going to call this function 
 
     var remoteVideo = createVideo(peerUsername);
-    setOnTrack(peer, remoteVideo); 
+    setOnTrack(peer, remoteVideo);
+
 
     mapPeers[peerUsername] = [peer, data_channel];
 
@@ -332,6 +351,7 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
 
 function addLocalTracks(peer){
     localStream.getTracks().forEach(track => {
+        console.log("here I am");
         peer.addTrack(track, localStream);
     }); 
 }

@@ -3,6 +3,10 @@ import json
 from chat.models import Talker, Room
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
+# Get channel_layer function
+
+# passing group_channel takes channel name
+
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
@@ -38,6 +42,7 @@ class ChatConsumer(WebsocketConsumer):
 
     # Receive message from WebSocket
     def receive(self, text_data):
+        print("we are in recieve!")
         #when a user receives info, it forwards it on to every other peer user  
         receive_dict = json.loads(text_data) #deserialize our text_data (json format) into a python dictionary 
         message = receive_dict["message"]
