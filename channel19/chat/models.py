@@ -29,3 +29,13 @@ class Talker(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     identifier = models.CharField(max_length=100, null=True, blank=True)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+
+
+class Listener(models.Model):
+    def __str__(self):
+            return self.guid
+
+    guid = models.CharField(max_length=30, default=name_gen)
+    creation_date = models.DateTimeField(auto_now_add=True)
+    identifier = models.CharField(max_length=100, null=True, blank=True)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)

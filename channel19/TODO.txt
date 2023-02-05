@@ -1,9 +1,9 @@
 
-1. figure out bug in admin screen which is creating 3 half backed related objects 
+1. 
 
 2. add a active=True/False to talker? Or do I just want to delete
 
-3. Get Ajax Configured so that I can see how many talkers are present 
+3. have the first three users be talkers, and everyone after that is a listener  
 
 4. once 4 talkers are present, additional connecters should be peanut gallery 
 
@@ -15,8 +15,13 @@
 
 8. assign users a random name 
 
-9. remove video 
+9. remove video / join automatically by going to the page 
 
 10. Get domain name
 
-11.
+
+
+current TODO
+
+limit 2 talkers, after that you are a listener 
+
