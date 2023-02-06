@@ -3,6 +3,7 @@ import json
 from chat.models import Talker, Room
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
+import random
 # Get channel_layer function
 
 # passing group_channel takes channel name
@@ -14,23 +15,31 @@ class ChatConsumer(WebsocketConsumer):
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = f"chat_{self.room_name}"
 
-        # Join room group
-        async_to_sync(self.channel_layer.group_add)( #add a channel (user) to the group (room)
-            self.room_group_name, #name of group (aka room)
-            self.channel_name #name of self's channel (aka self user)
-        )
-
         talker = Talker()
         session = self.scope['session']
         session['user'] = talker.guid
         this_room = Room.objects.get(uuid=self.room_name)
-        talker.room = this_room
-        talker.identifier = self.channel_name
-        try: 
-            talker.save()
-        except:
+        if len(this_room.talker_set.all()) >= 4:
             print("too many people in the room. Try back later")
             return 
+        talker.room = this_room
+        talker.identifier = self.channel_name #this channel name is a unique ID for the user. Its javascripts 'user name'
+        choices_as_dict = dict(Talker._meta.get_field('talker_name').choices)
+        choices_as_list = [*choices_as_dict] #pythonic version of list(dict.keys())
+        random.shuffle(choices_as_list) #randomly shuffles the names in place 
+        for name in choices_as_list:
+            try:
+                talker.talker_name = name
+                talker.save()
+            except:
+                continue
+        self.talker_name = talker.talker_name
+
+        # Join room group
+        async_to_sync(self.channel_layer.group_add)( #add a channel (user) to the group (room)
+            self.room_group_name, #name of group (aka room)
+            self.channel_name, #name of self's channel (aka self user)
+        )
         self.accept()
 
     def disconnect(self, close_code):
@@ -84,10 +93,17 @@ class ChatConsumer(WebsocketConsumer):
     def send_sdp(self, event):  
         #this function must correspond to the value of the 'type' key in the second param dict in the receive function 
         #the other data that is passed in that function is available in this function as part of the event dictionary 
+
+        #THIS IS A GREAT WAY TO COMMUNICATE WITH THE FRONT END - YOU HAVE BOTH THE SELF AND THE EVENT HERE 
+        print('in sneaky sdp')
+        
         receive_dict = event["receive_dict"]
-        if receive_dict['message'] == 'blue':
-            import pdb; pdb.set_trace() #this is a hold over from when chat existed 
+        user_channel_name = receive_dict['message']['receiver_channel_name']
+        talker = Talker.objects.get(identifier=user_channel_name)
+        receive_dict['message']['talker_display_name'] = talker.talker_name
+
         # Send message to WebSocket
-        print(self.channel_name)
+        print("The talker display name is: " + talker.talker_name)
+        print("the user channel name is: " + user_channel_name)
         self.send(text_data=json.dumps(receive_dict)) 
  
