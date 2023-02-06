@@ -19,16 +19,19 @@ class ChatConsumer(WebsocketConsumer):
             self.room_group_name, #name of group (aka room)
             self.channel_name #name of self's channel (aka self user)
         )
+
         talker = Talker()
         session = self.scope['session']
         session['user'] = talker.guid
         this_room = Room.objects.get(uuid=self.room_name)
         talker.room = this_room
         talker.identifier = self.channel_name
-        talker.save()
+        try: 
+            talker.save()
+        except:
+            print("too many people in the room. Try back later")
+            return 
         self.accept()
-        
-    
 
     def disconnect(self, close_code):
         # Leave room group
@@ -83,7 +86,7 @@ class ChatConsumer(WebsocketConsumer):
         #the other data that is passed in that function is available in this function as part of the event dictionary 
         receive_dict = event["receive_dict"]
         if receive_dict['message'] == 'blue':
-            import pdb; pdb.set_trace()
+            import pdb; pdb.set_trace() #this is a hold over from when chat existed 
         # Send message to WebSocket
         print(self.channel_name)
         self.send(text_data=json.dumps(receive_dict)) 

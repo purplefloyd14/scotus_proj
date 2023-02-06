@@ -60,7 +60,9 @@ function webSocketOnMessage(event){
 
 //queries the database for active talkers in a given room, takes the response, and populates userCount field with it 
 function updateActiveTalkers(){
-    xhttp.open('GET', `https://6fd7-217-114-38-163.ngrok.io/cb/${roomName.innerHTML}/get_active`, false);
+    currentRoomUuid = window.location.href.slice(-6) //get room name from last 6 digits of url. can also get it 
+    //from roomName.innerHTML, but one day roomName might not be displayed on the page 
+    xhttp.open('GET', `https://6fd7-217-114-38-163.ngrok.io/cb/${currentRoomUuid}/get_active`, false);
     xhttp.send();
     numUsersConnected = JSON.parse(xhttp.responseText);
     userCount.innerHTML = numUsersConnected.talker_count;
@@ -68,7 +70,7 @@ function updateActiveTalkers(){
 }
 
 //runs the updateActiverTalkers method every x seconds (1000 = 1 second)
-var t=setInterval(updateActiveTalkers,5000);
+var t=setInterval(updateActiveTalkers,1000);
 
 // do everything when the page loads, as opposed to when the user clicks on the join button 
 //in this case, I have attached the method to the room name element. Can and probably should be changed 
@@ -167,9 +169,6 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
     }) 
 
 
-
-
-
 function sendSignal(action, message){
     var jsonStr = JSON.stringify({
         'peer': username, 
@@ -210,8 +209,6 @@ function createOfferer(peerUsername, receiverChannelName){
     peer.addEventListener('iceconnectionstatechange', function() {
         console.log('ICE connection state:', peer.iceConnectionState);
       });
-
-    
 
     addLocalTracks(peer);  //takes local audio and video tracks and adds it to peer connection
 

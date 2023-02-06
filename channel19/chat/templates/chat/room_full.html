@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon4.ico' %}">
+    <head>
+        <meta charset="UTF-8">
+        <title>Channel42</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/misc.css' %}">
+    </head>
+    <body>
+        <h1> Welcome to Channel42 </h1>
+        <h2> -The Citizen's Band- </h2>
+
+        <div style="clear: both; width: 40%; padding: 10px; display: flex;">
+            <h3 style="float: left"> Subchannel URL: </h3>  &#20  &#20
+            <h3 style="float: right">{{room_name}}</h3>
+        </div>
+
+        <br>
+        <br>
+        <div class="full-room-main-box">
+            <h2>This room is full. Come back another time.</h2>    
+        </div>
+    </body>
+</html> 

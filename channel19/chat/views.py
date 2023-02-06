@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from chat.models import Room
-from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.http import JsonResponse
+from django.conf import settings 
+
 
 def generate(request):
     # try:
@@ -20,13 +21,13 @@ def generate(request):
     return HttpResponseRedirect(reverse('chat:instance', args=(new_uuid,)))
 
 
-def fetch_active(request, uuid):
+def fetch_active(request, room_uuid):
     try: 
-        room = Room.objects.get(uuid=uuid)
+        room = Room.objects.get(uuid=room_uuid)
         number_of_talkers = len(room.talker_set.all())
     except Room.DoesNotExist:
         return render(request, 'chat/404.html')
-    context = {'room_name': room.uuid,
+    context = {'room_name': room_uuid,
             'talker_count': number_of_talkers}
     return JsonResponse(context)
 
@@ -35,12 +36,15 @@ def index(request):
     return render(request, template_name)
 
     
-def instance(request, uuid):
+def instance(request, room_uuid):
     try: 
-        room = Room.objects.get(uuid=uuid)
+        room = Room.objects.get(uuid=room_uuid)
         number_of_talkers = len(room.talker_set.all())
+        if number_of_talkers >= settings.MAX_USERS_PER_ROOM:
+            context = {'room_name': room_uuid}
+            return render(request, 'chat/room_full.html', context=context)
     except Room.DoesNotExist:
         return render(request, 'chat/404.html')
-    context = {'room_name': room.uuid,
+    context = {'room_name': room_uuid,
             'talker_count': number_of_talkers}
     return render(request, 'chat/room.html', context=context) 
