@@ -15,6 +15,8 @@ class ChatConsumer(WebsocketConsumer):
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = f"chat_{self.room_name}"
 
+        talker_name = self.scope['url_route']['kwargs']['talker_name']
+
         talker = Talker()
         session = self.scope['session']
         session['user'] = talker.guid
@@ -24,17 +26,8 @@ class ChatConsumer(WebsocketConsumer):
             return 
         talker.room = this_room
         talker.identifier = self.channel_name #this channel name is a unique ID for the user. Its javascripts 'user name'
-        choices_as_dict = dict(Talker._meta.get_field('talker_name').choices)
-        choices_as_list = [*choices_as_dict] #pythonic version of list(dict.keys())
-        random.shuffle(choices_as_list) #randomly shuffles the names in place 
-        for name in choices_as_list:
-            try:
-                talker.talker_name = name
-                talker.save()
-            except:
-                continue
-        self.talker_name = talker.talker_name
-
+        talker.talker_name = talker_name
+        talker.save()
         # Join room group
         async_to_sync(self.channel_layer.group_add)( #add a channel (user) to the group (room)
             self.room_group_name, #name of group (aka room)

@@ -32,7 +32,7 @@ def fetch_active(request, room_uuid):
             'talker_count': number_of_talkers}
     return JsonResponse(context)
 
-def get_free_username(request, room_uuid):
+def get_available_username(request, room_uuid):
     try:
         room = Room.objects.get(uuid=room_uuid)
         number_of_talkers = len(room.talker_set.all())
@@ -62,7 +62,9 @@ def instance(request, room_uuid):
     try: 
         room = Room.objects.get(uuid=room_uuid)
         number_of_talkers = len(room.talker_set.all())
-        
+        if number_of_talkers >= settings.MAX_USERS_PER_ROOM:
+            context = {'room_name': room_uuid}
+            return render(request, 'chat/room_full.html', context=context)
     except Room.DoesNotExist:
         return render(request, 'chat/404.html')
     context = {'room_name': room_uuid,

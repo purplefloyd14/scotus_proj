@@ -2,7 +2,7 @@ console.log("In main.js!")
 
 var mapPeers = {};
 
-
+var currentBaseUrl = 'https://080b-217-114-38-169.ngrok.io'
 
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");
@@ -16,9 +16,8 @@ var xhttp = new XMLHttpRequest();
 
 var btnGetData = document.querySelector("#btn-get-active")
 
-var internalUsername; 
 
-var publicUsername;
+var username;
 
 var webSocket; 
 
@@ -27,15 +26,13 @@ function webSocketOnMessage(event){
     var parsedData = JSON.parse(event.data);
     var peerUsername = parsedData['peer'];
     var action = parsedData['action'];
-    publicUsername = parsedData.message.talker_display_name;
-    console.log("action: " + action)
     
 
     //this message is relayed to every peer on the group, so we end up receiving our own messages
     //in order to account for this, we return if we are the peer in the message (we are receiving our own letter)
     //in practice, this should really be handled on the back end, TODO 
     //see tutorial at 1:06:00
-    if(internalUsername == peerUsername){
+    if(username == peerUsername){
         return;
     }
     
@@ -71,8 +68,7 @@ function setPublicUsername(){
 //queries the database for active talkers in a given room, takes the response, and populates userCount field with it 
 function updateActiveTalkers(){
     console.log("in update active talker")
-    
-    xhttp.open('GET', `https://080b-217-114-38-169.ngrok.io/cb/${currentRoomUuid}/get_active`, false);
+    xhttp.open('GET', `${currentBaseUrl}/cb/${currentRoomUuid}/get_active`, false);
     xhttp.send();
     numUsersConnected = JSON.parse(xhttp.responseText);
     userCount.innerHTML = numUsersConnected.talker_count;
@@ -88,11 +84,12 @@ roomName.addEventListener("load", createConnectedTalker());
 
 
 function getNewPublicUsername(roomID){
-    xhttp.open('GET', `https://080b-217-114-38-169.ngrok.io/cb/${roomID}/get_free_username`, false);
+    xhttp.open('GET', `${currentBaseUrl}/cb/${roomID}/get_available_username`, false);
     xhttp.send();
     dataFromDB = JSON.parse(xhttp.responseText);
     var labelUsername = document.querySelector('#label-username');
     labelUsername.innerHTML = dataFromDB.recommended_name;
+    return dataFromDB.recommended_name;
 }
 
 //this function is almost a direct copy of the joinBtn on click method that used to be here 
@@ -100,22 +97,10 @@ function createConnectedTalker(){
     console.log('create connected talker');
 
     currentRoomUuid = window.location.href.slice(-6);
-    getNewPublicUsername(currentRoomUuid);
+    username = getNewPublicUsername(currentRoomUuid);
+    
     //get room name from last 6 digits of url. can also get it 
     //from roomName.innerHTML, but one day roomName might not be displayed on the page 
-
-    
-
-
-    internalUsername = Math.floor( Math.random() * 999999 );
-    console.log('Internal Username: ', internalUsername);
-
-    if(internalUsername == '') {
-        console.log('Internal Username non existant; something is up.')
-        return;
-    }
-
-    debugger;
 
     var loc = window.location;
     var wsStart = 'wss://';
@@ -125,7 +110,7 @@ function createConnectedTalker(){
         wsStart = 'wss://';
     }
 
-    var endPoint = wsStart + loc.host + loc.pathname;
+    var endPoint = wsStart + loc.host + loc.pathname + '/' + username;
     console.log("endpoint: ", endPoint);
 
     webSocket = new WebSocket(endPoint);
@@ -196,7 +181,7 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
 
 function sendSignal(action, message){
     var jsonStr = JSON.stringify({
-        'peer': internalUsername, 
+        'peer': username, 
         'action': action, 
         'message': message, 
     });
