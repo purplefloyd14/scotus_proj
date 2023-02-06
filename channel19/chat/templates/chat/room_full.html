@@ -22,7 +22,13 @@
         <br>
         <br>
         <div class="full-room-main-box">
-            <h2>This room is full. Come back another time.</h2>    
+            <h2>This room is full. </h2> <br><h2>Come back another time or generate a new room below.</h2>
+            <div class="bottom blue">
+                <form action="{% url 'chat:generate' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Generate New Subchannel!">
+                </form>
+            </div>    
         </div>
     </body>
 </html> 
