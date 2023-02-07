@@ -19,6 +19,7 @@
 
 10. Get domain name
 
+11. redundant checking for users' presence using a 'heartbeat' message from each user every few seconds 
 
 
 current TODO

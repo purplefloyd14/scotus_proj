@@ -7,8 +7,7 @@
 <link rel="icon" type="image/x-icon" href="{% static 'img/favicon4.ico' %}">
 <div class="center-main">
     <div class="top red">
-        <h1>Welcome to Channel42</h1>
-        <h2> -The Citizen's Band- </h2>
+        <img src="{% static 'img/logo_white.png' %}" alt="">
     </div>
     <div class="bottom blue">
         <form action="{% url 'chat:generate' %}" method="post">
@@ -16,8 +15,6 @@
             <input type="submit" value="Generate New Subchannel!">
         </form>
     </div>
-
-
 </div>
 
 

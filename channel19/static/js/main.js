@@ -16,7 +16,6 @@ var xhttp = new XMLHttpRequest();
 
 var btnGetData = document.querySelector("#btn-get-active")
 
-
 var username;
 
 var webSocket; 
@@ -314,9 +313,6 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
 
         mapPeers[peerUsername] = [peer, peer.dc]; 
     });
-
-    
-
 
     //used to remove video when a peer leaves the room 
     peer.addEventListener('iceconnectionstatechange', () => {
