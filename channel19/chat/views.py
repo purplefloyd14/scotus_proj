@@ -44,7 +44,7 @@ def get_available_username(request, room_uuid):
     
     names = ['John', 'Paul', 'George', 'Ringo']
     random.shuffle(names) #shuffle in place
-    recommended_name="not sure"
+    recommended_name="not_sure"
     for name in names:
         if len(room.talker_set.filter(talker_name=name)) == 0:
             recommended_name = name

@@ -2,22 +2,38 @@ console.log("In main.js!")
 
 var mapPeers = {};
 
-var currentBaseUrl = 'https://fcdf-45-85-145-203.ngrok.io'
+var currentBaseUrl = 'https://43a0-73-129-90-73.ngrok.io'
 
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");
 var btnJoin = document.querySelector("#btn-join");
 var userCount = document.getElementById("connected-user-count");
+var userCountJS = document.getElementById("connected-user-count-js")
 var roomName = document.getElementById('room-name');
 var currentRoomUuid = window.location.href.slice(-6);
+var peerCount = 1;
 
+var iceConfig = { 
+    iceServers: [
+    {
+        urls: "stun:stun.l.google.com:19302"
+    },
+    // {
+    //   urls: "turn:relay.metered.ca:80",
+    //   username: "ef5589e9789a32dcd988dd3b",
+    //   credential: "3WfeszWRhZ9QOyiz"
+    // },
+    // {
+    //     urls: "turn:relay.metered.ca:443",
+    //     username: "ef5589e9789a32dcd988dd3b",
+    //     credential: "3WfeszWRhZ9QOyiz"
+    //   }
+    ]
+  };
 
 var xhttp = new XMLHttpRequest();
-
 var btnGetData = document.querySelector("#btn-get-active")
-
 var username;
-
 var webSocket; 
 
 function webSocketOnMessage(event){
@@ -39,7 +55,7 @@ function webSocketOnMessage(event){
 
     if(action=='new-peer'){
         createOfferer(peerUsername, receiverChannelName);
-        setPublicUsername();
+        // setPublicUsername();
         return;
     }
 
@@ -60,27 +76,28 @@ function webSocketOnMessage(event){
     }
 }
 
-function setPublicUsername(){
-    
-}
 
 //queries the database for active talkers in a given room, takes the response, and populates userCount field with it 
 function updateActiveTalkers(){
-    console.log("in update active talker")
+    // console.log("in update active talker")
     xhttp.open('GET', `${currentBaseUrl}/cb/${currentRoomUuid}/get_active`, false);
     xhttp.send();
     numUsersConnected = JSON.parse(xhttp.responseText);
     userCount.innerHTML = numUsersConnected.talker_count;
-    console.log("number of users here: " + numUsersConnected.talker_count);
+    // console.log("number of users here: " + numUsersConnected.talker_count);
+}
+
+function monitorMapPeers(){
+    userCountJS.innerHTML = Object.keys(mapPeers).length + 1
 }
 
 // runs the updateActiverTalkers method every x seconds (1000 = 1 second)
-var t=setInterval(updateActiveTalkers,1000);
+var t=setInterval(updateActiveTalkers,100);
+var t=setInterval(monitorMapPeers, 100);
 
 // do everything when the page loads, as opposed to when the user clicks on the join button 
 //in this case, I have attached the method to the room name element. Can and probably should be changed 
-roomName.addEventListener("load", createConnectedTalker());
-
+// roomName.addEventListener("load", createConnectedTalker);
 
 function getNewPublicUsername(roomID){
     xhttp.open('GET', `${currentBaseUrl}/cb/${roomID}/get_available_username`, false);
@@ -111,6 +128,8 @@ function createConnectedTalker(){
 
     var endPoint = wsStart + loc.host + loc.pathname + '/' + username;
     console.log("endpoint: ", endPoint);
+
+    console.log("sanity check")
 
     webSocket = new WebSocket(endPoint);
 
@@ -190,33 +209,14 @@ function sendSignal(action, message){
 
 function createOfferer(peerUsername, receiverChannelName){
     //see video at 1:08
-    //for the purposes of learning this webapp will only be able to connect divices on the same network 
-    //in production there should be a TURN/STUN server which allows for ICE to coordinate everything around firewalls
-    //if we are trying to get out of network, we need to replace null below with a dictionary that specifies the TURN and STUN server credentials 
-
-    var iceConfig = { 
-        iceServers: [
-        {
-            urls: "stun:stun.l.google.com:19302"
-        },
-        // {
-        //   urls: "turn:relay.metered.ca:80",
-        //   username: "ef5589e9789a32dcd988dd3b",
-        //   credential: "3WfeszWRhZ9QOyiz"
-        // },
-        // {
-        //     urls: "turn:relay.metered.ca:443",
-        //     username: "ef5589e9789a32dcd988dd3b",
-        //     credential: "3WfeszWRhZ9QOyiz"
-        //   }
-        ]
-      };
-    
     
     var peer = new RTCPeerConnection(iceConfig); 
 
     peer.addEventListener('iceconnectionstatechange', function() {
         console.log('ICE connection state:', peer.iceConnectionState);
+        if (peer.iceConnectionState ==='connected'){
+            peerCount++;
+        }
       });
 
     addLocalTracks(peer);  //takes local audio and video tracks and adds it to peer connection
@@ -232,6 +232,10 @@ function createOfferer(peerUsername, receiverChannelName){
 
 
     mapPeers[peerUsername] = [peer, data_channel];
+    addPeerToList(peerUsername);
+    
+
+
 
 
     //used to remove video when a peer leaves the room 
@@ -240,9 +244,14 @@ function createOfferer(peerUsername, receiverChannelName){
 
         if(iceConnectionState === 'failed' || iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
             delete mapPeers[peerUsername];
+            removePeerFromList(peerUsername);
             
             if(iceConnectionState != 'closed'){
                 peer.close();
+            }
+
+            if(iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
+                peerCount--;
             }
 
             removeVideo(remoteVideo);
@@ -251,7 +260,7 @@ function createOfferer(peerUsername, receiverChannelName){
 
     peer.addEventListener('icecandidate', (event)=>{
         if(event.candidate){
-            console.log("New ICE candidate: ", JSON.stringify(peer.localDescription));
+            // console.log("New ICE candidate: ", JSON.stringify(peer.localDescription));
             //
             return;
         }
@@ -276,27 +285,22 @@ function createOfferer(peerUsername, receiverChannelName){
     //summary of what we have just done at 1:24
 }
 
+function addPeerToList(peerUsername){
+    var peerList = document.getElementById('ul-peer-username');
+    var newPeer = document.createElement('li');
+    newPeer.id = `li-${peerUsername}`;
+    newPeer.innerHTML = peerUsername;
+    peerList.appendChild(newPeer);
+}
+
+function removePeerFromList(peerUsername){
+    var peerList = document.getElementById('ul-peer-username');
+    var peerToRemove = document.getElementById(`li-${peerUsername}`);
+    peerList.removeChild(peerToRemove);
+}
+
 function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
 
-    var iceConfig = { 
-        iceServers: [
-        {
-            urls: "stun:stun.l.google.com:19302"
-        },
-        // {
-        //   urls: "turn:relay.metered.ca:80",
-        //   username: "ef5589e9789a32dcd988dd3b",
-        //   credential: "3WfeszWRhZ9QOyiz"
-        // },
-        // {
-        //     urls: "turn:relay.metered.ca:443",
-        //     username: "ef5589e9789a32dcd988dd3b",
-        //     credential: "3WfeszWRhZ9QOyiz"
-        //   }
-        ]
-      };
-
-    //if we are trying to get out of network, we need to replace null below with a dictionary that specifies the TURN and STUN server credentials 
     var peer = new RTCPeerConnection(iceConfig);  
 
     addLocalTracks(peer);  //takes local audio and video tracks and adds it to peer connection
@@ -311,7 +315,8 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
         })
         peer.dc.addEventListener('message', dcOnMessage);
 
-        mapPeers[peerUsername] = [peer, peer.dc]; 
+        mapPeers[peerUsername] = [peer, peer.dc];
+        addPeerToList(peerUsername);
     });
 
     //used to remove video when a peer leaves the room 
@@ -320,6 +325,7 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
 
         if(iceConnectionState === 'failed' || iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
             delete mapPeers[peerUsername];
+            removePeerFromList(peerUsername);
             
             if(iceConnectionState != 'closed'){
                 peer.close();
@@ -331,7 +337,7 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
 
     peer.addEventListener('icecandidate', (event)=>{
         if(event.candidate){
-            console.log("New ICE candidate: ", JSON.stringify(peer.localDescription));
+            // console.log("New ICE candidate: ", JSON.stringify(peer.localDescription));
             //
             return;
         }
@@ -370,6 +376,7 @@ function dcOnMessage(event){
     //when the message event is triggered on the data channel and it executes this function, the eventListener will pass to this function a dictionary 
     //as the parameter 'event'
     var message = event.data;
+    console.log("message being sent")
 
     //add new message to ul on html page as li 
     var li = document.createElement('li');
@@ -414,3 +421,6 @@ function removeVideo(video){
 
     videoWrapper.parentNode.removeChild(videoWrapper);
 }
+
+
+createConnectedTalker();

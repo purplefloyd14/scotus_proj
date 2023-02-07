@@ -14,11 +14,20 @@
         <br>
         <h3> Subchannel URL: <h3 id="room-name">{{room_name}}</h3>  </h3>
         <br>
-        <h3>Number of active: <h3 id="connected-user-count"> Loading... </h3></h3>
-        <br> 
+        <h3>Number of active (DB): <h3 id="connected-user-count"> Loading... </h3></h3>
+        <br>
+        <h3>Number of active (JS): <h3 id="connected-user-count-js"> (1) </h3></h3> 
+        <br>
         <br>
         <div>
             <h3>  You are:  <h3 id="label-username"></h3>    </h3>
+        </div>
+        <br>
+        <div>
+            <h3>  Also Connected we have:  </h3>
+            <ul id="ul-peer-username">
+                <li>example</li>
+            </ul>
         </div>
         <br>
         <div class="main-grid-container">

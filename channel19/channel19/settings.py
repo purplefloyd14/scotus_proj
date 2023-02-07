@@ -17,7 +17,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-MAX_USERS_PER_ROOM = 2
+MAX_USERS_PER_ROOM = 5
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -31,7 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['ngrok.io', 'localhost', '127.0.0.1', '*']
 # ALLOWED_HOSTS = []
 
-CSRF_TRUSTED_ORIGINS = ['https://fcdf-45-85-145-203.ngrok.io']
+CSRF_TRUSTED_ORIGINS = ['https://43a0-73-129-90-73.ngrok.io']
 
 
 # Application definition
