@@ -4,18 +4,26 @@
     <title>Channel42</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 </head>
-<link rel="icon" type="image/x-icon" href="{% static 'img/favicon4.ico' %}">
-<div class="center-main">
-    <div class="top red">
-        <img src="{% static 'img/logo_white.png' %}" alt="">
-    </div>
-    <div class="bottom blue">
-        <form action="{% url 'chat:generate' %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Generate New Subchannel!">
-        </form>
+<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+<div class="tiny-top-bar">
+    <div>
+        <a href="/about" class="about-button">About</a>
     </div>
 </div>
+<div class="total-page-container">
+    <div class="center-main-container">
+        <div class="inner-box">
+            <img src="{% static 'img/logo_white-min.png' %}" alt="">
+        </div>
+        <div class="inner-box">
+            <form class="form-adjust" action="{% url 'chat:generate' %}" method="post">
+                {% csrf_token %}
+                <input class="generate-button" type="submit" value="Generate Subchannel">
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 

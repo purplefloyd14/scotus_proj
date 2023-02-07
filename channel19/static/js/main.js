@@ -2,7 +2,7 @@ console.log("In main.js!")
 
 var mapPeers = {};
 
-var currentBaseUrl = 'https://080b-217-114-38-169.ngrok.io'
+var currentBaseUrl = 'https://fcdf-45-85-145-203.ngrok.io'
 
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");

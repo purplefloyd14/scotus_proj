@@ -56,6 +56,11 @@ def index(request):
     template_name = 'chat/index.html'
     return render(request, template_name)
 
+
+def about(request):
+    template_name = 'chat/about.html'
+    return render(request, template_name)
+
     
 def instance(request, room_uuid):
     print('in instance')
