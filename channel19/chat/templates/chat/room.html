@@ -10,44 +10,54 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <body>
-        <img src="{% static 'img/logo_white.png' %}" alt="">
-        <br>
-        <h3> Subchannel URL: <h3 id="room-name">{{room_name}}</h3>  </h3>
-        <br>
-        <h3>Number of active (DB): <h3 id="connected-user-count"> Loading... </h3></h3>
-        <br>
-        <h3>Number of active (JS): <h3 id="connected-user-count-js"> (1) </h3></h3> 
-        <br>
-        <br>
-        <div>
-            <h3>  You are:  <h3 id="label-username"></h3>    </h3>
-        </div>
-        <br>
-        <div>
-            <h3>  Also Connected we have:  </h3>
-            <ul id="ul-peer-username">
-                <li>example</li>
-            </ul>
-        </div>
-        <br>
-        <div class="main-grid-container">
-            <div id="video-container">
-                <div><video id="local-video" style="float: left;" autoplay playsinline></video></div>
-                <button id="btn-toggle-audio">Audio Mute</button>
-                <button id="btn-toggle-video">Video Off</button>
-            </div>
+        <div class="main-container">
+            <div class="logo-box-top"><img src="{% static 'img/logo_white-min.png' %}" alt=""></div>
             <br>
-
-            <button id="btn-get-active">Get Data</button>
-            <!-- <div id="chat">
-                <h3>Chat</h3>
-                <div id="messages">
-                    <ul id="message-list"></ul>
+            <div class="info-box-middle-row">
+                <div class="info-box-middle-box">
+                    <div>
+                        <h3> Subchannel URL: <h3 id="room-name">{{room_name}}</h3>  </h3>
+                    </div>
+                    <div>
+                        <h3>Number of active (DB): <h3 id="connected-user-count"> Loading... </h3></h3>
+                    </div>
+                    <div>
+                        <h3>Number of active (JS): <h3 id="connected-user-count-js"> (1) </h3></h3> 
+                    </div>
+                    <div>
+                        <h3>  You are:  <h3 id="label-username"></h3>    </h3>
+                    </div>
+                    <br>
+                    <div>
+                        <h3>  Also Connected we have:  </h3>
+                        <ul id="ul-peer-username">
+                            <li>example <img class='talking-logo' src="{% static 'img/blank.png' %}" alt=""></li>
+                        </ul>
+                    </div>   
                 </div>
-                <div><input id="msg"><button id="btn-send-msg">Send Message</button></div>
-                <button id="btn-share-screen">Share Screen</button>
-            </div> -->
+            </div>
+            <div class="bottom-box-audio-controls-row">
+                <div class="video-container">
+                    <video id="local-video" style="float: left;" autoplay playsinline></video>
+                    <button id="btn-toggle-audio">Audio Mute</button>
+                    <button id="btn-toggle-video">Video Off</button>
+                </div>
+                <br>
+    
+                <!-- <div id="chat">
+                    <h3>Chat</h3>
+                    <div id="messages">
+                        <ul id="message-list"></ul>
+                    </div>
+                    <div><input id="msg"><button id="btn-send-msg">Send Message</button></div>
+                    <button id="btn-share-screen">Share Screen</button>
+                </div> -->
+            </div>
+           
+
         </div>
-        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+        
+        
     </body>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </html> 

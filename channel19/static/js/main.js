@@ -92,8 +92,8 @@ function monitorMapPeers(){
 }
 
 // runs the updateActiverTalkers method every x seconds (1000 = 1 second)
-var t=setInterval(updateActiveTalkers,100);
-var t=setInterval(monitorMapPeers, 100);
+var t=setInterval(updateActiveTalkers,30000);
+var t=setInterval(monitorMapPeers, 30000);
 
 // do everything when the page loads, as opposed to when the user clicks on the join button 
 //in this case, I have attached the method to the room name element. Can and probably should be changed 
@@ -288,10 +288,16 @@ function createOfferer(peerUsername, receiverChannelName){
 function addPeerToList(peerUsername){
     var peerList = document.getElementById('ul-peer-username');
     var newPeer = document.createElement('li');
+    var speakingImage = document.createElement('img');
+    speakingImage.className = 'talking-logo';
     newPeer.id = `li-${peerUsername}`;
     newPeer.innerHTML = peerUsername;
     peerList.appendChild(newPeer);
+    newPeer.appendChild(speakingImage);
+    speakingImage.src = '../static/img/blank.png';
 }
+
+
 
 function removePeerFromList(peerUsername){
     var peerList = document.getElementById('ul-peer-username');
@@ -309,6 +315,7 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
     setOnTrack(peer, remoteVideo); 
 
     peer.addEventListener('datachannel', (e) => {
+        console.log("in DC stuff");
         peer.dc = e.channel; //gives us the data channel that was created by the offerer 
         peer.dc.addEventListener('open', () =>{
             console.log('Connection Opened For Data Channel!')
@@ -365,7 +372,6 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
 
 function addLocalTracks(peer){
     localStream.getTracks().forEach(track => {
-        console.log("here I am");
         peer.addTrack(track, localStream);
     }); 
 }
@@ -395,12 +401,8 @@ function createVideo(peerUsername){
     remoteVideo.playsInline = true;
 
     var videoWrapper = document.createElement('div');
-
     videoContainer.appendChild(videoWrapper);
-
-    videoWrapper.appendChild(remoteVideo);
-
-    //^ put wrapper into container, and video into wrapper 
+    videoWrapper.appendChild(remoteVideo); //^ put wrapper into container, and video into wrapper 
 
     return remoteVideo;
 }
