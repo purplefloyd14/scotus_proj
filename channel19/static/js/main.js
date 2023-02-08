@@ -392,7 +392,7 @@ function dcOnMessage(event){
 
 function createVideo(peerUsername){
     //video container, already existing, just grabbing it 
-    var videoContainer = document.querySelector('#video-container');
+    var videoContainer = document.querySelector('.video-container');
 
     //new video element 
     var remoteVideo = document.createElement('video');
