@@ -95,3 +95,12 @@ img {
     width: 42%;
 }
 
+ul { 
+    display: flex;
+    margin: 0;
+}
+
+ul.frames li {
+    font-size: 14px; font-size:1.4rem;
+    display: inline;
+  }
