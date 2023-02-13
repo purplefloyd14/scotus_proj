@@ -12,6 +12,8 @@ html, body {
     overflow: hidden;
 }
 
+
+
 .tiny-top-bar {
     display: flex;
     align-items: flex-end;
@@ -49,6 +51,7 @@ html, body {
     justify-content: center;
     align-self: center;
     display: flex;
+    padding-top: 15px;
 }
 
 .talking-logo {
@@ -81,18 +84,29 @@ html, body {
     justify-content: center;
 }
 
+.about-button {
+    color: black;
+    font-family: monospace;
+    padding-right: 5px;
+}
+
 h3 {
     display: inline;
 }
 
 video {
     background-color: black;
-    width: 175px;
-    height: 130px;
+    width: 110px;
+    height: 110px;
 }
 
 img {
-    width: 42%;
+    width: 80%;
+    max-width: 700px;
+}
+
+img:hover {
+    cursor:pointer;
 }
 
 ul { 
@@ -104,3 +118,8 @@ ul.frames li {
     font-size: 14px; font-size:1.4rem;
     display: inline;
   }
+
+.image-button {
+    background: none;
+    border: none;
+}

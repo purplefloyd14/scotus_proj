@@ -4,13 +4,14 @@
     display: flex;
     height: 80%;
     margin: auto;
-    width: 50%;
+    width: 100%;
     padding: 10px;
     justify-content: center;
     text-align: center;
     flex-direction: column;
     align-items: center;
-  }
+    max-width: 700px;
+}
 
  html, body {
     height: 100%;
@@ -47,7 +48,7 @@
 
 .generate-button {
     white-space: normal;
-    width: 90%;
+    width: 68%;
     background-color: #3b3c40;
     border: none;
     color: white;
@@ -55,13 +56,14 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 2vw;
+    font-size: 17px;
     border-radius: 5px;
     font-family: monospace;
 }
 
 img {
-    width: 75%;
+    width: 80%;
+    max-width: 700px;
 }
 
 .inner-box { 

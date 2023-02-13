@@ -2,7 +2,7 @@ console.log("In main.js!")
 
 var mapPeers = {};
 
-var currentBaseUrl = 'https://43a0-73-129-90-73.ngrok.io'
+var currentBaseUrl = 'https://ef01-73-129-90-73.ngrok.io'
 
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");
@@ -18,16 +18,16 @@ var iceConfig = {
     {
         urls: "stun:stun.l.google.com:19302"
     },
-    // {
-    //   urls: "turn:relay.metered.ca:80",
-    //   username: "ef5589e9789a32dcd988dd3b",
-    //   credential: "3WfeszWRhZ9QOyiz"
-    // },
-    // {
-    //     urls: "turn:relay.metered.ca:443",
-    //     username: "ef5589e9789a32dcd988dd3b",
-    //     credential: "3WfeszWRhZ9QOyiz"
-    //   }
+    {
+      urls: "turn:relay.metered.ca:80",
+      username: "ef5589e9789a32dcd988dd3b",
+      credential: "3WfeszWRhZ9QOyiz"
+    },
+    {
+        urls: "turn:relay.metered.ca:443",
+        username: "ef5589e9789a32dcd988dd3b",
+        credential: "3WfeszWRhZ9QOyiz"
+      }
     ]
   };
 
@@ -92,8 +92,8 @@ function monitorMapPeers(){
 }
 
 // runs the updateActiverTalkers method every x seconds (1000 = 1 second)
-var t=setInterval(updateActiveTalkers,30000);
-var t=setInterval(monitorMapPeers, 30000);
+var t=setInterval(updateActiveTalkers,200);
+var t=setInterval(monitorMapPeers, 200);
 
 // do everything when the page loads, as opposed to when the user clicks on the join button 
 //in this case, I have attached the method to the room name element. Can and probably should be changed 
@@ -205,6 +205,7 @@ function sendSignal(action, message){
     });
 
     webSocket.send(jsonStr);
+    console.log("sending message in send signal")
 }
 
 function createOfferer(peerUsername, receiverChannelName){

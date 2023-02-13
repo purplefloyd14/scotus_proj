@@ -1,5 +1,7 @@
 
-1. 
+1. "ABOUT" page 
+
+1.5. 404 Not found page 
 
 2. add a active=True/False to talker? Or do I just want to delete
 
@@ -13,16 +15,13 @@
 
 7. captcha? 
 
-8. assign users a random name 
+8. create MCU for listeners 
 
-9. remove video / join automatically by going to the page 
+9. remove video, make it audio only 
 
-10. Get domain name
+10. add expiry onto each room - view should not show rooms that have 
+"expired" and then make a crontab DB sweeper that runs every X hours. 
 
 11. redundant checking for users' presence using a 'heartbeat' message from each user every few seconds 
 
-
-current TODO
-
-limit 2 talkers, after that you are a listener 
 
