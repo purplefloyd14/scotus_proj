@@ -1,1 +1,40 @@
-<h2>404</h2>
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Channel42</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/misc.css' %}">
+</head>
+<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+<div class="tiny-top-bar">
+    <div>
+        <a href="/" class="about-button">Home</a>
+    </div>
+</div>
+<div class="total-page-container">
+    <div class="center-main-container">
+        <div class="logo-row-box">
+            <button class='about-image-button' type="submit" onclick="window.location.href='../';">
+                <img class='image-logo' src="{% static 'img/logo_white-min.png' %}" alt="">
+            </button>
+        </div>
+        <div class="main-content-box">
+            <h1 class='about-title'>404.</h1>
+            <div class="about-page-main-div">
+                <p class="about-page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus luctus leo eu massa vestibulum dapibus volutpat nec nisi. Duis bibendum lacinia nunc, ut vestibulum felis volutpat sit amet.
+                    Proin vulputate libero a risus malesuada, quis pretium orci tempus. Morbi a auctor lorem. Phasellus tincidunt lobortis justo non elementum. Suspendisse eget sapien lorem. In vel dui orci. 
+                    Nulla facilisi. In pellentesque elit eu sem fermentum, id accumsan nisl ornare.
+                    Nam id venenatis tortor. Sed tempor ligula sed sem consectetur, nec faucibus ipsum rhoncus. Suspendisse eleifend turpis sapien, id gravida dui imperdiet in. 
+                   
+                    <br>
+                    <br>
+
+                    Cras vehicula enim tellus, quis aliquet leo pretium sit amet. In dapibus, diam et accumsan dictum, turpis ligula iaculis mi, at maximus massa ipsum ac est. Nullam sit amet laoreet leo. 
+                    Sed volutpat molestie efficitur. Etiam vitae rhoncus arcu. Phasellus porta tortor non nisi tincidunt, sit amet efficitur justo elementum. 
+                    Duis hendrerit malesuada ligula, at ornare augue dapibus vel. Sed mollis leo ipsum, quis placerat nisi porta quis. Curabitur semper at ipsum ac semper. 
+                    Curabitur facilisis nunc at eros sodales accumsan.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+

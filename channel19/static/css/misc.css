@@ -25,7 +25,11 @@ html, body {
    overflow: hidden;
 }
 
-
+.about-image-button{ 
+   background: none;
+   height: 100%;
+   border: none;
+}
 
 .tiny-top-bar {
    display: flex;
@@ -37,6 +41,12 @@ html, body {
 .image-logo {
    display: flex;
    height: 100%;
+}
+
+.image-logo:hover {
+   display: flex;
+   height: 100%;
+   cursor: pointer;
 }
 
 
