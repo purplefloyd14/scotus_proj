@@ -1,13 +1,13 @@
 
-1. "ABOUT" page 
-
-1.5. 404 Not found page 
+1. Format CSS so that stats are displayed well on all screens (format periods)
 
 2. add a active=True/False to talker? Or do I just want to delete
 
 3. have the first three users be talkers, and everyone after that is a listener  
 
-4. once 4 talkers are present, additional connecters should be peanut gallery 
+4. fix DISCONNECT issue 
+
+4.5 SIGNAL WHEN TALKING. COULD BE DONE THROUGH MESSAGING 
 
 5. Html / CSS sprucing up 
 
@@ -19,8 +19,7 @@
 
 9. remove video, make it audio only 
 
-10. add expiry onto each room - view should not show rooms that have 
-"expired" and then make a crontab DB sweeper that runs every X hours. 
+10.  make a crontab DB sweeper that runs every X hours. 
 
 11. redundant checking for users' presence using a 'heartbeat' message from each user every few seconds 
 

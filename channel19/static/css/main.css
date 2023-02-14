@@ -79,20 +79,20 @@ html, body {
 }
 
 .video-container {
-    display: none;
     align-items: center;
     flex-direction: column;
     justify-content: center;
 }
 
 #peer-box-row {
-    display: flex;
+    display: none;
     width: 75%;
     height: 30%;
     justify-content: space-around;
 }
 
 .peer-box-instance {
+    display: none;
     height: 80px;
     display: flex;
     flex-direction: column;

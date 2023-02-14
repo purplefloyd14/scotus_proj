@@ -1,6 +1,8 @@
 console.log("In main.js!")
 
 var mapPeers = {};
+var peerTrack = {};
+
 
 var currentBaseUrl = 'https://ef01-73-129-90-73.ngrok.io'
 
@@ -9,7 +11,9 @@ var usernameInput = document.querySelector("#username");
 var btnJoin = document.querySelector("#btn-join");
 var userCount = document.getElementById("connected-user-count");
 var userCountJS = document.getElementById("connected-user-count-js")
+var userCountJS2 = document.getElementById("connected-user-count-js-2")
 var roomName = document.getElementById('room-name');
+var expiryOG = document.getElementById("original-expiry");
 var currentRoomUuid = window.location.href.slice(-6);
 var peerCount = 1;
 
@@ -37,8 +41,9 @@ var username;
 var webSocket; 
 var secondsToDeath; 
 
+
 function webSocketOnMessage(event){
-    console.log('in on messsage');
+    // console.log('in on messsage');
     var parsedData = JSON.parse(event.data);
     var peerUsername = parsedData['peer'];
     var action = parsedData['action'];
@@ -75,6 +80,14 @@ function webSocketOnMessage(event){
 
         return;
     }
+
+    if(action=='heartbeat'){
+        peerTrack[peerUsername] = parsedData['message']['time']; 
+        //update peertrack dict with username as key and current time as value
+        return;
+    }
+
+
 }
 
 function calculateCountdown(seconds) {
@@ -94,15 +107,17 @@ function calculateCountdown(seconds) {
 function getCreatedDate(){ //this is fired once at the beginningn by createConnectedTalker
     expiryClock = document.getElementById('expiry_clock');
     xhttp.open('GET', `${currentBaseUrl}/cb/${currentRoomUuid}/get_seconds_to_expiry`, false);
+    console.log("hitting this function");
     xhttp.send();
     var response = JSON.parse(xhttp.responseText);
     var secondsToExpiry = response.seconds_to_expiry;
     secondsToDeath = secondsToExpiry;
+    peerTrack['overall'] = secondsToExpiry;
     t3=setInterval(updateCountdown, 1000);
 }
 
 function updateCountdown(){
-    console.log("Running Countdown. Seconds to Death: " + secondsToDeath);
+    // console.log("Running Countdown. Seconds to Death: " + secondsToDeath);
     properTime = calculateCountdown(secondsToDeath);
     expiryClock.innerHTML = properTime; 
     secondsToDeath --;
@@ -121,12 +136,30 @@ function updateActiveTalkers(){
 }
 
 function monitorMapPeers(){
-    userCountJS.innerHTML = Object.keys(mapPeers).length + 1
+    userCountJS.innerHTML = Object.keys(mapPeers).length + 1 //add one to count self 
 }
 
+function monitorMapPeersJS2(){
+    //this function monitors the peerTrack dict, removing entries older than 2 seconds 
+    userCountJS2.innerHTML = Object.keys(peerTrack).length //add one to count self, sub one to discount overall
+    for (let user in peerTrack) {
+        if (peerTrack[user] > secondsToDeath + 2) {
+            //if more than 2 seconds have passed since the heartbeat was sent from that user
+            if (user != 'overall'){
+                delete peerTrack[user];
+            }
+        }
+    }
+}
+function printPTID(){
+    expiryOG.innerHTML = peerTrack['overall'];
+}
 // runs the updateActiverTalkers method every x seconds (1000 = 1 second)
 var t1=setInterval(updateActiveTalkers,1000);
 var t2=setInterval(monitorMapPeers, 1000);
+var t4=setInterval(monitorMapPeersJS2, 100);
+var t3=setInterval(printPTID, 1000);
+
 
 // do everything when the page loads, as opposed to when the user clicks on the join button 
 //in this case, I have attached the method to the room name element. Can and probably should be changed 
@@ -163,15 +196,16 @@ function createConnectedTalker(){
 
     var endPoint = wsStart + loc.host + loc.pathname + '/' + username;
     console.log("endpoint: ", endPoint);
-
-    console.log("sanity check")
-
     webSocket = new WebSocket(endPoint);
 
     webSocket.addEventListener('open', (e) => {
         console.log('Connection Opened!'); 
-        console.log(e)
-        sendSignal('new-peer', {})
+        console.log(e);
+        sendSignal('new-peer', {});
+        setInterval( function() { sendSignal("heartbeat", {
+            'time': secondsToDeath, //send heartbeat signal from every peer every half second
+        }); 
+    }, 500 );
     });
     console.log("between here")
     webSocket.addEventListener('message', webSocketOnMessage);
@@ -181,7 +215,6 @@ function createConnectedTalker(){
     webSocket.addEventListener('error', (e) => {
         console.log('Error Occurred!'); 
     });
-
 }
 
 var localStream = new MediaStream();
@@ -194,8 +227,6 @@ const constraints = {
 const localVideo = document.querySelector('#local-video');
 const btnToggleAudio = document.querySelector('#btn-toggle-audio');
 const btnToggleVideo = document.querySelector('#btn-toggle-video');
-
-
 
 var userMedia = navigator.mediaDevices.getUserMedia(constraints)
     .then(stream => {
@@ -240,19 +271,22 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
     }) 
 
 
+function isOpen(ws) { return ws.readyState === ws.OPEN }
+
 function sendSignal(action, message){
     var jsonStr = JSON.stringify({
         'peer': username, 
         'action': action, 
         'message': message, 
     });
-
-    webSocket.send(jsonStr);
-    console.log("sending message in send signal")
+    if (isOpen(webSocket)){
+        if (action === 'heartbeat'){
+            console.log("sending Heartbeat");
+        }
+        webSocket.send(jsonStr);
+    }
+    // console.log("sending message in send signal: " + action)
 }
-
-var glob_peer;
-
 function createOfferer(peerUsername, receiverChannelName){
     //see video at 1:08
     
@@ -322,6 +356,7 @@ function createOfferer(peerUsername, receiverChannelName){
 
     //summary of what we have just done at 1:24
 
+    
 
     function boolTalking() {
         peer.getStats(null).then((stats) => {

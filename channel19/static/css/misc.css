@@ -49,6 +49,10 @@ html, body {
    cursor: pointer;
 }
 
+.title-four-o-four { 
+   align-self: flex-start;
+}
+
 
 .logo-row-box {
    display: flex;
@@ -84,4 +88,20 @@ html, body {
    display: flex;
    justify-content: center;
    align-items: center;
+}
+
+
+.chunky-img{
+   -webkit-transform:scale(0.6); /*Webkit: Scale down image to 0.6x original size*/
+   -moz-transform:scale(0.6); /*Mozilla scale version*/
+   -o-transform:scale(0.6); /*Opera scale version*/
+   -webkit-transition-duration: 0.5s; /*Webkit: Animation duration*/
+   -moz-transition-duration: 0.5s; /*Mozilla duration version*/
+   -o-transition-duration: 0.5s; /*Opera duration version*/
+   }
+   
+.chunky-img:hover{
+-webkit-transform:scale(0.9); /*Webkit: Scale up image to most of the original size*/
+-moz-transform:scale(0.9); /*Mozilla scale version*/
+-o-transform:scale(0.9); /*Opera scale version*/
 }
