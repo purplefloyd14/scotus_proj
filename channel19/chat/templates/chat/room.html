@@ -18,14 +18,32 @@
         <div class="main-container">
             <div class="logo-box-top">
                 <button class='image-button' type="submit" onclick="window.location.href='../';">
-                    <img src="{% static 'img/logo_white-min.png' %}" alt="">
+                    <img class='main-logo-img' src="{% static 'img/logo_white-min.png' %}" alt="">
                 </button>
             </div>
             <br>
             <div class="info-box-middle-row">
                 <div class="info-box-middle-box">
                     <div>
-                        <h3> Subchannel URL: <h3 id="room-name">{{room_name}}</h3>  </h3>
+                        <h3> Subchannel URL:.......................<h3 id="room-name">{{room_name}}</h3>  </h3>
+                    </div>
+                    <div>
+                        <h3>Number of active (DB):.................... <h3 id="connected-user-count"> Loading... </h3></h3>
+                    </div>
+                    <div>
+                        <h3>Number of active (JS):.................... <h3 id="connected-user-count-js"> (1) </h3></h3> 
+                    </div>
+                    <div>
+                        <h3>Max Users:................................ <h3 id="connected-user-count">4</h3></h3>
+                    </div>
+                    <div>
+                        <h3>Time to expiry:.................... <h3 id="expiry_clock"> Loading </h3></h3>
+                    </div>
+                    <div>
+                        <h3>  You are:...............................  <h3 id="label-username"></h3></h3>
+                    </div>
+                    <!-- <div>
+                        <h3> Subchannel URL:<h3 id="room-name">{{room_name}}</h3>  </h3>
                     </div>
                     <div>
                         <h3>Number of active (DB): <h3 id="connected-user-count"> Loading... </h3></h3>
@@ -34,21 +52,27 @@
                         <h3>Number of active (JS): <h3 id="connected-user-count-js"> (1) </h3></h3> 
                     </div>
                     <div>
-                        <h3>Time to expiry: <h3 id="connected-user-count"> 1:08:43 </h3></h3>
+                        <h3>Max Users: <h3 id="connected-user-count">4</h3></h3>
                     </div>
                     <div>
-                        <h3>  You are:  <h3 id="label-username"></h3>    </h3>
+                        <h3>Time to expiry: <h3 id="expiry_clock"> Loading </h3></h3>
                     </div>
+                    <div>
+                        <h3>  You are:  <h3 id="label-username"></h3></h3>
+                    </div> -->
+                    
                     <br>
-                    <div>
-                        <h3>Also Connected we have:</h3>
-                        <ul id="ul-peer-username">
-                            <li>example<img class='talking-logo' src="{% static 'img/blank.png' %}" alt=""></li>
-                        </ul>
-                    </div>   
+                    
                 </div>
             </div>
             <div class="bottom-box-audio-controls-row">
+                <h4 id="talking-test">testing</h4>
+                <div>
+                    <h3>Also Connected we have:</h3>
+                </div>   
+                <div id="peer-box-row">
+
+                </div>
                 <div class="video-container">
                     <video id="local-video" style="float: left;" autoplay playsinline></video>
                     <button id="btn-toggle-audio">Audio Mute</button>

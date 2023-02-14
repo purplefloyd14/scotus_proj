@@ -17,7 +17,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-MAX_USERS_PER_ROOM = 5
+MAX_USERS_PER_ROOM = 4
+SECONDS_FOR_ROOM_EXISTENCE = 7200 #15 mins = 900 seconds
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/

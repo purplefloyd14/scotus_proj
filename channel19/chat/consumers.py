@@ -4,6 +4,7 @@ from chat.models import Talker, Room
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 import random
+from django.conf import settings 
 # Get channel_layer function
 
 # passing group_channel takes channel name
@@ -21,7 +22,7 @@ class ChatConsumer(WebsocketConsumer):
         session = self.scope['session']
         session['user'] = talker.guid
         this_room = Room.objects.get(uuid=self.room_name)
-        if len(this_room.talker_set.all()) >= 4:
+        if len(this_room.talker_set.all()) >= settings.MAX_USERS_PER_ROOM:
             print("too many people in the room. Try back later")
             return 
         talker.room = this_room

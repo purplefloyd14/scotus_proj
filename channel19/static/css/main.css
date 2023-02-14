@@ -35,7 +35,7 @@ html, body {
   }
 
 .info-box-middle-row {
-    height: 30%;
+    height: 15%;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -75,13 +75,28 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-family: monospace;
 }
 
 .video-container {
-    display: flex;
+    display: none;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+}
+
+#peer-box-row {
+    display: flex;
+    width: 75%;
+    height: 30%;
+    justify-content: space-around;
+}
+
+.peer-box-instance {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .about-button {
@@ -100,12 +115,13 @@ video {
     height: 110px;
 }
 
-img {
+
+.main-logo-img {
     width: 80%;
     max-width: 700px;
 }
 
-img:hover {
+.main-logo-img:hover {
     cursor:pointer;
 }
 
