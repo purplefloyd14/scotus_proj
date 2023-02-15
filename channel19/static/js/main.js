@@ -15,8 +15,8 @@ var userCountDC = document.getElementById("connected-user-count-dc")
 var roomName = document.getElementById('room-name');
 var expiryOG = document.getElementById("original-expiry");
 var currentRoomUuid = window.location.href.slice(-6);
-var peerCount = 1;
 var talkingNow = false;
+var sendingActively = false; 
 
 var iceConfig = { 
     iceServers: [
@@ -41,6 +41,7 @@ var btnGetData = document.querySelector("#btn-get-active")
 var username;
 var webSocket; 
 var secondsToDeath; 
+
 
 
 function webSocketOnMessage(event){
@@ -106,7 +107,6 @@ function calculateCountdown(seconds) {
 function getCreatedDate(){ //this is fired once at the beginningn by createConnectedTalker
     expiryClock = document.getElementById('expiry_clock');
     xhttp.open('GET', `${currentBaseUrl}/cb/${currentRoomUuid}/get_seconds_to_expiry`, false);
-    console.log("hitting this function");
     xhttp.send();
     var response = JSON.parse(xhttp.responseText);
     var secondsToExpiry = response.seconds_to_expiry;
@@ -134,15 +134,21 @@ function updateActiveTalkers(){
     // console.log("number of users here: " + numUsersConnected.talker_count);
 }
 
+function monitorMapPeers(){
+    numConnectedUsers = Object.keys(mapPeers).length + 1;
+    userCountJS.innerHTML = numConnectedUsers;
+}
 
-function monitorMapPeersDataChannel(){
+setInterval(monitorMapPeers, 2000);
+
+
+function monitorPeerTrackDirectConnection(){
     //this function monitors the peerTrackDirectConnection dict, removing entries older than 2 seconds 
-    numConnectedUsers = Object.keys(peerTrackDirectConnection).length + 1 //add one to count self
+    numConnectedUsers = Object.keys(peerTrackDirectConnection).length + 1; //add one to count self
     userCountDC.innerHTML = numConnectedUsers;
     for (let user in peerTrackDirectConnection) {
-        if (peerTrackDirectConnection[user] > secondsToDeath + 3) {
-            //if more than 2 seconds have passed since the heartbeat was sent from that user
-            delete peerTrackDirectConnection[user];
+        if (peerTrackDirectConnection[user] > secondsToDeath + 3) { //if more than 2 seconds have passed since the heartbeat was sent from that user
+            delete peerTrackDirectConnection[user]; //delete that user 
             handleListItems(user, 'delete');
             console.log("Say goodbye to: " + user);
         } else {
@@ -180,9 +186,8 @@ function handleListItems(user, action){
     }
 }
 
-// runs the updateActiverTalkers method every x seconds (1000 = 1 second)
-var t1=setInterval(updateActiveTalkers,1000);
-var t4=setInterval(monitorMapPeersDataChannel, 100);
+// var t1=setInterval(updateActiveTalkers,1000);
+// var t4=setInterval(monitorPeerTrackDirectConnection, 500); //check the peerTrack dict and remove those who arent pinging us 
 
 
 // do everything when the page loads, as opposed to when the user clicks on the join button 
@@ -335,7 +340,7 @@ function sendMsgOnClick(){
     message = JSON.stringify({
         'action': 'message',
         'content': msgText,
-        'user': username
+        'user': username,
     });
     console.log('Sending message: '+ msgText + " from user: " + username);
     for (index in dataChannels){
@@ -364,9 +369,17 @@ function sendSignal(action, message){
     }
 }
 
+function sendHeartBeatIfNeeded(sender){
+    console.log("head HB if needed from: " + sender);
+    if (!sendingActively){
+        setInterval(sendDirectChannelSignalHeartbeat, 1000);
+        sendingActively = true;
+    }
+}
+
 
 function sendDirectChannelSignalHeartbeat(){
-    // console.log("we are sending a heartbeat from: " + username);
+    console.log("we are sending a heartbeat from: " + username + ". Trigged in OFFERER");
     //this is how you send something to all peers via WebRTC DirectChannel (no server needed)
     var dataChannels = getDataChannels(); //get the DataChannel objects that relate to each peer in the mesh 
     var message = JSON.stringify({ //construct a message object 
@@ -374,7 +387,7 @@ function sendDirectChannelSignalHeartbeat(){
         'action': 'heartbeat_over_direct_channel',
         'time': secondsToDeath, 
         'talking': talkingNow,
-    });
+    })
     for (index in dataChannels){ //iterate through datacharnnels belonging to peers in mesh
         // if (dataChannels[index].readyState === 'open') {
         //     dataChannels[index].send(message); //send each peer the message object 
@@ -385,44 +398,37 @@ function sendDirectChannelSignalHeartbeat(){
 
 
 function createOfferer(peerUsername, receiverChannelName){
+    console.log("we are in create offerer");
     //see video at 1:08
     
     var peer = new RTCPeerConnection(iceConfig); 
 
     peer.addEventListener('iceconnectionstatechange', function() {
         console.log('ICE connection state:', peer.iceConnectionState);
-        if (peer.iceConnectionState ==='connected'){
-            peerCount++;
-        }
       });
       addLocalTracks(peer);  //takes local audio and video tracks and adds it self 
       data_channel = peer.createDataChannel('channel');
       data_channel.addEventListener('open', () =>{
         console.log('Connection Opened For Data Channel!');
-        setInterval(sendDirectChannelSignalHeartbeat, 500);
+        // sendHeartBeatIfNeeded("Offerer");
       });
       data_channel.addEventListener('message', dcOnMessage); //whenever we get a message through this data channel it is going to call this function 
       var remoteVideo = createVideo(peerUsername); 
   
       setOnTrack(peer, remoteVideo); //adds own streams to remote stream 
       mapPeers[peerUsername] = [peer, data_channel];
-      addPeerToList(peerUsername);
+    //   addPeerToList(peerUsername);
 
     //used to remove video when a peer leaves the room 
     peer.addEventListener('iceconnectionstatechange', () => {
         var iceConnectionState = peer.iceConnectionState;
 
         if(iceConnectionState === 'failed' || iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
-            removePeerFromList(peerUsername);
-            peerCount--;
+            console.log("we are deleting a peer in offerer: " + peerUsername);
             delete mapPeers[peerUsername];
             
             if(iceConnectionState != 'closed'){
                 peer.close();
-            }
-
-            if(iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
-                // peerCount--;
             }
 
             removeVideo(remoteVideo);
@@ -482,30 +488,24 @@ function createOfferer(peerUsername, receiverChannelName){
     // statsInterval = setInterval(boolTalking, 10000);
 }
 
-function addPeerToList(peerUsername){
-    var newPeerDiv = document.createElement('div');
-    newPeerDiv.className = 'peer-box-instance';
-    newPeerDiv.id= "div-" + peerUsername;
-    var newPeerImage = document.createElement('img');
-    newPeerImage.src = "../static/img/beatles/" + peerUsername.toLowerCase() + "_small.png";
-    var newPeerName = document.createElement("h4");
-    newPeerName.innerHTML = peerUsername;
-    newPeerDiv.appendChild(newPeerImage);
-    newPeerDiv.appendChild(newPeerName);
-    var peerBoxRow = document.getElementById("peer-box-row");
-    peerBoxRow.appendChild(newPeerDiv);
-    console.log('added!')
-}
+// function addPeerToList(peerUsername){
+//     var newPeerDiv = document.createElement('div');
+//     newPeerDiv.className = 'peer-box-instance';
+//     newPeerDiv.id= "div-" + peerUsername;
+//     var newPeerImage = document.createElement('img');
+//     newPeerImage.src = "../static/img/beatles/" + peerUsername.toLowerCase() + "_small.png";
+//     var newPeerName = document.createElement("h4");
+//     newPeerName.innerHTML = peerUsername;
+//     newPeerDiv.appendChild(newPeerImage);
+//     newPeerDiv.appendChild(newPeerName);
+//     var peerBoxRow = document.getElementById("peer-box-row");
+//     peerBoxRow.appendChild(newPeerDiv);
+//     console.log('added!')
+// }
 
-function removePeerFromList(peerUsername){
-    return;
-    // var peerList = document.getElementById('peer-box-row');
-    // var peerToRemove = document.getElementById(`div-${peerUsername.toLowerCase}`);
-    // peerList.removeChild(peerToRemove);
-}
 
 function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
-
+    console.log("we are in create answerer")
     var peer = new RTCPeerConnection(iceConfig);
 
     addLocalTracks(peer);  // add my tracks to my own feed 
@@ -516,21 +516,28 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
     peer.addEventListener('datachannel', (e) => {
         peer.dataChannel = e.channel; //gives us the data channel that was created by the offerer 
         peer.dataChannel.addEventListener('open', () =>{
-            console.log('Connection Opened For Data Channel!')
-            setInterval(sendDirectChannelSignalHeartbeat, 500);
+            console.log('Connection Opened For Data Channel!');
+            // sendHeartBeatIfNeeded("answerer");
         })
         peer.dataChannel.addEventListener('message', dcOnMessage);
-
+        console.log("we got into the answerer part where we add the MESSAGE listener for peer: " + peerUsername);
         mapPeers[peerUsername] = [peer, peer.dataChannel];
-        addPeerToList(peerUsername);
+        // addPeerToList(peerUsername);
     });
+
+    // peer.addEventListener("datachannel", (ev) => {
+    //     receiveChannel = ev.channel;
+    //     receiveChannel.onmessage = console.log("!!message");
+    //     receiveChannel.onopen = console.log("!!open");
+    //     receiveChannel.onclose = console.log("!!!Close");
+    //   }, false);
 
     //used to remove video when a peer leaves the room 
     peer.addEventListener('iceconnectionstatechange', () => {
         var iceConnectionState = peer.iceConnectionState;
 
         if(iceConnectionState === 'failed' || iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
-            removePeerFromList(peerUsername);
+            console.log("we are deleting a peer in answerer: " + peerUsername + ". the connection state is: "+ iceConnectionState);
             delete mapPeers[peerUsername];
             
             if(iceConnectionState != 'closed'){
@@ -578,19 +585,16 @@ function dcOnMessage(event){
     //when the message event is triggered on the data channel and it executes this function, the eventListener will pass to this function a dictionary 
     //as the parameter 'event'
     var message = JSON.parse(event.data);
-    // var message = event.data;
     // console.log("in onMessage, got message: " + message.action);
     if (message.action === 'message'){
         var li = document.createElement('li');
         li.appendChild(document.createTextNode(message.user + ": " + message.content));
-        messageList.appendChild(li)
+        messageList.appendChild(li);
     }
     if (message.action === 'heartbeat_over_direct_channel'){
-        // console.log(`In heartbeat - Setting user: ${message.user} to time ${message.time}`);
         peerTrackDirectConnection[message.user] = message.time;
-        // console.log("we got a heartbeat from: " + message.user);
-    }
-    
+        console.log("we got a heartbeat from: " + message.user);
+    } 
 }
 
 // f5 = setInterval(sendOverDataChannel, 3000);
