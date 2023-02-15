@@ -164,7 +164,15 @@ function handleListItems(user, action){
             newUserLi = document.createElement('li')
             newUserLi.id = `${user}-li-active`;
             newUserH3 = document.createElement('h3');
-            newUserH3.innerHTML =`......................... ${user}`;
+            if (user === "John" || user === "Paul") {
+                newUserH3.innerHTML =`........................ ${user}`;
+            }
+            if (user === "George"){ 
+                newUserH3.innerHTML =`...................... ${user}`;
+            }
+            if (user === "Ringo"){ 
+                newUserH3.innerHTML =`....................... ${user}`;
+            }
             newUserLi.appendChild(newUserH3);
             listOfConnectedUsers = document.getElementById('connected-users-ul');
             listOfConnectedUsers.appendChild(newUserLi);
@@ -186,7 +194,16 @@ function getNewPublicUsername(roomID){
     xhttp.send();
     dataFromDB = JSON.parse(xhttp.responseText);
     var labelUsername = document.querySelector('#label-username');
-    labelUsername.innerHTML = dataFromDB.recommended_name;
+    recommendedName = dataFromDB.recommended_name
+    if (recommendedName === "John" || recommendedName === "Paul") {
+        var selfHeader = document.getElementById('you-are-header');
+        selfHeader.innerHTML = "You are:............................... "
+    }
+    if (recommendedName === "Ringo") {
+        var selfHeader = document.getElementById('you-are-header');
+        selfHeader.innerHTML = "You are:.............................. "
+    }
+    labelUsername.innerHTML = recommendedName;
     return dataFromDB.recommended_name;
 }
 
