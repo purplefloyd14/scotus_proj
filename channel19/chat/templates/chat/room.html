@@ -18,17 +18,18 @@
         <div class="main-container">
             <div class="logo-box-top">
                 <button class='image-button' type="submit" onclick="window.location.href='../';">
-                    <img class='main-logo-img' src="{% static 'img/logo_white-min.png' %}" alt="">
+                    <img id='main-logo-image' class='main-logo-img' src="{% static 'img/logo_white-min.png' %}" alt="">
                 </button>
             </div>
             <br>
             <div class="info-box-middle-row">
                 <div class="info-box-middle-box">
-                    <div>
-                        <h3> Version:.......................... <h3 id="room-name">1.01-lite</h3>  </h3>
-                    </div>
+                    
                     <div>
                         <h3> Subchannel URL:...................... <h3 id="room-name">{{room_name}}</h3>  </h3>
+                    </div>
+                    <div>
+                        <h3> Version:............................... <h3 id="room-name">1.01</h3>  </h3>
                     </div>
                     <!-- <div>
                         <h3>Number of active (DB):.................... <h3 id="connected-user-count"> X </h3></h3>
@@ -76,19 +77,7 @@
                 </div>
             </div>
             <div class="bottom-box-audio-controls-row">
-               
-                <div id="peer-box-row">
-                    
-
-                </div>
-                <div class="video-container">
-                    <video id="local-video" style="float: left;" autoplay playsinline></video>
-                    
-                    <button id="btn-toggle-video">Video Off</button>
-                </div>
-                <br>
-    
-               
+                <button id="btn-toggle-audio">Mute</button>            
             </div>
             <div id="chat">
                 <h3>Chat</h3>
@@ -96,7 +85,6 @@
                     <ul id="message-list"></ul>
                 </div>
                 <div><input id="msg"><button id="btn-send-msg">Send Message</button></div>
-                <button id="btn-toggle-audio">Audio Mute</button>
             </div>
            
 
@@ -106,4 +94,5 @@
         
     </body>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <link rel="prefetch" href="{% static 'img/logo_white-red-min.png' %}">
 </html> 

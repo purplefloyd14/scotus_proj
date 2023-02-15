@@ -71,11 +71,11 @@
 
 .bottom-box-audio-controls-row {
     width: 50%;
-    height: 30%;
+    min-height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     font-family: monospace;
 }
 
@@ -140,6 +140,7 @@ ul.frames li {
 .image-button {
     background: none;
     border: none;
+    padding-left: 45px;
 }
 
 #seen-div {
@@ -168,4 +169,19 @@ ul.frames li {
 .peer-list-title { 
     padding: 0px;
     margin: 0px;
+}
+
+#btn-toggle-audio { 
+    white-space: normal;
+    width: 68%;
+    background-color: #3b3c40;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+    border-radius: 5px;
+    font-family: monospace;
 }

@@ -17,6 +17,7 @@ var expiryOG = document.getElementById("original-expiry");
 var currentRoomUuid = window.location.href.slice(-6);
 var talkingNow = false;
 var sendingActively = false; 
+var mainLogoImage = document.getElementById('main-logo-image');
 
 var iceConfig = { 
     iceServers: [
@@ -121,7 +122,6 @@ function updateCountdown(){
     expiryClock.innerHTML = properTime; 
     secondsToDeath--;
 }
-
 
 
 //queries the database for active talkers in a given room, takes the response, and populates userCount field with it 
@@ -279,10 +279,12 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
             audioTracks[0].enabled = !audioTracks[0].enabled;
 
             if(audioTracks[0].enabled){
-                btnToggleAudio.innerHTML = "Audio Mute";
+                btnToggleAudio.innerHTML = "Mute";
+                mainLogoImage.src='../static/img/logo_white-min.png'
                 return;
             }
-            btnToggleAudio.innerHTML = "Audio Unmute";
+            btnToggleAudio.innerHTML = "Unmute";
+            mainLogoImage.src='../static/img/logo_white-red-min.png'
         });
     })
     .catch(error => {
