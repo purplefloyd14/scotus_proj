@@ -139,3 +139,15 @@ ul.frames li {
     background: none;
     border: none;
 }
+
+
+#message-list {
+    flex-direction: column;
+}
+
+#chat {
+    display: flex;
+    align-self: flex-start;
+    height: 100%;
+    flex-direction: column;
+}

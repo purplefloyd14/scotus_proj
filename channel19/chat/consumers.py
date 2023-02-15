@@ -85,7 +85,7 @@ class ChatConsumer(WebsocketConsumer):
 
        # Receive message from room group
     def send_sdp(self, event):  
-        #this function must correspond to the value of the 'type' key in the second param dict in the receive function 
+        #this function must correspond to the value of the 'type' key in the second param (which is a dict) in the receive function (above)
         #the other data that is passed in that function is available in this function as part of the event dictionary 
 
         #THIS IS A GREAT WAY TO COMMUNICATE WITH THE FRONT END - YOU HAVE BOTH THE SELF AND THE EVENT HERE 

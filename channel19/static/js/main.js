@@ -2,8 +2,7 @@ console.log("In main.js!")
 
 var mapPeers = {};
 var peerTrack = {};
-
-
+var peerTrackDC = {};
 var currentBaseUrl = 'https://ef01-73-129-90-73.ngrok.io'
 
 var labelUsername = document.querySelector("#label-username");
@@ -12,6 +11,7 @@ var btnJoin = document.querySelector("#btn-join");
 var userCount = document.getElementById("connected-user-count");
 var userCountJS = document.getElementById("connected-user-count-js")
 var userCountJS2 = document.getElementById("connected-user-count-js-2")
+var userCountDC = document.getElementById("connected-user-count-dc")
 var roomName = document.getElementById('room-name');
 var expiryOG = document.getElementById("original-expiry");
 var currentRoomUuid = window.location.href.slice(-6);
@@ -45,8 +45,8 @@ var secondsToDeath;
 function webSocketOnMessage(event){
     // console.log('in on messsage');
     var parsedData = JSON.parse(event.data);
-    var peerUsername = parsedData['peer'];
-    var action = parsedData['action'];
+    var peerUsername = parsedData['peer']; //who is the message from 
+    var action = parsedData['action']; //what is the action at issue
     
 
     //this message is relayed to every peer on the group, so we end up receiving our own messages
@@ -58,10 +58,10 @@ function webSocketOnMessage(event){
     }
     
     var receiverChannelName = parsedData['message']['receiver_channel_name'];
+    console.log("receiver channel name is: " + receiverChannelName);
 
     if(action=='new-peer'){
         createOfferer(peerUsername, receiverChannelName);
-        // setPublicUsername();
         return;
     }
 
@@ -73,11 +73,8 @@ function webSocketOnMessage(event){
 
     if(action=='new-answer'){
         var answer = parsedData['message']['sdp'];
-
-        var peer = mapPeers[peerUsername][0];
-
+        var peer = mapPeers[peerUsername][0]; //give us the websocketPeer object associated with the sender's username
         peer.setRemoteDescription(answer);
-
         return;
     }
 
@@ -120,7 +117,7 @@ function updateCountdown(){
     // console.log("Running Countdown. Seconds to Death: " + secondsToDeath);
     properTime = calculateCountdown(secondsToDeath);
     expiryClock.innerHTML = properTime; 
-    secondsToDeath --;
+    secondsToDeath--;
 }
 
 
@@ -141,7 +138,7 @@ function monitorMapPeers(){
 
 function monitorMapPeersJS2(){
     //this function monitors the peerTrack dict, removing entries older than 2 seconds 
-    userCountJS2.innerHTML = Object.keys(peerTrack).length //add one to count self, sub one to discount overall
+    userCountJS2.innerHTML = Object.keys(peerTrack).length + 1//add one to count self, sub one to discount overall
     for (let user in peerTrack) {
         if (peerTrack[user] > secondsToDeath + 2) {
             //if more than 2 seconds have passed since the heartbeat was sent from that user
@@ -151,14 +148,29 @@ function monitorMapPeersJS2(){
         }
     }
 }
+
+function monitorMapPeersDataChannel(){
+    //this function monitors the peerTrack dict, removing entries older than 2 seconds 
+    userCountDC.innerHTML = Object.keys(peerTrack).length + 1//add one to count self, sub one to discount overall
+    for (let user in peerTrack) {
+        if (peerTrack[user] > secondsToDeath + 2) {
+            //if more than 2 seconds have passed since the heartbeat was sent from that user
+            if (user != 'overall'){
+                delete peerTrack[user];
+            }
+        }
+    }
+}
+
 function printPTID(){
     expiryOG.innerHTML = peerTrack['overall'];
 }
 // runs the updateActiverTalkers method every x seconds (1000 = 1 second)
-var t1=setInterval(updateActiveTalkers,1000);
-var t2=setInterval(monitorMapPeers, 1000);
-var t4=setInterval(monitorMapPeersJS2, 100);
-var t3=setInterval(printPTID, 1000);
+// var t1=setInterval(updateActiveTalkers,1000);
+// var t2=setInterval(monitorMapPeers, 1000);
+// var t4=setInterval(monitorMapPeersJS2, 100);
+// var t4=setInterval(monitorMapPeersDataChannel, 100);
+// var t3=setInterval(printPTID, 1000);
 
 
 // do everything when the page loads, as opposed to when the user clicks on the join button 
@@ -201,11 +213,11 @@ function createConnectedTalker(){
     webSocket.addEventListener('open', (e) => {
         console.log('Connection Opened!'); 
         console.log(e);
-        sendSignal('new-peer', {});
-        setInterval( function() { sendSignal("heartbeat", {
-            'time': secondsToDeath, //send heartbeat signal from every peer every half second
-        }); 
-    }, 500 );
+        sendSignal('new-peer', {}); //hey everybody - I am a new peer 
+    //     setInterval( function() { sendSignal("heartbeat", {
+    //         'time': secondsToDeath, //send heartbeat signal from every peer every half second
+    //     }); 
+    // }, 500 );
     });
     console.log("between here")
     webSocket.addEventListener('message', webSocketOnMessage);
@@ -268,8 +280,30 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
     })
     .catch(error => {
         console.log('Error accessing media devices!', error);
-    }) 
+    });
+ 
+var btnSendMsg = document.querySelector('#btn-send-msg');
 
+var messageList = document.querySelector('#message-list');
+var messageInput = document.querySelector('#msg');
+
+btnSendMsg.addEventListener('click', sendMsgOnClick);
+
+function sendMsgOnClick(){
+    var message = messageInput.value;
+    var li = document.createElement('li'); 
+    li.appendChild(document.createTextNode("Me: " + message));
+    messageList.append(li);
+
+    var dataChannels = getDataChannels();
+
+    message = username + ": " + message; 
+    for (index in dataChannels){
+        dataChannels[index].send(message)
+    }
+
+    messageInput.value = '';
+}
 
 function isOpen(ws) { return ws.readyState === ws.OPEN }
 
@@ -281,11 +315,10 @@ function sendSignal(action, message){
     });
     if (isOpen(webSocket)){
         if (action === 'heartbeat'){
-            console.log("sending Heartbeat");
+            console.log("sending Heartbeat through websockets");
         }
         webSocket.send(jsonStr);
     }
-    // console.log("sending message in send signal: " + action)
 }
 function createOfferer(peerUsername, receiverChannelName){
     //see video at 1:08
@@ -298,17 +331,17 @@ function createOfferer(peerUsername, receiverChannelName){
             peerCount++;
         }
       });
-    addLocalTracks(peer);  //takes local audio and video tracks and adds it self 
-    var data_channel = peer.createDataChannel('channel');
-    data_channel.addEventListener('open', () =>{
-        console.log('Connection Opened For Data Channel!')
-    })
-    data_channel.addEventListener('message', dcOnMessage); //whenever we get a message through this data channel it is going to call this function 
-    var remoteVideo = createVideo(peerUsername); 
-
-    setOnTrack(peer, remoteVideo); //adds own streams to remote stream 
-    mapPeers[peerUsername] = [peer, data_channel];
-    addPeerToList(peerUsername);
+      addLocalTracks(peer);  //takes local audio and video tracks and adds it self 
+      data_channel = peer.createDataChannel('channel');
+      data_channel.addEventListener('open', () =>{
+          console.log('Connection Opened For Data Channel!')
+      })
+      data_channel.addEventListener('message', dcOnMessage); //whenever we get a message through this data channel it is going to call this function 
+      var remoteVideo = createVideo(peerUsername); 
+  
+      setOnTrack(peer, remoteVideo); //adds own streams to remote stream 
+      mapPeers[peerUsername] = [peer, data_channel];
+      addPeerToList(peerUsername);
 
     //used to remove video when a peer leaves the room 
     peer.addEventListener('iceconnectionstatechange', () => {
@@ -316,6 +349,7 @@ function createOfferer(peerUsername, receiverChannelName){
 
         if(iceConnectionState === 'failed' || iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
             removePeerFromList(peerUsername);
+            peerCount--;
             delete mapPeers[peerUsername];
             
             if(iceConnectionState != 'closed'){
@@ -323,7 +357,7 @@ function createOfferer(peerUsername, receiverChannelName){
             }
 
             if(iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
-                peerCount--;
+                // peerCount--;
             }
 
             removeVideo(remoteVideo);
@@ -414,14 +448,13 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
     setOnTrack(peer, remoteVideo); // add my feed to the remote stream 
 
     peer.addEventListener('datachannel', (e) => {
-        console.log("in DC stuff");
-        peer.dc = e.channel; //gives us the data channel that was created by the offerer 
-        peer.dc.addEventListener('open', () =>{
+        peer.dataChannel = e.channel; //gives us the data channel that was created by the offerer 
+        peer.dataChannel.addEventListener('open', () =>{
             console.log('Connection Opened For Data Channel!')
         })
-        peer.dc.addEventListener('message', dcOnMessage);
+        peer.dataChannel.addEventListener('message', dcOnMessage);
 
-        mapPeers[peerUsername] = [peer, peer.dc];
+        mapPeers[peerUsername] = [peer, peer.dataChannel];
         addPeerToList(peerUsername);
     });
 
@@ -448,7 +481,6 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
             //
             return;
         }
-
         //when ICE process has been completed the candidate value will be null in which case we will 
         //simply send signal and send the SDP to remote peer. 
 
@@ -460,12 +492,10 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
     peer.setRemoteDescription(offer)
         .then(()=> {
             console.log('remote description set successfully for %s.', peerUsername);
-
             return peer.createAnswer();
         })
         .then(a =>{
             console.log('Answer Created!');
-
             peer.setLocalDescription(a); 
         })
 }
@@ -477,19 +507,19 @@ function addLocalTracks(peer){
     }); 
 }
 
-var messageList = document.querySelector('#message-list');
-
-
+ 
 function dcOnMessage(event){
     //when the message event is triggered on the data channel and it executes this function, the eventListener will pass to this function a dictionary 
     //as the parameter 'event'
     var message = event.data;
-    console.log("message being sent")
+    console.log("message being received!! : " + message)
     //add new message to ul on html page as li 
     var li = document.createElement('li');
     li.appendChild(document.createTextNode(message));
     messageList.appendChild(li)
 }
+
+// f5 = setInterval(sendOverDataChannel, 3000);
 
 function createVideo(peerUsername){
     //video container, already existing, just grabbing it 
@@ -524,5 +554,13 @@ function removeVideo(video){
     videoWrapper.parentNode.removeChild(videoWrapper);
 }
 
+function getDataChannels(){
+    var dataChannels = [];
+    for (peerUserName in mapPeers){
+        var dataChannel = mapPeers[peerUserName][1];
+        dataChannels.push(dataChannel);
+    }
+    return dataChannels;
+}
 
 createConnectedTalker();
