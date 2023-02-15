@@ -2,7 +2,7 @@ console.log("In main.js!")
 
 var mapPeers = {};
 var peerTrack = {};
-var peerTrackDC = {};
+var peerTrackDirectConnection = {};
 var currentBaseUrl = 'https://ef01-73-129-90-73.ngrok.io'
 
 var labelUsername = document.querySelector("#label-username");
@@ -16,6 +16,7 @@ var roomName = document.getElementById('room-name');
 var expiryOG = document.getElementById("original-expiry");
 var currentRoomUuid = window.location.href.slice(-6);
 var peerCount = 1;
+var talkingNow = false;
 
 var iceConfig = { 
     iceServers: [
@@ -81,6 +82,7 @@ function webSocketOnMessage(event){
     if(action=='heartbeat'){
         peerTrack[peerUsername] = parsedData['message']['time']; 
         //update peertrack dict with username as key and current time as value
+        //probably not going to be used if I can get it to work p2p instead (saves server calls)
         return;
     }
 
@@ -132,45 +134,47 @@ function updateActiveTalkers(){
     // console.log("number of users here: " + numUsersConnected.talker_count);
 }
 
-function monitorMapPeers(){
-    userCountJS.innerHTML = Object.keys(mapPeers).length + 1 //add one to count self 
-}
-
-function monitorMapPeersJS2(){
-    //this function monitors the peerTrack dict, removing entries older than 2 seconds 
-    userCountJS2.innerHTML = Object.keys(peerTrack).length + 1//add one to count self, sub one to discount overall
-    for (let user in peerTrack) {
-        if (peerTrack[user] > secondsToDeath + 2) {
-            //if more than 2 seconds have passed since the heartbeat was sent from that user
-            if (user != 'overall'){
-                delete peerTrack[user];
-            }
-        }
-    }
-}
 
 function monitorMapPeersDataChannel(){
-    //this function monitors the peerTrack dict, removing entries older than 2 seconds 
-    userCountDC.innerHTML = Object.keys(peerTrack).length + 1//add one to count self, sub one to discount overall
-    for (let user in peerTrack) {
-        if (peerTrack[user] > secondsToDeath + 2) {
+    //this function monitors the peerTrackDirectConnection dict, removing entries older than 2 seconds 
+    numConnectedUsers = Object.keys(peerTrackDirectConnection).length + 1 //add one to count self
+    userCountDC.innerHTML = numConnectedUsers;
+    for (let user in peerTrackDirectConnection) {
+        if (peerTrackDirectConnection[user] > secondsToDeath + 3) {
             //if more than 2 seconds have passed since the heartbeat was sent from that user
-            if (user != 'overall'){
-                delete peerTrack[user];
-            }
+            delete peerTrackDirectConnection[user];
+            handleListItems(user, 'delete');
+            console.log("Say goodbye to: " + user);
+        } else {
+            handleListItems(user, 'create');
         }
     }
 }
 
-function printPTID(){
-    expiryOG.innerHTML = peerTrack['overall'];
+function handleListItems(user, action){
+    if (action === 'delete'){
+        userListItem = document.getElementById(`${user}-li-active`);
+        if (userListItem) {
+            userListItem.remove();
+        }
+    }
+    if (action === 'create'){
+        connectedUserLi = document.getElementById(`${user}-li-active`);
+        if (!connectedUserLi){ //if a list element for this user does not exist 
+            newUserLi = document.createElement('li')
+            newUserLi.id = `${user}-li-active`;
+            newUserH3 = document.createElement('h3');
+            newUserH3.innerHTML =`......................... ${user}`;
+            newUserLi.appendChild(newUserH3);
+            listOfConnectedUsers = document.getElementById('connected-users-ul');
+            listOfConnectedUsers.appendChild(newUserLi);
+        }
+    }
 }
+
 // runs the updateActiverTalkers method every x seconds (1000 = 1 second)
-// var t1=setInterval(updateActiveTalkers,1000);
-// var t2=setInterval(monitorMapPeers, 1000);
-// var t4=setInterval(monitorMapPeersJS2, 100);
-// var t4=setInterval(monitorMapPeersDataChannel, 100);
-// var t3=setInterval(printPTID, 1000);
+var t1=setInterval(updateActiveTalkers,1000);
+var t4=setInterval(monitorMapPeersDataChannel, 100);
 
 
 // do everything when the page loads, as opposed to when the user clicks on the join button 
@@ -213,7 +217,7 @@ function createConnectedTalker(){
     webSocket.addEventListener('open', (e) => {
         console.log('Connection Opened!'); 
         console.log(e);
-        sendSignal('new-peer', {}); //hey everybody - I am a new peer 
+        sendSignal('new-peer', {}); //hey everybody - I am a new peer (this is the websockets implimentation which has been depricated)
     //     setInterval( function() { sendSignal("heartbeat", {
     //         'time': secondsToDeath, //send heartbeat signal from every peer every half second
     //     }); 
@@ -286,21 +290,42 @@ var btnSendMsg = document.querySelector('#btn-send-msg');
 
 var messageList = document.querySelector('#message-list');
 var messageInput = document.querySelector('#msg');
+var heartBeatButton = document.querySelector('#heart-beat-button');
 
 btnSendMsg.addEventListener('click', sendMsgOnClick);
 
+messageInput.addEventListener("keyup", function(e) {
+    console.log("we are here in the keydown area");
+    e = window.event;
+    var keyCode = e.keyCode || e.which;
+    if(keyCode==13) {
+        console.log("we are within the 13 area");
+        e.preventDefault();
+        btnSendMsg.click();
+    }
+});
+
+heartBeatButton.addEventListener('click', sendDirectChannelSignalHeartbeat);
+
 function sendMsgOnClick(){
-    var message = messageInput.value;
+    var msgText = messageInput.value;
     var li = document.createElement('li'); 
-    li.appendChild(document.createTextNode("Me: " + message));
+    li.appendChild(document.createTextNode("Me: " + msgText));
     messageList.append(li);
 
     var dataChannels = getDataChannels();
 
-    message = username + ": " + message; 
+    message = JSON.stringify({
+        'action': 'message',
+        'content': msgText,
+        'user': username
+    });
+    console.log('Sending message: '+ msgText + " from user: " + username);
     for (index in dataChannels){
-        dataChannels[index].send(message)
-    }
+        if (dataChannels[index].readyState === 'open') {
+            dataChannels[index].send(message); //send each peer the message object 
+        }
+    };
 
     messageInput.value = '';
 }
@@ -308,6 +333,7 @@ function sendMsgOnClick(){
 function isOpen(ws) { return ws.readyState === ws.OPEN }
 
 function sendSignal(action, message){
+    //this is how you send something to all peers via websockets (server side)
     var jsonStr = JSON.stringify({
         'peer': username, 
         'action': action, 
@@ -320,6 +346,27 @@ function sendSignal(action, message){
         webSocket.send(jsonStr);
     }
 }
+
+
+function sendDirectChannelSignalHeartbeat(){
+    // console.log("we are sending a heartbeat from: " + username);
+    //this is how you send something to all peers via WebRTC DirectChannel (no server needed)
+    var dataChannels = getDataChannels(); //get the DataChannel objects that relate to each peer in the mesh 
+    var message = JSON.stringify({ //construct a message object 
+        'user': username,
+        'action': 'heartbeat_over_direct_channel',
+        'time': secondsToDeath, 
+        'talking': talkingNow,
+    });
+    for (index in dataChannels){ //iterate through datacharnnels belonging to peers in mesh
+        // if (dataChannels[index].readyState === 'open') {
+        //     dataChannels[index].send(message); //send each peer the message object 
+        // }
+        dataChannels[index].send(message);
+    }
+}
+
+
 function createOfferer(peerUsername, receiverChannelName){
     //see video at 1:08
     
@@ -334,8 +381,9 @@ function createOfferer(peerUsername, receiverChannelName){
       addLocalTracks(peer);  //takes local audio and video tracks and adds it self 
       data_channel = peer.createDataChannel('channel');
       data_channel.addEventListener('open', () =>{
-          console.log('Connection Opened For Data Channel!')
-      })
+        console.log('Connection Opened For Data Channel!');
+        setInterval(sendDirectChannelSignalHeartbeat, 500);
+      });
       data_channel.addEventListener('message', dcOnMessage); //whenever we get a message through this data channel it is going to call this function 
       var remoteVideo = createVideo(peerUsername); 
   
@@ -433,9 +481,10 @@ function addPeerToList(peerUsername){
 }
 
 function removePeerFromList(peerUsername){
-    var peerList = document.getElementById('peer-box-row');
-    var peerToRemove = document.getElementById(`div-${peerUsername.toLowerCase}`);
-    peerList.removeChild(peerToRemove);
+    return;
+    // var peerList = document.getElementById('peer-box-row');
+    // var peerToRemove = document.getElementById(`div-${peerUsername.toLowerCase}`);
+    // peerList.removeChild(peerToRemove);
 }
 
 function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
@@ -451,6 +500,7 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
         peer.dataChannel = e.channel; //gives us the data channel that was created by the offerer 
         peer.dataChannel.addEventListener('open', () =>{
             console.log('Connection Opened For Data Channel!')
+            setInterval(sendDirectChannelSignalHeartbeat, 500);
         })
         peer.dataChannel.addEventListener('message', dcOnMessage);
 
@@ -465,7 +515,6 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
         if(iceConnectionState === 'failed' || iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
             removePeerFromList(peerUsername);
             delete mapPeers[peerUsername];
-            
             
             if(iceConnectionState != 'closed'){
                 peer.close();
@@ -511,12 +560,20 @@ function addLocalTracks(peer){
 function dcOnMessage(event){
     //when the message event is triggered on the data channel and it executes this function, the eventListener will pass to this function a dictionary 
     //as the parameter 'event'
-    var message = event.data;
-    console.log("message being received!! : " + message)
-    //add new message to ul on html page as li 
-    var li = document.createElement('li');
-    li.appendChild(document.createTextNode(message));
-    messageList.appendChild(li)
+    var message = JSON.parse(event.data);
+    // var message = event.data;
+    // console.log("in onMessage, got message: " + message.action);
+    if (message.action === 'message'){
+        var li = document.createElement('li');
+        li.appendChild(document.createTextNode(message.user + ": " + message.content));
+        messageList.appendChild(li)
+    }
+    if (message.action === 'heartbeat_over_direct_channel'){
+        // console.log(`In heartbeat - Setting user: ${message.user} to time ${message.time}`);
+        peerTrackDirectConnection[message.user] = message.time;
+        // console.log("we got a heartbeat from: " + message.user);
+    }
+    
 }
 
 // f5 = setInterval(sendOverDataChannel, 3000);
