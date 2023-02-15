@@ -258,21 +258,29 @@ function createConnectedTalker(){
 var localStream = new MediaStream();
 
 const constraints = {
-    'video': false, 
+    'video': true, 
     'audio': true
 }
 
+const localVideo = document.querySelector('#local-video');
 const btnToggleAudio = document.querySelector('#btn-toggle-audio');
+const btnToggleVideo = document.querySelector('#btn-toggle-video');
 
 var userMedia = navigator.mediaDevices.getUserMedia(constraints)
     .then(stream => {
         localStream = stream;
+        localVideo.srcObject = localStream;
+        localVideo.muted = true;
 
         console.log("we are here in the media function");
-        
-        var audioTracks = stream.getAudioTracks();
-        audioTracks[0].enabled = true;
 
+        var audioTracks = stream.getAudioTracks();
+        var videoTracks = stream.getVideoTracks();
+
+        console.log(stream);
+
+        audioTracks[0].enabled = true;
+        videoTracks[0].enabled = true;
 
 
         btnToggleAudio.addEventListener('click', () => {
@@ -285,6 +293,15 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
             }
             btnToggleAudio.innerHTML = "Unmute";
             mainLogoImage.src='../static/img/logo_white-red-min.png'
+        });
+        btnToggleVideo.addEventListener('click', () => {
+            videoTracks[0].enabled = !videoTracks[0].enabled;
+
+            if(videoTracks[0].enabled){
+                btnToggleVideo.innerHTML = "Video Off";
+                return;
+            }
+            btnToggleVideo.innerHTML = "Video On"; 
         });
     })
     .catch(error => {
