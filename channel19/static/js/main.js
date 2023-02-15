@@ -134,12 +134,12 @@ function updateActiveTalkers(){
     // console.log("number of users here: " + numUsersConnected.talker_count);
 }
 
-function monitorMapPeers(){
-    numConnectedUsers = Object.keys(mapPeers).length + 1;
-    userCountJS.innerHTML = numConnectedUsers;
-}
+// function monitorMapPeers(){
+//     numConnectedUsers = Object.keys(mapPeers).length + 1;
+//     userCountJS.innerHTML = numConnectedUsers;
+// }
 
-setInterval(monitorMapPeers, 2000);
+// setInterval(monitorMapPeers, 2000);x
 
 
 function monitorPeerTrackDirectConnection(){
@@ -187,7 +187,7 @@ function handleListItems(user, action){
 }
 
 // var t1=setInterval(updateActiveTalkers,1000);
-// var t4=setInterval(monitorPeerTrackDirectConnection, 500); //check the peerTrack dict and remove those who arent pinging us 
+var t4=setInterval(monitorPeerTrackDirectConnection, 500); //check the peerTrack dict and remove those who arent pinging us 
 
 
 // do everything when the page loads, as opposed to when the user clicks on the join button 
@@ -258,29 +258,20 @@ function createConnectedTalker(){
 var localStream = new MediaStream();
 
 const constraints = {
-    'video': true, 
+    'video': false, 
     'audio': true
 }
 
-const localVideo = document.querySelector('#local-video');
 const btnToggleAudio = document.querySelector('#btn-toggle-audio');
-const btnToggleVideo = document.querySelector('#btn-toggle-video');
 
 var userMedia = navigator.mediaDevices.getUserMedia(constraints)
     .then(stream => {
         localStream = stream;
-        localVideo.srcObject = localStream;
-        localVideo.muted = true;
 
         console.log("we are here in the media function");
         
         var audioTracks = stream.getAudioTracks();
-        var videoTracks = stream.getVideoTracks();
-
-        console.log(stream);
-
         audioTracks[0].enabled = true;
-        videoTracks[0].enabled = true;
 
 
 
@@ -293,16 +284,6 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
             }
             btnToggleAudio.innerHTML = "Audio Unmute";
         });
-
-        btnToggleVideo.addEventListener('click', () => {
-            videoTracks[0].enabled = !videoTracks[0].enabled;
-
-            if(videoTracks[0].enabled){
-                btnToggleVideo.innerHTML = "Video Off";
-                return;
-            }
-            btnToggleVideo.innerHTML = "Video On"; 
-        });
     })
     .catch(error => {
         console.log('Error accessing media devices!', error);
@@ -312,7 +293,6 @@ var btnSendMsg = document.querySelector('#btn-send-msg');
 
 var messageList = document.querySelector('#message-list');
 var messageInput = document.querySelector('#msg');
-var heartBeatButton = document.querySelector('#heart-beat-button');
 
 btnSendMsg.addEventListener('click', sendMsgOnClick);
 
@@ -327,7 +307,6 @@ messageInput.addEventListener("keyup", function(e) {
     }
 });
 
-heartBeatButton.addEventListener('click', sendDirectChannelSignalHeartbeat);
 
 function sendMsgOnClick(){
     var msgText = messageInput.value;
@@ -410,9 +389,10 @@ function createOfferer(peerUsername, receiverChannelName){
       data_channel = peer.createDataChannel('channel');
       data_channel.addEventListener('open', () =>{
         console.log('Connection Opened For Data Channel!');
-        // sendHeartBeatIfNeeded("Offerer");
+        sendHeartBeatIfNeeded("Offerer");
       });
       data_channel.addEventListener('message', dcOnMessage); //whenever we get a message through this data channel it is going to call this function 
+      //1:10:00 in video 
       var remoteVideo = createVideo(peerUsername); 
   
       setOnTrack(peer, remoteVideo); //adds own streams to remote stream 
@@ -422,6 +402,7 @@ function createOfferer(peerUsername, receiverChannelName){
     //used to remove video when a peer leaves the room 
     peer.addEventListener('iceconnectionstatechange', () => {
         var iceConnectionState = peer.iceConnectionState;
+        console.log("ICE Connection State (In Answerer) Changed to: " + iceConnectionState);
 
         if(iceConnectionState === 'failed' || iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
             console.log("we are deleting a peer in offerer: " + peerUsername);
@@ -517,7 +498,7 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
         peer.dataChannel = e.channel; //gives us the data channel that was created by the offerer 
         peer.dataChannel.addEventListener('open', () =>{
             console.log('Connection Opened For Data Channel!');
-            // sendHeartBeatIfNeeded("answerer");
+            sendHeartBeatIfNeeded("answerer");
         })
         peer.dataChannel.addEventListener('message', dcOnMessage);
         console.log("we got into the answerer part where we add the MESSAGE listener for peer: " + peerUsername);
@@ -525,16 +506,10 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
         // addPeerToList(peerUsername);
     });
 
-    // peer.addEventListener("datachannel", (ev) => {
-    //     receiveChannel = ev.channel;
-    //     receiveChannel.onmessage = console.log("!!message");
-    //     receiveChannel.onopen = console.log("!!open");
-    //     receiveChannel.onclose = console.log("!!!Close");
-    //   }, false);
-
     //used to remove video when a peer leaves the room 
     peer.addEventListener('iceconnectionstatechange', () => {
         var iceConnectionState = peer.iceConnectionState;
+        console.log("ICE Connection State (In Answerer) Changed to: " + iceConnectionState);
 
         if(iceConnectionState === 'failed' || iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
             console.log("we are deleting a peer in answerer: " + peerUsername + ". the connection state is: "+ iceConnectionState);
