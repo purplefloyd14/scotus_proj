@@ -85,8 +85,8 @@ function webSocketOnMessage(event){
     if(action=='new-answer'){ //received by oldie, a response from the newbie they invited 
         console.log(`We (${username}) just got a message with Action: ${action} From: ${peerUsername} - we are going to set a Remote Description for them.`);
         var answer = parsedData['message']['sdp'];
-        var peer = mapPeers[peerUsername][0]; //give us the websocketPeer object associated with the sender's username
-        peer.setRemoteDescription(answer);
+        var connectionToPeer = mapPeers[peerUsername][0]; //give us the websocketPeer object associated with the sender's username
+        connectionToPeer.setRemoteDescription(answer);
         return;
     }
 
@@ -158,7 +158,7 @@ function monitorPeerTrackDirectConnection(){
     numConnectedUsers = Object.keys(peerTrackDirectConnection).length + 1; //add one to count self
     userCountDC.innerHTML = numConnectedUsers;
     for (let user in peerTrackDirectConnection) {
-        if (peerTrackDirectConnection[user] > secondsToDeath + 15) { //if more than 2 seconds have passed since the heartbeat was sent from that user
+        if (peerTrackDirectConnection[user] > secondsToDeath + 3) { //if more than 2 seconds have passed since the heartbeat was sent from that user
             delete peerTrackDirectConnection[user]; //delete that user 
             handleListItems(user, 'delete');
             console.log("Say goodbye to: " + user);
@@ -178,7 +178,7 @@ function handleListItems(user, action){
     if (action === 'create'){
         connectedUserLi = document.getElementById(`${user}-li-active`);
         if (!connectedUserLi){ //if a list element for this user does not exist 
-            newUserLi = document.createElement('li')
+            newUserLi = document.createElement('li');
             newUserLi.id = `${user}-li-active`;
             newUserH3 = document.createElement('h3');
             if (user === "John" || user === "Paul") {
@@ -190,6 +190,7 @@ function handleListItems(user, action){
             if (user === "Ringo"){ 
                 newUserH3.innerHTML =`....................... ${user}`;
             }
+            newUserH3.className = 'new-user-h3';
             newUserLi.appendChild(newUserH3);
             listOfConnectedUsers = document.getElementById('connected-users-ul');
             listOfConnectedUsers.appendChild(newUserLi);
@@ -197,7 +198,7 @@ function handleListItems(user, action){
     }
 }
 
-var t1=setInterval(updateActiveTalkers,5000);
+var t1=setInterval(updateActiveTalkers,1000);
 var t4=setInterval(monitorPeerTrackDirectConnection, 300); //check the peerTrack dict and remove those who arent pinging us 
 
 
@@ -287,16 +288,19 @@ const constraints = {
 }
 
 // const localVideo = document.querySelector('#local-video');
+const localAudio = document.getElementById('local-audio');
 const btnToggleAudio = document.querySelector('#btn-toggle-audio');
-const btnToggleVideo = document.querySelector('#btn-toggle-video');
+// const btnToggleVideo = document.querySelector('#btn-toggle-video');
 
 var userMedia = navigator.mediaDevices.getUserMedia(constraints)
     .then(stream => {
         localStream = stream;
+        localAudio.srcObject = localStream;
+        localAudio.muted = true;
         // localVideo.srcObject = localStream;
         // localVideo.muted = true;
         console.log(`Creating Media Stream for: ${username}`);
-        var audioTracks = stream.getAudioTracks();
+        var audioTracks = localStream.getAudioTracks();
         // var videoTracks = stream.getVideoTracks();
 
         // console.log(stream);
@@ -316,8 +320,8 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
             btnToggleAudio.innerHTML = "Unmute";
             mainLogoImage.src='../static/img/logo_white-red-min.png'
         });
-        btnToggleVideo.addEventListener('click', () => {
-            return;
+        // btnToggleVideo.addEventListener('click', () => {
+        //     return;
             // videoTracks[0].enabled = !videoTracks[0].enabled;
 
             // if(videoTracks[0].enabled){
@@ -325,7 +329,7 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
             //     return;
             // }
             // btnToggleVideo.innerHTML = "Video On"; 
-        });
+        // });
     })
     .catch(error => {
         console.log('Error accessing media devices!', error);
@@ -411,10 +415,9 @@ function sendDirectChannelSignalHeartbeat(){
         'peers': Object.keys(peerTrackDirectConnection).length
     })
     for (index in dataChannels){ //iterate through datacharnnels belonging to peers in mesh
-        // if (dataChannels[index].readyState === 'open') {
-        //     dataChannels[index].send(message); //send each peer the message object 
-        // }
-        dataChannels[index].send(message);
+        if (dataChannels[index].readyState === 'open') {
+            dataChannels[index].send(message); //send each peer the message object 
+        }
     }
 }
 
@@ -428,7 +431,7 @@ function createOfferer(peerUsername, receiverChannelName){
     connectionToPeer.addEventListener('iceconnectionstatechange', function() {
         console.log(`Offer From: ${username} To: ${peerUsername} - ICE connection state: ${connectionToPeer.iceConnectionState}`);
       });
-      addLocalTracks(connectionToPeer);  //takes local audio and video tracks and adds it self 
+      addLocalTracks(connectionToPeer, peerUsername, "Offerer");  //add local tracks to new connection object 
       data_channel = connectionToPeer.createDataChannel('channel');
       data_channel.addEventListener('open', () =>{
         console.log(`Offer From: ${username} To: ${peerUsername} - Connection Opened For Data Channel!`);
@@ -436,10 +439,13 @@ function createOfferer(peerUsername, receiverChannelName){
       });
       data_channel.addEventListener('message', onMessageDirectConnection); //whenever we get a message through this data channel it is going to call this function 
       //1:10:00 in video 
-      var remoteVideo = createVideo(peerUsername); //returns <div> html element with <video> inside it, tagged for your remote peer (this will be their feed that comes to you)
-      setOnTrack(connectionToPeer, remoteVideo); //adds own streams to remote stream 
+      var remoteAudio = createAudio(peerUsername);
+    //   var remoteVideo = createVideo(peerUsername); //returns <div> html element with <video> inside it, tagged for your remote peer (this will be their feed that comes to you)
+    //   setOnTrack(connectionToPeer, remoteVideo);
+      setOnTrack(connectionToPeer, remoteAudio, peerUsername, 'Offerer');
+      
       console.log(`mapPeers keys: ${Object.keys(peerTrackDirectConnection)}`);
-      console.log(`peerUsername is: ${peerUsername}`)
+      console.log(`peerUsername is: ${peerUsername}`);
       if (!peerUsername in mapPeers){
         debugger;
       }
@@ -458,7 +464,7 @@ function createOfferer(peerUsername, receiverChannelName){
             if(iceConnectionState != 'closed'){
                 connectionToPeer.close();
             }
-
+            removeAudio(remoteAudio);
             // removeVideo(remoteVideo);
         }
     });
@@ -489,31 +495,28 @@ function createOfferer(peerUsername, receiverChannelName){
 
     //summary of what we have just done at 1:24
 
-    
+    document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
 
     function boolTalking() {
+        threasholdVol = .2;
         connectionToPeer.getStats(null).then((stats) => {
-          let statsOutput = "";
           var talking_div =document.getElementById("talking-test");
-        
           stats.forEach((report) => {
               Object.keys(report).forEach((statName) => {
-                if (statName === 'audioLevel' || statName === 'totalAudioEnergy'){
-                    statsOutput += statName + ': '+ report[statName];
-                }
-                if (statName == "audioLevel" && report[statName]>0.005){
-                    console.log("here: " + report[statName]);
-                    talking_div.innerHTML="TALKING";
-
-                } if (statName == "audioLevel" && report[statName]<0.1) {
-                    console.log("there: " + report[statName]);
-                    talking_div.innerHTML="NOT";
+                if (statName === "audioLevel") {
+                    if (report[statName]>threasholdVol){
+                        console.log("here: " + report[statName]);
+                        talking_div.innerHTML="TALKING";
+                    } else {
+                        console.log("there: " + report[statName]);
+                        talking_div.innerHTML="NOT";
+                    }
                 }
               });
           });
         });
       }
-    // statsInterval = setInterval(boolTalking, 10000);
+    statsInterval = setInterval(boolTalking, 100);
 }
 
 
@@ -521,10 +524,12 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
     console.log(`Creating an Answerer. We are: ${username} - Responding To: ${peerUsername}`);
     var connectionToPeer = new RTCPeerConnection(iceConfig);
 
-    addLocalTracks(connectionToPeer);  // add my tracks to my own feed 
-
-    var remoteVideo = createVideo(peerUsername); //returns an html video element. Theres no source or anything
-    setOnTrack(connectionToPeer, remoteVideo); // add my feed to the remote stream 
+    addLocalTracks(connectionToPeer, peerUsername, "Answerer");  // add my tracks to my own feed 
+    var remoteAudio = createAudio(peerUsername);
+    // var remoteVideo = createVideo(peerUsername); //returns an html video element. Theres no source or anything
+    setOnTrack(connectionToPeer, remoteAudio, peerUsername, 'Answerer');
+    // setOnTrack(connectionToPeer, remoteVideo); // add my feed to the remote stream 
+    
 
     connectionToPeer.addEventListener('datachannel', (e) => {
         connectionToPeer.dataChannel = e.channel; //gives us the data channel that was created by the offerer 
@@ -550,7 +555,7 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
                 connectionToPeer.close();
             }
 
-            // removeVideo(remoteVideo);
+            removeAudio(remoteAudio);
         }
     });
 
@@ -578,9 +583,31 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
             console.log(`We Answerer: ${username}, have Successfully created an answer. Setting Local Discription for ${peerUsername}`);
             connectionToPeer.setLocalDescription(a); 
         })
+
+    function boolTalking() {
+        threasholdVol = .2;
+        connectionToPeer.getStats(null).then((stats) => {
+            var talking_div =document.getElementById("talking-test");
+            stats.forEach((report) => {
+                Object.keys(report).forEach((statName) => {
+                if (statName === "audioLevel") {
+                    if (report[statName]>threasholdVol){
+                        console.log("here: " + report[statName]);
+                        talking_div.innerHTML="TALKING";
+                    } else {
+                        console.log("there: " + report[statName]);
+                        talking_div.innerHTML="NOT";
+                    }
+                }
+                });
+            });
+        });
+        }
+    statsInterval = setInterval(boolTalking, 100);
 }
 
-function addLocalTracks(connectionToPeer){
+function addLocalTracks(connectionToPeer, peerUsername, role){
+    console.log(`We are: ${username}, Playing role: ${role}. ADDING LOCAL TRACKS to Connection with: ${peerUsername}`);
     //this is how we add our own audio and video to the stream
     localStream.getTracks().forEach(track => {
         connectionToPeer.addTrack(track, localStream);
@@ -604,41 +631,36 @@ function onMessageDirectConnection(event){
     } 
 }
 
-// f5 = setInterval(sendOverDataChannel, 3000);
-
-function createVideo(peerUsername){
+function createAudio(peerUsername){
     //video container, already existing, just grabbing it 
-    var videoContainer = document.querySelector('.video-container');
+    var audioContainer = document.querySelector('.audio-container');
 
     //new video element 
-    var remoteVideo = document.createElement('video');
-    remoteVideo.id = peerUsername + '-video';
-    remoteVideo.autoplay = true;
-    remoteVideo.playsInline = true;
+    var remoteAudio = document.createElement('audio');
+    remoteAudio.id = peerUsername + '-audio';
+    remoteAudio.autoplay = true;
 
-    var videoWrapper = document.createElement('div');
-    videoContainer.appendChild(videoWrapper);
-    videoWrapper.appendChild(remoteVideo); //^ put wrapper into container, and video into wrapper 
+    audioContainer.appendChild(remoteAudio);
 
-    return remoteVideo;
+    return remoteAudio;
 }
 
 
-function setOnTrack(connectionToPeer, remoteAudio){
-    //remote audio is passed in as remoteVideo (just an html video tag)
+function setOnTrack(connectionToPeer, remoteAudio, peerUsername, role){
     var remoteStream = new MediaStream();
     remoteAudio.srcObject = remoteStream;
     // add remote tracks to our peer to listen for 
-    connectionToPeer.addEventListener('track', async (event) => {
+    connectionToPeer.addEventListener('track', (event) => {
+        console.log(`***** A TRACK event has been fired. We are ${role} ${username} and the peer is ${peerUsername}`)
         remoteStream.addTrack(event.track, remoteStream);
     });
 }
 
-// function removeVideo(video){
-//     var videoWrapper = video.parentNode;
 
-//     videoWrapper.parentNode.removeChild(videoWrapper);
-// }
+function removeAudio(audio){
+    var audioWrapper = audio.parentNode;
+    audioWrapper.removeChild(audio);
+}
 
 function getDataChannels(){
     var dataChannels = [];
