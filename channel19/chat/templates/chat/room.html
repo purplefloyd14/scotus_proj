@@ -11,16 +11,12 @@
     </head>
     <body>
         <div class="tiny-top-bar">
-            <div>
-                <a href="/about" class="about-button">About</a>
-                <button id="new-peer-button">New Peer Signal</button>
-            </div>
+                <div class="top-bar-element"><a id='home-btn' href="/" class="top-bar-button">Home</a></div>
+                <div class="top-bar-element"><a href="/about" class="top-bar-button">About</a></div>
         </div>
         <div class="main-container">
             <div class="logo-box-top">
-                <button class='image-button' type="submit" onclick="window.location.href='../';">
                     <img id='main-logo-image' class='main-logo-img' src="{% static 'img/logo_white-min.png' %}" alt="">
-                </button>
             </div>
             <br>
             <div class="info-box-middle-row">
@@ -52,7 +48,9 @@
                     </div>
                     <div id="seen-div">
                         <h3 class="peer-list-title">Also Connected:</h3>
-                        <ul id="connected-users-ul"></ul>
+                        <ul id="connected-users-ul">
+                            <li id="loading-user-li"><h3 id="loading-user-h3">Loading..</h3></li>
+                        </ul>
                     </div>  
                     <!-- <div>
                         <h3> Subchannel URL:<h3 id="room-name">{{room_name}}</h3>  </h3>
@@ -79,7 +77,8 @@
             </div>
             <div id="talking-test"></div>
             <div class="bottom-box-audio-controls-row">
-                <button id="btn-toggle-audio">Mute</button>            
+                <div class="div-lower-button"><button id="btn-toggle-audio">Mute</button>  </div>
+                <div class="div-lower-button"><button id="btn-copy-link">Copy Link</button>  </div>
             </div>
             <div id="chat">
                 <h3>Chat</h3>
@@ -87,6 +86,7 @@
                     <ul id="message-list"></ul>
                 </div>
                 <div><input id="msg"><button id="btn-send-msg">Send Message</button></div>
+                <button id="new-peer-button">New Peer Signal</button>   
             </div>
             <div class="audio-container">
                 <audio id='local-audio' autoplay playsinline></audio>

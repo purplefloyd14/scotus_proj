@@ -20,6 +20,10 @@
    align-self: flex-start;
 }
 
+.top-bar-button {
+   font-size: 17px;
+}
+
 html, body {
    height: 100%;
    overflow: hidden;
@@ -105,3 +109,70 @@ html, body {
 -moz-transform:scale(0.9); /*Mozilla scale version*/
 -o-transform:scale(0.9); /*Opera scale version*/
 }
+
+
+
+@media (min-width: 320px) and (max-width: 999px) {
+
+   .tiny-top-bar {
+      height: 7%
+   }
+
+   html, body {
+      height: 100%;
+      overflow: scroll;
+      overflow-x: hidden;
+   }
+
+   /* body {
+      position: relative;
+    } */
+
+    html, body {
+      overscroll-behavior-y: none;
+    }
+
+    .top-bar-button {
+      display: flex;
+      color: black;
+      font-family: monospace;
+      padding: 50px;
+      padding-bottom: 0px;
+      font-size: 50px;
+      display: block;
+  }
+
+  .about-title { 
+   align-self: flex-start;
+   font-size: 50px;
+}
+
+.about-page-main-div {
+   box-shadow: 10px 5px 5px grey;
+   font-size: 40px;
+   font-family: monospace;
+   width: 100%;
+   border-style: solid;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   max-width: 1222px;
+}
+
+.top-button-div-el {
+   height: 100%;
+}
+
+.logo-row-box {
+   display: flex;
+   height: 10%;
+   align-items: center;
+   justify-content: center;
+}
+
+.main-content-box{
+   max-width: none;
+   padding-bottom: 10%;
+}
+
+ }

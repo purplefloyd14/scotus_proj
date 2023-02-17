@@ -27,7 +27,6 @@
 
 .form-adjust{
     width:100%;
-    padding-right: 5%;
 }
 
 .generate-button:hover {
@@ -35,6 +34,7 @@
     cursor:pointer;
 }
 .about-button {
+    font-size:17px;
     color: black;
     font-family: monospace;
     padding-right: 5px;
@@ -64,6 +64,7 @@
 img {
     width: 80%;
     max-width: 700px;
+    padding-left: 34px;
 }
 
 .inner-box { 
@@ -73,3 +74,65 @@ img {
     width: 100%;
     height: 47%;
 }
+
+
+@media (min-width: 320px) and (max-width: 999px) {
+
+    .top-button-div{
+        height: 100%;
+    }
+
+    .generate-button {
+        white-space: normal;
+        width: 100%;
+        height: 50%;
+        background-color: #3b3c40;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 80px;
+        border-radius: 15px;
+        font-family: monospace;
+    }
+
+    .about-button {
+        display: flex;
+        color: black;
+        font-family: monospace;
+        padding: 50px;
+        padding-bottom: 0px;
+        font-size: 50px;
+        display: block;
+    }
+
+    html, body {
+        height: 99%;
+        overflow-x: hidden;
+      }
+      body {
+        position: relative;
+      }
+
+      html, body {
+        overscroll-behavior-y: none;
+      }
+
+    .generate-button:hover {
+        border: 10px solid #3ac920;
+        cursor:pointer;
+    }
+
+    html {
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+        -moz-user-select: -moz-none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    
+
+  }

@@ -230,6 +230,16 @@ function getNewPublicUsername(roomID){
 //******************************************************************************************************************************************************
 //******************************************************************************************************************************************************
 
+var loadingUserLi = document.getElementById('loading-user-li');
+loadingUserLi.addEventListener("click", changeToNone);
+
+function changeToNone(){
+    setTimeout(function() {
+        console.log("!!!******* here")
+        var loadingUserH3= document.getElementById('loading-user-h3');
+        loadingUserH3.innerHTML = "None"; 
+      }, 1500);
+}
 
 
 
@@ -495,7 +505,7 @@ function createOfferer(peerUsername, receiverChannelName){
 
     //summary of what we have just done at 1:24
 
-    document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
+    // document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
 
     function boolTalking() {
         threasholdVol = .2;
@@ -669,6 +679,20 @@ function getDataChannels(){
         dataChannels.push(dataChannel);
     }
     return dataChannels;
+}
+
+btnCopyLink = document.getElementById('btn-copy-link');
+btnCopyLink.addEventListener('click', copyURLtoClipboard);
+
+function copyURLtoClipboard(){
+    var dummy = document.createElement('input'),
+    text = window.location.href;
+
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummy);
 }
 
 createConnectedTalker();
