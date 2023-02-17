@@ -12,11 +12,11 @@ from django.conf import settings
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
-        print("arriving")
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = f"chat_{self.room_name}"
 
         talker_name = self.scope['url_route']['kwargs']['talker_name']
+        print(f"arriving {talker_name}")
 
         talker = Talker()
         session = self.scope['session']
@@ -38,8 +38,8 @@ class ChatConsumer(WebsocketConsumer):
 
     def disconnect(self, close_code):
         # Leave room group
-        print("leaving")
         talker = Talker.objects.get(guid=self.scope['session']['user'])
+        print(f"leaving {talker.talker_name}")
         talker.delete()
         async_to_sync(self.channel_layer.group_discard)( #remove a user from the room
             self.room_group_name, #room name

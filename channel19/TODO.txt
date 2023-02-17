@@ -24,3 +24,21 @@
 11. redundant checking for users' presence using a 'heartbeat' message from each user every few seconds 
 
 12. refactor JS into multiple files 
+
+13. Add active talker symbol 
+
+14. create testing suite 
+
+15. Mobile CSS 
+
+16. Make site more robust. Whats wrong with mobile? Why is it timing out if you reject permissions?
+Can we include "active connections" as part of the heartbeat? Tweak heartbeat frequency? 
+Include dictionary somewhere. 
+
+17. Refactor in order to make names easy 
+(number of participants based on list of names, everything automated based on that list in settings)
+
+18. Deploy 
+______
+______
+______.
