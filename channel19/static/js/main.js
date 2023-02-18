@@ -199,7 +199,7 @@ function handleListItems(user, action){
 }
 
 var t1=setInterval(updateActiveTalkers,1000);
-var t4=setInterval(monitorPeerTrackDirectConnection, 300); //check the peerTrack dict and remove those who arent pinging us 
+var t4=setInterval(monitorPeerTrackDirectConnection, 500); //check the peerTrack dict and remove those who arent pinging us 
 
 
 // do everything when the page loads, as opposed to when the user clicks on the join button 
@@ -230,15 +230,22 @@ function getNewPublicUsername(roomID){
 //******************************************************************************************************************************************************
 //******************************************************************************************************************************************************
 
-var loadingUserLi = document.getElementById('loading-user-li');
-loadingUserLi.addEventListener("click", changeToNone);
+// var loadingUserLi = document.getElementById('loading-user-li');
+// loadingUserLi.addEventListener('load', (event) => {
+//     changeToNone();
+// });
+
+window.onload = function(){ 
+    if(document.getElementById('loading-user-li')){
+      setTimeout(changeToNone, 1000);
+    }
+   } 
 
 function changeToNone(){
     setTimeout(function() {
-        console.log("!!!******* here")
         var loadingUserH3= document.getElementById('loading-user-h3');
         loadingUserH3.innerHTML = "None"; 
-      }, 1500);
+      }, 1000);
 }
 
 
@@ -407,7 +414,7 @@ function sendSignal(action, message){
 function sendHeartBeatIfNeeded(sender){
     console.log(`Starting Heartbeat signal stream from ${sender}: ${username}`);
     if (!sendingActively){
-        setInterval(sendDirectChannelSignalHeartbeat, 10000);
+        setInterval(sendDirectChannelSignalHeartbeat, 800);
         sendingActively = true;
     }
 }
@@ -507,26 +514,26 @@ function createOfferer(peerUsername, receiverChannelName){
 
     // document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
 
-    function boolTalking() {
-        threasholdVol = .2;
-        connectionToPeer.getStats(null).then((stats) => {
-          var talking_div =document.getElementById("talking-test");
-          stats.forEach((report) => {
-              Object.keys(report).forEach((statName) => {
-                if (statName === "audioLevel") {
-                    if (report[statName]>threasholdVol){
-                        console.log("here: " + report[statName]);
-                        talking_div.innerHTML="TALKING";
-                    } else {
-                        console.log("there: " + report[statName]);
-                        talking_div.innerHTML="NOT";
-                    }
-                }
-              });
-          });
-        });
-      }
-    statsInterval = setInterval(boolTalking, 100);
+    // function boolTalking() {
+    //     threasholdVol = .2;
+    //     connectionToPeer.getStats(null).then((stats) => {
+    //       var talking_div =document.getElementById("talking-test");
+    //       stats.forEach((report) => {
+    //           Object.keys(report).forEach((statName) => {
+    //             if (statName === "audioLevel") {
+    //                 if (report[statName]>threasholdVol){
+    //                     console.log("here: " + report[statName]);
+    //                     talking_div.innerHTML="TALKING";
+    //                 } else {
+    //                     console.log("there: " + report[statName]);
+    //                     talking_div.innerHTML="NOT";
+    //                 }
+    //             }
+    //           });
+    //       });
+    //     });
+    //   }
+    // statsInterval = setInterval(boolTalking, 100);
 }
 
 
@@ -594,26 +601,26 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
             connectionToPeer.setLocalDescription(a); 
         })
 
-    function boolTalking() {
-        threasholdVol = .2;
-        connectionToPeer.getStats(null).then((stats) => {
-            var talking_div =document.getElementById("talking-test");
-            stats.forEach((report) => {
-                Object.keys(report).forEach((statName) => {
-                if (statName === "audioLevel") {
-                    if (report[statName]>threasholdVol){
-                        console.log("here: " + report[statName]);
-                        talking_div.innerHTML="TALKING";
-                    } else {
-                        console.log("there: " + report[statName]);
-                        talking_div.innerHTML="NOT";
-                    }
-                }
-                });
-            });
-        });
-        }
-    statsInterval = setInterval(boolTalking, 100);
+    // function boolTalking() {
+    //     threasholdVol = .2;
+    //     connectionToPeer.getStats(null).then((stats) => {
+    //         var talking_div =document.getElementById("talking-test");
+    //         stats.forEach((report) => {
+    //             Object.keys(report).forEach((statName) => {
+    //             if (statName === "audioLevel") {
+    //                 if (report[statName]>threasholdVol){
+    //                     console.log("here: " + report[statName]);
+    //                     talking_div.innerHTML="TALKING";
+    //                 } else {
+    //                     console.log("there: " + report[statName]);
+    //                     talking_div.innerHTML="NOT";
+    //                 }
+    //             }
+    //             });
+    //         });
+    //     });
+    //     }
+    // statsInterval = setInterval(boolTalking, 100);
 }
 
 function addLocalTracks(connectionToPeer, peerUsername, role){

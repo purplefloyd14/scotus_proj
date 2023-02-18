@@ -1,28 +1,59 @@
-{% load static %}
+<!DOCTYPE html>
+
+<!-- Block elements stack up on top of one another
+and fill the available width of the browser window or other containing element. 
+Inline elements and text characters line up next to one another to fill
+the block elements. 
+
+EM: Relative to the parent element
+
+REM: Relative to the root element (HTML tag)
+
+%: Relative to the parent element
+
+VW: Relative to the viewport’s width
+
+VH: Relative to the viewport’s height
+
+
+
+
+
+-->
+<html lang="en">
+    {% load static %}
 <head>
     <meta charset="UTF-8">
     <title>Channel42</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
-<div class="tiny-top-bar">
-    <div>
-        <a href="/about" class="about-button">About</a>
-    </div>
-</div>
-<div class="total-page-container">
+<body>
+    <nav class="tiny-top-bar">
+        <div class="top-bar-button">
+            <a href="/about" class="about-button">About</a>
+        </div>
+    </nav>
     <div class="center-main-container">
-        <div class="inner-box">
+        <div class="logo-box">
             <img src="{% static 'img/logo_white-min.png' %}" alt="">
         </div>
-        <div class="inner-box">
-            <form class="form-adjust" action="{% url 'chat:generate' %}" method="post">
-                {% csrf_token %}
-                <input class="generate-button" type="submit" value="Generate Subchannel">
-            </form>
+        <div class="button-box">
+            <div class="form-div">
+                <form class="button-form" action="{% url 'chat:generate' %}" method="post">
+                    {% csrf_token %}
+                    <input class="generate-button" type="submit" value="Generate Subchannel">
+                </form>
+            </div>
         </div>
     </div>
-</div>
+    
+</body>
+</html>
+
+
 
 
 

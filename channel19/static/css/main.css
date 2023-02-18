@@ -213,9 +213,19 @@ button:hover {
     cursor: pointer;
 }
 
+#btn-copy-link:hover {
+    border: 2px solid #3ac920;
+    cursor:pointer;
+}
+
+#btn-toggle-audio:hover {
+    border: 1px solid #ff0505;
+    cursor:pointer;
+}
 
 
-@media (min-width: 320px) and (max-width: 999px) {
+
+@media (min-width: 320px) and (max-width: 750px) {
     .top-bar-button {
         display: flex;
         color: black;
