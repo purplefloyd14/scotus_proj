@@ -58,6 +58,20 @@ html, body{
     float: right;
 }
 
+ul { 
+    display: inherit;
+    margin: 0;
+}
+
+ul.frames li {
+    font-size: 14px; font-size:1.4rem;
+    display: inline;
+}
+
+#dummy-peer-list{
+    color:transparent;
+}
+
 .bottom-box-controls-row{
     height: 10vh;
     display: flex;
@@ -87,10 +101,14 @@ html, body{
     cursor:pointer;
 }
 
+#chat{
+    display: none;
+}
+
 @media (min-width: 600px) {
 
     img{
-        max-width: 570px    ;
+        max-width: 480px    ;
     }
 
     .top-bar-button {
@@ -108,6 +126,18 @@ html, body{
     .bottom-box-controls-row{
         max-width: 500px;
         justify-content: space-between;
+        flex-direction: column;
+        height: 100%;
+        align-items: flex-start;
+        margin-left: 100px;
+    }
+
+    #side-car-div{
+        display: flex;
+    }
+
+    #chat{
+        display: block;
     }
 
 
@@ -257,7 +287,7 @@ ul {
 ul.frames li {
     font-size: 14px; font-size:1.4rem;
     display: inline;
-  }
+}
 
 .image-button {
     background: none;

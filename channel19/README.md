@@ -32,3 +32,10 @@ ch31 - $400
 ch14 - min. $250 
 ch48 - $400 
 channel14 - 8k 
+
+
+
+
+ISSUES TO TEST (SOLVED OR WORKING ON):
+Timing - different clients count at different speeds. A test should make sure that the clients are in sync over long time scales. 
+
