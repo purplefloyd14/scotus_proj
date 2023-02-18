@@ -11,17 +11,102 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <div class="tiny-top-bar">
-                <div class="top-bar-element"><a id='home-btn' href="/" class="top-bar-button">Home</a></div>
-                <div class="top-bar-element"><a href="/about" class="top-bar-button">About</a></div>
-        </div>
-        <div class="main-container">
+        <nav class="tiny-top-bar">
+                <div class="top-bar-button"><a id='home-btn' href="/" class="top-bar-button">Home</a></div>
+                <div class="top-bar-button"><a href="/about" class="top-bar-button">About</a></div>
+        </nav>
+        <div class="center-main-container">
             <div class="logo-box-top">
                     <img id='main-logo-image' class='main-logo-img' src="{% static 'img/logo_white-min.png' %}" alt="">
             </div>
-            <br>
-            <div class="info-box-middle-row">
-                <div class="info-box-middle-box">
+            <div class="data-box-middle-row">
+                <table class="data-table">
+                    <tbody>
+                        <tr>
+                            <td>Subchannel URL:</td>
+                            <td>........</td>
+                            <td class="table-data-end">{{room_name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Version:</td>
+                            <td>......</td>
+                            <td class="table-data-end">1.01</td>
+                        </tr>
+                        <tr>
+                            <td>#Active(DB):</td>
+                            <td>......</td>
+                            <td class="table-data-end">X</td>
+                        </tr>
+                        <tr>
+                            <td>#Active(JS):</td>
+                            <td>......</td>
+                            <td class="table-data-end">X</td>
+                        </tr>
+                        <tr>
+                            <td>#Active(CD):</td>
+                            <td>......</td>
+                            <td class="table-data-end">X</td>
+                        </tr>
+                        <tr>
+                            <td>Max Users:</td>
+                            <td>......</td>
+                            <td class="table-data-end">4</td>
+                        </tr>
+                        <tr>
+                            <td>Time to expiry:</td>
+                            <td>......</td>
+                            <td class="table-data-end" id="expiry_clock">^Loading</td>
+                        </tr>
+                        <tr>
+                            <td>You are:</td>
+                            <td>......</td>
+                            <td id="user-username" class="table-data-end">TEMP</td>
+                        </tr>
+                        <tr>
+                            <td>Also connected:</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>......</td>
+                            <td class="table-data-end">One</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>......</td>
+                            <td class="table-data-end">Two</td>
+                        </tr>
+                        <!-- and so on... -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="bottom-box-controls-row">
+                <div class="div-lower-button"><button class="control-button" id="btn-toggle-audio">Mute</button>  </div>
+                <div class="div-lower-button"><button class="control-button" id="btn-copy-link">Copy Link</button>  </div>
+            </div>
+
+            <div class="audio-container">
+                <audio id='local-audio' autoplay playsinline></audio>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <link rel="prefetch" href="{% static 'img/logo_white-red-min.png' %}">
+</html> 
+
+
+<div id="chat" style="display:hidden;">
+    <h3>Chat</h3>
+    <div id="messages">
+        <ul id="message-list"></ul>
+    </div>
+    <div><input id="msg"><button id="btn-send-msg">Send Message</button></div>
+    <button id="new-peer-button">New Peer Signal</button>   
+    <div id="talking-test"></div>
+</div>
+
+                <!-- <div class="info-box-middle-box">
                     
                     <div>
                         <h3> Subchannel URL:...................... <h3 id="room-name">{{room_name}}</h3>  </h3>
@@ -52,7 +137,7 @@
                         <ul id="connected-users-ul">
                             <li id="loading-user-li"><h3 id="loading-user-h3">Loading..</h3></li>
                         </ul>
-                    </div>  
+                    </div>   -->
                     <!-- <div>
                         <h3> Subchannel URL:<h3 id="room-name">{{room_name}}</h3>  </h3>
                     </div>
@@ -72,38 +157,3 @@
                         <h3>  You are:  <h3 id="label-username"></h3></h3>
                     </div> -->
                     
-                    <br>
-                    
-                </div>
-            </div>
-            <div id="talking-test"></div>
-            <div class="bottom-box-audio-controls-row">
-                <div class="div-lower-button"><button id="btn-toggle-audio">Mute</button>  </div>
-                <div class="div-lower-button"><button id="btn-copy-link">Copy Link</button>  </div>
-            </div>
-            <div id="chat">
-                <h3>Chat</h3>
-                <div id="messages">
-                    <ul id="message-list"></ul>
-                </div>
-                <div><input id="msg"><button id="btn-send-msg">Send Message</button></div>
-                <button id="new-peer-button">New Peer Signal</button>   
-            </div>
-            <div class="audio-container">
-                <audio id='local-audio' autoplay playsinline></audio>
-            </div>
-            <!-- <div class="video-container">
-                <video id="local-video" style="float: left;" autoplay playsinline></video>
-                <button id="btn-toggle-audio">Audio Mute</button>
-                <button id="btn-toggle-video">Video Off</button>
-            </div> -->
-           
-
-        </div>
-        
-        
-        
-    </body>
-    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-    <link rel="prefetch" href="{% static 'img/logo_white-red-min.png' %}">
-</html> 

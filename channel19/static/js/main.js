@@ -11,7 +11,6 @@ var currentBaseUrl = 'https://ef01-73-129-90-73.ngrok.io'
 
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");
-var btnJoin = document.querySelector("#btn-join");
 var userCount = document.getElementById("connected-user-count");
 var userCountJS = document.getElementById("connected-user-count-js")
 var userCountJS2 = document.getElementById("connected-user-count-js-2")
@@ -115,6 +114,7 @@ function calculateCountdown(seconds) {
 
 
 function getCreatedDate(){ //this is fired once at the beginningn by createConnectedTalker
+    console.log("here")
     expiryClock = document.getElementById('expiry_clock');
     xhttp.open('GET', `${currentBaseUrl}/cb/${currentRoomUuid}/get_seconds_to_expiry`, false);
     xhttp.send();
@@ -198,8 +198,8 @@ function handleListItems(user, action){
     }
 }
 
-var t1=setInterval(updateActiveTalkers,1000);
-var t4=setInterval(monitorPeerTrackDirectConnection, 500); //check the peerTrack dict and remove those who arent pinging us 
+// var t1=setInterval(updateActiveTalkers,1000);
+// var t4=setInterval(monitorPeerTrackDirectConnection, 500); //check the peerTrack dict and remove those who arent pinging us 
 
 
 // do everything when the page loads, as opposed to when the user clicks on the join button 
@@ -210,16 +210,8 @@ function getNewPublicUsername(roomID){
     xhttp.open('GET', `${currentBaseUrl}/cb/${roomID}/get_available_username`, false);
     xhttp.send();
     dataFromDB = JSON.parse(xhttp.responseText);
-    var labelUsername = document.querySelector('#label-username');
+    var labelUsername = document.querySelector('#user-username');
     recommendedName = dataFromDB.recommended_name
-    if (recommendedName === "John" || recommendedName === "Paul") {
-        var selfHeader = document.getElementById('you-are-header');
-        selfHeader.innerHTML = "You are:............................... "
-    }
-    if (recommendedName === "Ringo") {
-        var selfHeader = document.getElementById('you-are-header');
-        selfHeader.innerHTML = "You are:.............................. "
-    }
     labelUsername.innerHTML = recommendedName;
     return dataFromDB.recommended_name;
 }
@@ -357,18 +349,18 @@ var btnSendMsg = document.querySelector('#btn-send-msg');
 var messageList = document.querySelector('#message-list');
 var messageInput = document.querySelector('#msg');
 
-btnSendMsg.addEventListener('click', sendMsgOnClick);
+// btnSendMsg.addEventListener('click', sendMsgOnClick);
 
-messageInput.addEventListener("keyup", function(e) {
-    console.log("we are here in the keydown area");
-    e = window.event;
-    var keyCode = e.keyCode || e.which;
-    if(keyCode==13) {
-        console.log("we are within the 13 area");
-        e.preventDefault();
-        btnSendMsg.click();
-    }
-});
+// messageInput.addEventListener("keyup", function(e) {
+//     console.log("we are here in the keydown area");
+//     e = window.event;
+//     var keyCode = e.keyCode || e.which;
+//     if(keyCode==13) {
+//         console.log("we are within the 13 area");
+//         e.preventDefault();
+//         btnSendMsg.click();
+//     }
+// });
 
 
 function sendMsgOnClick(){

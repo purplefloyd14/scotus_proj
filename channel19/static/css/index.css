@@ -21,6 +21,10 @@ img {
     font-size: 2vh;
 }
 
+.about-button{
+    color: black;
+}
+
 .center-main-container {
     display: flex;
     height: 90vh;
@@ -47,7 +51,7 @@ img {
 .form-div{
     display: block;
     height: 20vh;
-    width: 60vw;
+    width: 75vw;
 }
 
 .button-form{
@@ -64,9 +68,10 @@ img {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 2em;
+    font-size: 2rem;
     border-radius: 5px;
     font-family: monospace;
+    border: 2px solid transparent;
 }
 
 .generate-button:hover {
@@ -79,12 +84,16 @@ img {
 @media (min-width: 600px) {
 
     img{
-        max-width: 670px    ;
+        max-width: 570px    ;
     }
 
     .form-div{
-        max-width:500px;
+        max-width:400px;
         margin-right: 3em;  
+    }
+
+    .generate-button {
+        font-size:125%;
     }
 }
 

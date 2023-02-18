@@ -1,4 +1,119 @@
-.video-grid-container {
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+img {
+    max-height:100%; 
+    max-width:100%;
+}
+
+html, body{
+    height: 99%;
+    overflow-x: hidden;
+}
+
+body{
+    position: relative;
+}
+
+html, body{
+    overscroll-behavior-y: none;
+}
+
+.tiny-top-bar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.top-bar-button {
+    color: black;
+    font-family: monospace;
+    margin: 1%;
+    font-size: 2vh;
+    margin-left:3%;
+}
+
+.center-main-container {
+    display: flex;
+    height: 85vh;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.data-box-middle-row{
+    width: 96vw
+}
+
+.data-table{
+    width: 100%;
+    font-family: monospace;
+    font-size: medium;
+    font-weight: bolder;
+}
+
+.table-data-end {
+    float: right;
+}
+
+.bottom-box-controls-row{
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.control-button{
+    white-space: normal;
+    width: 100%;
+    background-color: #3b3c40;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+    border-radius: 5px;
+    font-family: monospace;
+    border: 2px solid transparent;
+}
+
+.control-button:hover{
+    border: 2px solid #3ac920;
+    cursor:pointer;
+}
+
+@media (min-width: 600px) {
+
+    img{
+        max-width: 570px    ;
+    }
+
+    .top-bar-button {
+        margin-left:0px;
+    }
+
+    .data-table{
+        font-size:large;
+    }
+
+    .data-box-middle-row{
+        max-width: 400px;
+    }
+
+    .bottom-box-controls-row{
+        max-width: 500px;
+        justify-content: space-between;
+    }
+
+
+}
+
+/* .video-grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     background-color: black;
@@ -359,4 +474,4 @@ button:hover {
         font-size: 54px;
     }
   
-  }
+  } */
