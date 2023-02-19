@@ -9,6 +9,9 @@
         <title>Channel42</title>
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:title" content="Channel42" />
+        <!-- <meta property="og:description" content="Meet me on Channel42" /> -->
+        <meta property="og:image" content="https://media.istockphoto.com/id/1190658706/vector/podcast-icon-like-on-air-live-podcast-badge-icon-stamp-logo-radio-broadcasting-or-streaming.jpg?s=612x612&w=0&k=20&c=FDjHNA44BTfz0UWfZpjswiwzUtxRflXiD0pXwS1phs8=" />
     </head>
     <body>
         <nav class="tiny-top-bar">
@@ -115,64 +118,12 @@
             <div class="audio-container">
                 <audio id='local-audio' autoplay playsinline></audio>
             </div>
+            <audio id="notification-sound">
+                <source src="{% static 'img/masterpiece.mp3' %}" type="audio/mp3">
+            </audio>
         </div>
     </body>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <link rel="prefetch" href="{% static 'img/logo_white-red-min.png' %}">
 
 </html> 
-
-
-
-
-                <!-- <div class="info-box-middle-box">
-                    
-                    <div>
-                        <h3> Subchannel URL:...................... <h3 id="room-name">{{room_name}}</h3>  </h3>
-                    </div>
-                    <div>
-                        <h3> Version:............................... <h3 id="room-name">1.01</h3>  </h3>
-                    </div>
-                    <div>
-                        <h3>Number of active (DB):.................... <h3 id="connected-user-count"> X </h3></h3>
-                    </div>
-                    <div>
-                        <h3>Number of active (JS):.................... <h3 id="connected-user-count-js"> X </h3></h3>
-                    </div> 
-                    <div>
-                        <h3>Number of active (DC):.................... <h3 id="connected-user-count-dc"> X </h3></h3> 
-                    </div>
-                    <div>
-                        <h3>Max Users:................................ <h3>4</h3></h3>
-                    </div>
-                    <div>
-                        <h3>Time to expiry:.................... <h3 id="expiry_clock"> ^Loading </h3></h3>
-                    </div>
-                    <div>
-                        <h3 id='you-are-header'>You are:.............................  <h3 id="label-username"></h3></h3>
-                    </div>
-                    <div id="seen-div">
-                        <h3 class="peer-list-title">Also Connected:</h3>
-                        <ul id="connected-users-ul">
-                            <li id="loading-user-li"><h3 id="loading-user-h3">Loading..</h3></li>
-                        </ul>
-                    </div>   -->
-                    <!-- <div>
-                        <h3> Subchannel URL:<h3 id="room-name">{{room_name}}</h3>  </h3>
-                    </div>
-                    <div>
-                        <h3>Number of active (DB): <h3 id="connected-user-count"> Loading... </h3></h3>
-                    </div>
-                    <div>
-                        <h3>Number of active (JS): <h3 id="connected-user-count-js"> (1) </h3></h3> 
-                    </div>
-                    <div>
-                        <h3>Max Users: <h3 id="connected-user-count">4</h3></h3>
-                    </div>
-                    <div>
-                        <h3>Time to expiry: <h3 id="expiry_clock"> Loading </h3></h3>
-                    </div>
-                    <div>
-                        <h3>  You are:  <h3 id="label-username"></h3></h3>
-                    </div> -->
-                    

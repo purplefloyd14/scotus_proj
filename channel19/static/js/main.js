@@ -5,7 +5,7 @@ var mapPeers = {};
 //        }
 var peerTrack = {};
 var peerTrackDirectConnection = {};
-var currentBaseUrl = 'https://b472-73-129-90-73.ngrok.io'
+var currentBaseUrl = 'https://1a88-73-129-90-73.ngrok.io'
 
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");
@@ -22,6 +22,7 @@ var newPeerSignalButton = document.getElementById('new-peer-button');
 var mainLogoImage = document.getElementById('main-logo-image');
 var timeElement = document.getElementById("time-now");
 var difference = document.getElementById("diff-now");
+const notificationSound = document.getElementById("notification-sound");
 
 var iceConfig = { 
     
@@ -230,9 +231,14 @@ function getNewPublicUsername(roomID){
 //******************************************************************************************************************************************************
 var localStream = new MediaStream();
 const constraints = {
-    audio: true,
-    video: false, 
-};
+    audio: {
+      volume: 0.2,
+      autoGainControl: false,
+      noiseSuppression: true,
+      echoCancellation: true
+    }, 
+    video:false
+  };
 const localAudio = document.getElementById('local-audio');
 const btnToggleAudio = document.querySelector('#btn-toggle-audio');
 
@@ -301,7 +307,8 @@ function createConnectedTalker(){
         });
 
         function sendNewPeerSignal(){
-            sendSignal('new-peer', {});
+            // sendSignal('new-peer', {});
+            notificationSound.play();
         }
 
         newPeerSignalButton.addEventListener('click',sendNewPeerSignal);
