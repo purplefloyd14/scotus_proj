@@ -24,20 +24,25 @@ var timeElement = document.getElementById("time-now");
 var difference = document.getElementById("diff-now");
 
 var iceConfig = { 
+    
     iceServers: [
+    // {
+    //     urls: "stun:stun.services.mozilla.com",
+    //     // mdns: true
+    // },
+    // {
+    //     urls: "turn:relay.metered.ca:443",
+    //     username: "b1887ca5572e1e4e59cbf558",
+    //     credential: "ittq9D45Yd+SuGdn"
+    // },
     {
         urls: "stun:stun.l.google.com:19302"
     },
     // {
-    //   urls: "turns:webrtcweb.com:7788",
-    //   username: "muazkh",
-    //   credential: "muazkh"
-    // },
-    // {
     //     urls: "turn:relay.metered.ca:443",
-    //     username: "b1fdde8cd90ab185d8112b12",
-    //     credential: "TKpfyORIesYutdtz+R9t/WD"
-    //   }
+    //     username: "b1887ca5572e1e4e59cbf558",
+    //     credential: "ittq9D45Yd+SuGdn"
+    // }
     ]
   };
 
@@ -223,6 +228,14 @@ function getNewPublicUsername(roomID){
 //******************************************************************************************************************************************************
 //******************************************************************************************************************************************************
 //******************************************************************************************************************************************************
+var localStream = new MediaStream();
+const constraints = {
+    audio: true,
+    video: false, 
+};
+const localAudio = document.getElementById('local-audio');
+const btnToggleAudio = document.querySelector('#btn-toggle-audio');
+
 
 
 //this function is almost a direct copy of the joinBtn on click method that used to be here 
@@ -240,51 +253,7 @@ function createConnectedTalker(){
     var loc = window.location;
     var wsStart = 'wss://';
 
-    if(loc.protocol == 'https'){
-        console.log('we are in https world!')
-        wsStart = 'wss://';
-    }
-
-    var endPoint = wsStart + loc.host + loc.pathname + '/' + username;
-    console.log("Websocket endpoint: ", endPoint);
-    webSocket = new WebSocket(endPoint);
-
-    webSocket.addEventListener('open', (e) => {
-        console.log(`${username} <--> Server - Websocket Connection Opened!`); 
-        sendSignal('new-peer', {}); //hey everybody - I am a new peer (this is the websockets implimentation which has been depricated)
-    //     setInterval( function() { sendSignal("heartbeat", {
-    //         'time': secondsToDeath, //send heartbeat signal from every peer every half second
-    //     }); 
-    // }, 500 );
-    });
-    webSocket.addEventListener('message', webSocketOnMessage);
-    webSocket.addEventListener('close', (e) => {
-        console.log('Connection Closed!'); 
-    });
-    webSocket.addEventListener('error', (e) => {
-        console.log('Error Occurred!'); 
-    });
-
-    function sendNewPeerSignal(){
-        sendSignal('new-peer', {});
-    }
-
-    newPeerSignalButton.addEventListener('click',sendNewPeerSignal);
-}
-
-var localStream = new MediaStream();
-
-const constraints = {
-    'video': false, 
-    'audio': true
-}
-
-// const localVideo = document.querySelector('#local-video');
-const localAudio = document.getElementById('local-audio');
-const btnToggleAudio = document.querySelector('#btn-toggle-audio');
-// const btnToggleVideo = document.querySelector('#btn-toggle-video');
-
-var userMedia = navigator.mediaDevices.getUserMedia(constraints)
+    navigator.mediaDevices.getUserMedia(constraints)
     .then(stream => {
         localStream = stream;
         localAudio.srcObject = localStream;
@@ -293,7 +262,8 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
         var audioTracks = localStream.getAudioTracks();
 
         audioTracks[0].enabled = true;
-        // videoTracks[0].enabled = true;
+
+        // addTrackToConnections(audioTracks[0]);
 
         btnToggleAudio.addEventListener('click', () => {
             audioTracks[0].enabled = !audioTracks[0].enabled;
@@ -309,7 +279,42 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
     })
     .catch(error => {
         console.log('Error accessing media devices!', error);
-    });
+    }).then(() =>{
+        var endPoint = wsStart + loc.host + loc.pathname + '/' + username;
+        console.log("Websocket endpoint: ", endPoint);
+        webSocket = new WebSocket(endPoint);
+
+        webSocket.addEventListener('open', (e) => {
+            console.log(`${username} <--> Server - Websocket Connection Opened!`); 
+            sendSignal('new-peer', {}); //hey everybody - I am a new peer (this is the websockets implimentation which has been depricated)
+        //     setInterval( function() { sendSignal("heartbeat", {
+        //         'time': secondsToDeath, //send heartbeat signal from every peer every half second
+        //     }); 
+        // }, 500 );
+        });
+        webSocket.addEventListener('message', webSocketOnMessage);
+        webSocket.addEventListener('close', (e) => {
+            console.log('Connection Closed!'); 
+        });
+        webSocket.addEventListener('error', (e) => {
+            console.log('Error Occurred!'); 
+        });
+
+        function sendNewPeerSignal(){
+            sendSignal('new-peer', {});
+        }
+
+        newPeerSignalButton.addEventListener('click',sendNewPeerSignal);
+        });
+
+}
+
+
+
+
+// const btnToggleVideo = document.querySelector('#btn-toggle-video');
+
+
  
 var btnSendMsg = document.querySelector('#btn-send-msg');
 
@@ -407,7 +412,9 @@ function createOfferer(peerUsername, receiverChannelName){
         sendHeartBeatIfNeeded("Offerer");
     });
     data_channel.addEventListener('message', onMessageDirectConnection); //whenever we get a message through this data channel it is going to call this function 
-    
+    var remoteAudio = createAudio(peerUsername); //1:10:00 in video 
+    setOnTrack(connectionToPeer, remoteAudio, peerUsername, 'Offerer');
+    addLocalTracks(connectionToPeer, peerUsername, "Offerer");
     // if (!peerUsername in mapPeers){
     // debugger;
     // }
@@ -428,7 +435,7 @@ function createOfferer(peerUsername, receiverChannelName){
     });
     connectionToPeer.addEventListener('icecandidate', (event)=>{
         if(event.candidate){
-            // console.log("From video, all conn details: " + event.candidate.candidate.split(" "));
+            // console.log("IP details leaked from ICE candidate: " + event.candidate.candidate.split(" ")[4]);
             // console.log(`Offerer ${username} has a new ICE Candidate`)
             // console.log("New ICE candidate: ", JSON.stringify(connectionToPeer.localDescription));
             return; //when gathering is finished, the event.candidate object will be null. in that case we send offer
@@ -449,15 +456,16 @@ function createOfferer(peerUsername, receiverChannelName){
             console.log(`Offerer ${username}: - Local description for self set successfully!`);
         });
     //summary of what we have just done at 1:24
-    var remoteAudio = createAudio(peerUsername); //1:10:00 in video 
-    setOnTrack(connectionToPeer, remoteAudio, peerUsername, 'Offerer');
-    addLocalTracks(connectionToPeer, peerUsername, "Offerer");
+
 }
 
 
 function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
     console.log(`Creating an Answerer. We are: ${username} - Responding To: ${peerUsername}`);
     var connectionToPeer = new RTCPeerConnection(iceConfig);
+    var remoteAudio = createAudio(peerUsername);
+    addLocalTracks(connectionToPeer, peerUsername, "Answerer");
+    setOnTrack(connectionToPeer, remoteAudio, peerUsername, 'Answerer');
     
     
     //https://stackoverflow.com/questions/65408752/ontrack-event-not-firing-for-caller
@@ -482,6 +490,9 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
         var iceConnectionState = connectionToPeer.iceConnectionState;
         console.log(`Answerer here. We are ${username} - ICE Connection State Changed to: ${iceConnectionState}`);
 
+        
+
+
         if(iceConnectionState === 'failed' || iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
             console.log(`We are Answerer: ${username} - Deleting a peer: ${peerUsername}. The connection state is: ${iceConnectionState}`);
             delete mapPeers[peerUsername];
@@ -496,8 +507,9 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
     
     connectionToPeer.addEventListener('icecandidate', (event)=>{
         if(event.candidate){
+            // console.log("IP details leaked from ICE candidate: " + event.candidate.candidate.split(" ")[4]);
             // console.log("New ICE candidate: ", JSON.stringify(connectionToPeer.localDescription));
-            console.log(`Answerer ${username} has a new ICE Candidate`);
+            // console.log(`Answerer ${username} has a new ICE Candidate`);
             return;
         }
         sendSignal('new-answer', {
@@ -506,10 +518,6 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
         });
 
     });
-
-    var remoteAudio = createAudio(peerUsername);
-    addLocalTracks(connectionToPeer, peerUsername, "Answerer");
-    setOnTrack(connectionToPeer, remoteAudio, peerUsername, 'Answerer');
 
 
     connectionToPeer.setRemoteDescription(offer)
