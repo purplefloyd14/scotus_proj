@@ -29,14 +29,14 @@ var iceConfig = {
         urls: "stun:stun.l.google.com:19302"
     },
     // {
-    //   urls: "turn:relay.metered.ca:80",
-    //   username: "ef5589e9789a32dcd988dd3b",
-    //   credential: "3WfeszWRhZ9QOyiz"
+    //   urls: "turns:webrtcweb.com:7788",
+    //   username: "muazkh",
+    //   credential: "muazkh"
     // },
     // {
     //     urls: "turn:relay.metered.ca:443",
-    //     username: "ef5589e9789a32dcd988dd3b",
-    //     credential: "3WfeszWRhZ9QOyiz"
+    //     username: "b1fdde8cd90ab185d8112b12",
+    //     credential: "TKpfyORIesYutdtz+R9t/WD"
     //   }
     ]
   };
@@ -51,7 +51,7 @@ var originalClock;
 
 
 
-function    webSocketOnMessage(event){
+function webSocketOnMessage(event){
     // console.log('in on messsage');
     var parsedData = JSON.parse(event.data);
     var peerUsername = parsedData['peer']; //who is the message from 
@@ -88,6 +88,7 @@ function    webSocketOnMessage(event){
         var answer = parsedData['message']['sdp'];
         var connectionToPeer = mapPeers[peerUsername][0]; //give us the websocketPeer object associated with the sender's username
         connectionToPeer.setRemoteDescription(answer);
+        console.log(`Offerer: ${username} has set a remote description for Answerer:${peerUsername}. Next Stop: Connection open.`);
         return;
     }
 
@@ -134,8 +135,8 @@ function updateCountdown(){
     secondsToDeath = originalTimeToDeath - timeElapsed; 
     properTime = calculateCountdown(secondsToDeath);
     expiryClock.innerHTML = properTime; 
-    timeElement.innerHTML = currentClock;
-    difference.innerHTML = secondsToDeath - currentClock;
+    // timeElement.innerHTML = currentClock;
+    // difference.innerHTML = secondsToDeath - currentClock;
     if (secondsToDeath === 0){
         window.location.reload();
     }
@@ -199,7 +200,7 @@ function handleListItems(user, action){
     }
 }
 
-var t1=setInterval(updateActiveTalkers,1000);
+// var t1=setInterval(updateActiveTalkers,1000);
 var t4=setInterval(monitorPeerTrackDirectConnection, 1000); //check the peerTrack dict and remove those who arent pinging us 
 
 
@@ -222,25 +223,6 @@ function getNewPublicUsername(roomID){
 //******************************************************************************************************************************************************
 //******************************************************************************************************************************************************
 //******************************************************************************************************************************************************
-
-// var loadingUserLi = document.getElementById('loading-user-li');
-// loadingUserLi.addEventListener('load', (event) => {
-//     changeToNone();
-// });
-
-window.onload = function(){ 
-    if(document.getElementById('loading-user-li')){
-      setTimeout(changeToNone, 1000);
-    }
-   } 
-
-function changeToNone(){
-    setTimeout(function() {
-        var loadingUserH3= document.getElementById('loading-user-h3');
-        loadingUserH3.innerHTML = "None"; 
-      }, 1000);
-}
-
 
 
 //this function is almost a direct copy of the joinBtn on click method that used to be here 
@@ -307,17 +289,11 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
         localStream = stream;
         localAudio.srcObject = localStream;
         localAudio.muted = true;
-        // localVideo.srcObject = localStream;
-        // localVideo.muted = true;
         console.log(`Creating Media Stream for: ${username}`);
         var audioTracks = localStream.getAudioTracks();
-        // var videoTracks = stream.getVideoTracks();
-
-        // console.log(stream);
 
         audioTracks[0].enabled = true;
         // videoTracks[0].enabled = true;
-
 
         btnToggleAudio.addEventListener('click', () => {
             audioTracks[0].enabled = !audioTracks[0].enabled;
@@ -330,16 +306,6 @@ var userMedia = navigator.mediaDevices.getUserMedia(constraints)
             btnToggleAudio.innerHTML = "Unmute";
             mainLogoImage.src='../static/img/logo_white-red-min.png'
         });
-        // btnToggleVideo.addEventListener('click', () => {
-        //     return;
-            // videoTracks[0].enabled = !videoTracks[0].enabled;
-
-            // if(videoTracks[0].enabled){
-            //     btnToggleVideo.innerHTML = "Video Off";
-            //     return;
-            // }
-            // btnToggleVideo.innerHTML = "Video On"; 
-        // });
     })
     .catch(error => {
         console.log('Error accessing media devices!', error);
@@ -353,11 +319,9 @@ var messageInput = document.querySelector('#msg');
 btnSendMsg.addEventListener('click', sendMsgOnClick);
 
 messageInput.addEventListener("keyup", function(e) {
-    console.log("we are here in the keydown area");
     e = window.event;
     var keyCode = e.keyCode || e.which;
     if(keyCode==13) {
-        console.log("we are within the 13 area");
         e.preventDefault();
         btnSendMsg.click();
     }
@@ -390,6 +354,7 @@ function sendMsgOnClick(){
 function isOpen(ws) { return ws.readyState === ws.OPEN }
 
 function sendSignal(action, message){
+    // console.log(`Self: ${username} Sending Websockets Signal. Action: ${action}  Message: ${JSON.stringify(message)}`);
     //this is how you send something to all peers via websockets (server side)
     var jsonStr = JSON.stringify({
         'peer': username, 
@@ -425,7 +390,7 @@ function sendDirectChannelSignalHeartbeat(){
     })
     for (index in dataChannels){ //iterate through datachannels belonging to peers in mesh
         if (dataChannels[index].readyState === 'open') {
-            console.log("we are sending a heartbeat from: " + username + " where seconds to death is: " + secondsToDeath);
+            // console.log("we are sending a heartbeat from: " + username + " where seconds to death is: " + secondsToDeath);
             dataChannels[index].send(message); //send each peer the message object 
         }
     }
@@ -435,118 +400,77 @@ function sendDirectChannelSignalHeartbeat(){
 function createOfferer(peerUsername, receiverChannelName){
     console.log(`Creating an Offerer. From: ${username} To: ${peerUsername}`);
     //see video at 1:08
-    
     var connectionToPeer = new RTCPeerConnection(iceConfig); 
-
-    connectionToPeer.addEventListener('iceconnectionstatechange', function() {
-        console.log(`Offer From: ${username} To: ${peerUsername} - ICE connection state: ${connectionToPeer.iceConnectionState}`);
-      });
-      addLocalTracks(connectionToPeer, peerUsername, "Offerer");  //add local tracks to new connection object 
-      data_channel = connectionToPeer.createDataChannel('channel');
-      data_channel.addEventListener('open', () =>{
+    data_channel = connectionToPeer.createDataChannel('channel');
+    data_channel.addEventListener('open', () =>{
         console.log(`Offer From: ${username} To: ${peerUsername} - Connection Opened For Data Channel!`);
         sendHeartBeatIfNeeded("Offerer");
-      });
-      data_channel.addEventListener('message', onMessageDirectConnection); //whenever we get a message through this data channel it is going to call this function 
-      //1:10:00 in video 
-      var remoteAudio = createAudio(peerUsername);
-    //   var remoteVideo = createVideo(peerUsername); //returns <div> html element with <video> inside it, tagged for your remote peer (this will be their feed that comes to you)
-    //   setOnTrack(connectionToPeer, remoteVideo);
-      setOnTrack(connectionToPeer, remoteAudio, peerUsername, 'Offerer');
-      
-      console.log(`mapPeers keys: ${Object.keys(peerTrackDirectConnection)}`);
-      console.log(`peerUsername is: ${peerUsername}`);
-      if (!peerUsername in mapPeers){
-        debugger;
-      }
-      console.log(`peerUsername in mapPeers: ${peerUsername in mapPeers}`);
-      mapPeers[peerUsername] = [connectionToPeer, data_channel];
+    });
+    data_channel.addEventListener('message', onMessageDirectConnection); //whenever we get a message through this data channel it is going to call this function 
+    
+    // if (!peerUsername in mapPeers){
+    // debugger;
+    // }
+    mapPeers[peerUsername] = [connectionToPeer, data_channel];
 
     //used to remove video when a peer leaves the room 
     connectionToPeer.addEventListener('iceconnectionstatechange', () => {
         var iceConnectionState = connectionToPeer.iceConnectionState;
         console.log("ICE Connection State Changed to: " + iceConnectionState);
-
         if(iceConnectionState === 'failed' || iceConnectionState === 'disconnected' || iceConnectionState === 'closed'){
             console.log(`Offerer ${username} is deleting Peer: + ${peerUsername}`);
             delete mapPeers[peerUsername];
-            
             if(iceConnectionState != 'closed'){
                 connectionToPeer.close();
             }
             removeAudio(remoteAudio);
-            // removeVideo(remoteVideo);
         }
     });
-
     connectionToPeer.addEventListener('icecandidate', (event)=>{
         if(event.candidate){
-            console.log("From video, all conn details: " + event.candidate.candidate.split(" "));
-            console.log(`Offerer ${username} has a new ICE Candidate`)
-            console.log("New ICE candidate: ", JSON.stringify(connectionToPeer.localDescription));
-            //
-            return;
+            // console.log("From video, all conn details: " + event.candidate.candidate.split(" "));
+            // console.log(`Offerer ${username} has a new ICE Candidate`)
+            // console.log("New ICE candidate: ", JSON.stringify(connectionToPeer.localDescription));
+            return; //when gathering is finished, the event.candidate object will be null. in that case we send offer
         }
-
-        //when ICE process has been completed the candidate value will be null in which case we will 
-        //simply send signal and send the SDP to remote peer. 
         sendSignal('new-offer', {
             'sdp': connectionToPeer.localDescription, 
             'receiver_channel_name': receiverChannelName, //send it only to the peer that sent the new peer signal 
         });
-
-
     });
 
-    connectionToPeer.createOffer()
-        .then(o => connectionToPeer.setLocalDescription(o))
+    const offerOptions = {
+        offerToReceiveAudio: true,
+    };
+
+    connectionToPeer.createOffer(offerOptions)
+        .then(offer => connectionToPeer.setLocalDescription(offer))
         .then(() =>{
-            console.log(`Offerer ${username}: - Local description for ${peerUsername} set successfully!`);
+            console.log(`Offerer ${username}: - Local description for self set successfully!`);
         });
-
     //summary of what we have just done at 1:24
-
-    // document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
-
-    // function boolTalking() {
-    //     threasholdVol = .2;
-    //     connectionToPeer.getStats(null).then((stats) => {
-    //       var talking_div =document.getElementById("talking-test");
-    //       stats.forEach((report) => {
-    //           Object.keys(report).forEach((statName) => {
-    //             if (statName === "audioLevel") {
-    //                 if (report[statName]>threasholdVol){
-    //                     console.log("here: " + report[statName]);
-    //                     talking_div.innerHTML="TALKING";
-    //                 } else {
-    //                     console.log("there: " + report[statName]);
-    //                     talking_div.innerHTML="NOT";
-    //                 }
-    //             }
-    //           });
-    //       });
-    //     });
-    //   }
-    // statsInterval = setInterval(boolTalking, 100);
+    var remoteAudio = createAudio(peerUsername); //1:10:00 in video 
+    setOnTrack(connectionToPeer, remoteAudio, peerUsername, 'Offerer');
+    addLocalTracks(connectionToPeer, peerUsername, "Offerer");
 }
 
 
 function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
     console.log(`Creating an Answerer. We are: ${username} - Responding To: ${peerUsername}`);
     var connectionToPeer = new RTCPeerConnection(iceConfig);
-
-    addLocalTracks(connectionToPeer, peerUsername, "Answerer");  // add my tracks to my own feed 
-    var remoteAudio = createAudio(peerUsername);
-    // var remoteVideo = createVideo(peerUsername); //returns an html video element. Theres no source or anything
-    setOnTrack(connectionToPeer, remoteAudio, peerUsername, 'Answerer');
-    // setOnTrack(connectionToPeer, remoteVideo); // add my feed to the remote stream 
+    
+    
+    //https://stackoverflow.com/questions/65408752/ontrack-event-not-firing-for-caller
     
 
     connectionToPeer.addEventListener('datachannel', (e) => {
+        
         connectionToPeer.dataChannel = e.channel; //gives us the data channel that was created by the offerer 
         connectionToPeer.dataChannel.addEventListener('open', () =>{
+            // setOnTrack(connectionToPeer, remoteAudio, peerUsername, 'Answerer');
             console.log(`We are ${username} - Connection Opened For Data Channel with ${peerUsername}`);
             sendHeartBeatIfNeeded("Answerer");
+            
         })
         connectionToPeer.dataChannel.addEventListener('message', onMessageDirectConnection);
         mapPeers[peerUsername] = [connectionToPeer, connectionToPeer.dataChannel];
@@ -569,60 +493,44 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
             removeAudio(remoteAudio);
         }
     });
-
+    
     connectionToPeer.addEventListener('icecandidate', (event)=>{
         if(event.candidate){
-            console.log("New ICE candidate: ", JSON.stringify(connectionToPeer.localDescription));
-            //
-            console.log(`Answerer ${username} has a new ICE Candidate`)
+            // console.log("New ICE candidate: ", JSON.stringify(connectionToPeer.localDescription));
+            console.log(`Answerer ${username} has a new ICE Candidate`);
             return;
         }
-        //when ICE process has been completed the candidate value will be null in which case we will 
-        //simply send signal and send the SDP to remote peer. 
-
         sendSignal('new-answer', {
             'sdp': connectionToPeer.localDescription, 
             'receiver_channel_name': receiverChannelName, //send it only to the peer that sent the new peer signal 
         });
+
     });
+
+    var remoteAudio = createAudio(peerUsername);
+    addLocalTracks(connectionToPeer, peerUsername, "Answerer");
+    setOnTrack(connectionToPeer, remoteAudio, peerUsername, 'Answerer');
+
+
     connectionToPeer.setRemoteDescription(offer)
         .then(()=> {
             console.log(`We are Answerer: ${username} - Remote description set successfully for ${peerUsername}`);
             return connectionToPeer.createAnswer();
         })
         .then(a =>{
-            console.log(`We Answerer: ${username}, have Successfully created an answer. Setting Local Discription for ${peerUsername}`);
+            console.log(`We Answerer: ${username}, have Successfully created an answer. Setting Local Discription for self`);
             connectionToPeer.setLocalDescription(a); 
         })
-
-    // function boolTalking() {
-    //     threasholdVol = .2;
-    //     connectionToPeer.getStats(null).then((stats) => {
-    //         var talking_div =document.getElementById("talking-test");
-    //         stats.forEach((report) => {
-    //             Object.keys(report).forEach((statName) => {
-    //             if (statName === "audioLevel") {
-    //                 if (report[statName]>threasholdVol){
-    //                     console.log("here: " + report[statName]);
-    //                     talking_div.innerHTML="TALKING";
-    //                 } else {
-    //                     console.log("there: " + report[statName]);
-    //                     talking_div.innerHTML="NOT";
-    //                 }
-    //             }
-    //             });
-    //         });
-    //     });
-    //     }
-    // statsInterval = setInterval(boolTalking, 100);
 }
 
 function addLocalTracks(connectionToPeer, peerUsername, role){
     console.log(`We are: ${username}, Playing role: ${role}. ADDING LOCAL TRACKS to Connection with: ${peerUsername}`);
     //this is how we add our own audio and video to the stream
     localStream.getTracks().forEach(track => {
+        console.log(`^^## We ${role}: (${username}) are adding a local track`)
         connectionToPeer.addTrack(track, localStream);
     }); 
+    return;
 }
 
  
@@ -638,21 +546,16 @@ function onMessageDirectConnection(event){
     }
     if (message.action === 'heartbeat_over_direct_channel'){
         peerTrackDirectConnection[message.user] = message.time;
-        console.log("we got a heartbeat from: " + message.user + " at time: " + message.time);
+        // console.log("we got a heartbeat from: " + message.user + " at time: " + message.time);
     } 
 }
 
 function createAudio(peerUsername){
-    //video container, already existing, just grabbing it 
     var audioContainer = document.querySelector('.audio-container');
-
-    //new video element 
     var remoteAudio = document.createElement('audio');
     remoteAudio.id = peerUsername + '-audio';
     remoteAudio.autoplay = true;
-
     audioContainer.appendChild(remoteAudio);
-
     return remoteAudio;
 }
 
@@ -661,10 +564,11 @@ function setOnTrack(connectionToPeer, remoteAudio, peerUsername, role){
     var remoteStream = new MediaStream();
     remoteAudio.srcObject = remoteStream;
     // add remote tracks to our peer to listen for 
-    connectionToPeer.addEventListener('track', (event) => {
+    console.log("we are in SET ON TRACK");
+    connectionToPeer.ontrack = (event) => {
         console.log(`***** A TRACK event has been fired. We are ${role} ${username} and the peer is ${peerUsername}`)
         remoteStream.addTrack(event.track, remoteStream);
-    });
+    };
 }
 
 
@@ -697,3 +601,25 @@ function copyURLtoClipboard(){
 }
 
 createConnectedTalker();
+
+
+// function boolTalking() {
+//     threasholdVol = .2;
+//     connectionToPeer.getStats(null).then((stats) => {
+//         var talking_div =document.getElementById("talking-test");
+//         stats.forEach((report) => {
+//             Object.keys(report).forEach((statName) => {
+//             if (statName === "audioLevel") {
+//                 if (report[statName]>threasholdVol){
+//                     console.log("here: " + report[statName]);
+//                     talking_div.innerHTML="TALKING";
+//                 } else {
+//                     console.log("there: " + report[statName]);
+//                     talking_div.innerHTML="NOT";
+//                 }
+//             }
+//             });
+//         });
+//     });
+//     }
+// statsInterval = setInterval(boolTalking, 100);
