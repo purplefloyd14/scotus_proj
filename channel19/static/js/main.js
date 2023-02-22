@@ -5,7 +5,7 @@ var mapPeers = {};
 //        }
 var peerTrack = {};
 var peerTrackDirectConnection = {};
-var currentBaseUrl = 'https://1a88-73-129-90-73.ngrok.io'
+var currentBaseUrl = 'https://6f9f-45-85-144-74.ngrok.io'
 
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");

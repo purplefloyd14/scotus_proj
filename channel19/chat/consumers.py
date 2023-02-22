@@ -3,6 +3,7 @@ import json
 from chat.models import Talker, Room
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
+from channels.exceptions import StopConsumer
 import random
 from django.conf import settings 
 # Get channel_layer function
@@ -16,6 +17,7 @@ class ChatConsumer(WebsocketConsumer):
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = f"chat_{self.room_name}"
         talker_name = self.scope['url_route']['kwargs']['talker_name'][:-6]
+        # talker_name = self.scope['url_route']['kwargs']['talker_name']
         print(f"arriving {talker_name}")
 
         talker = Talker()

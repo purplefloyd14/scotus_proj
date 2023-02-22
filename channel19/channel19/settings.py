@@ -32,7 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['ngrok.io', 'localhost', '127.0.0.1', '*']
 # ALLOWED_HOSTS = []
 
-CSRF_TRUSTED_ORIGINS = ['https://1a88-73-129-90-73.ngrok.io']
+CSRF_TRUSTED_ORIGINS = ['https://6f9f-45-85-144-74.ngrok.io']
 
 
 # Application definition
