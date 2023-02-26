@@ -311,20 +311,20 @@ ul.frames li {
     }
 
     .bottom-box-controls-row{
-        max-width: 500px;
-        justify-content: space-between;
-        flex-direction: column;
-        height: 100%;
-        align-items: flex-start;
-        margin-left: 100px;
-        border-style: solid;
-        padding: 18px;
-        background: blanchedalmond;
-        max-height: 230px;
-    }
+    max-width: 500px;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+    align-items: flex-start;
+    margin-left: 100px;
+    border-style: solid;
+    padding: 18px;
+    background: blanchedalmond;
+    max-height: 200px;
+}
 
     .switch-box{
-        margin: 10px;
+        margin: 6px;
         display: flex;
         width: 95%;
         justify-content: space-between;
@@ -333,8 +333,30 @@ ul.frames li {
     #side-car-div{
         display: flex;
         margin-top: 20px;
+        max-width: 800px;
+        flex-wrap: wrap;
+        flex-direction: row;
+        max-height: 400px;
+        justify-content: flex-start;
     }
 
+    .center-main-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        max-height: 500px;
+    }
+
+
+
+
+
+
+
+}
+
+/* 
 
 
 
@@ -394,10 +416,7 @@ ul.frames li {
 
 
 
-
-}
-
-/* .video-grid-container {
+.video-grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     background-color: black;
