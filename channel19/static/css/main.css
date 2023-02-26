@@ -1,5 +1,5 @@
-html, body {
-    height: 100%;
+
+.no-overflow{
     overflow: hidden;
 }
 
@@ -10,11 +10,13 @@ img {
 
 html, body{
     height: 99%;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 body{
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 html, body{
@@ -27,21 +29,31 @@ html, body{
     justify-content: flex-end;
 }
 
+.logo-box-top{
+    height: 14vh;
+    display: flex;
+    justify-content: center;
+}
+
 .top-bar-button {
     color: black;
     font-family: monospace;
-    margin: 1%;
+    margin: 2%;
     font-size: 2vh;
-    margin-left:3%;
+    margin-left: 6%;
 }
 
 #side-car-div{
-    margin-top:-10%;
+    margin-top: 3vh;
+    height: 75vh;
+    display: block;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .center-main-container {
-    display: flex;
-    height: 85vh;
+    display: block;
+    height: 94vh;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
@@ -54,7 +66,7 @@ html, body{
 .data-table{
     width: 100%;
     font-family: monospace;
-    font-size: medium;
+    font-size: small;
     font-weight: bolder;
 }
 
@@ -77,11 +89,12 @@ ul.frames li {
 }
 
 .bottom-box-controls-row{
-    height: 10vh;
-    display: flex;
     justify-content: space-around;
-    align-items: flex-end;
-    width: 100%;
+    flex-direction: row;
+    border-style: solid;
+    padding: 3px;
+    background: blanchedalmond;
+    display: flex;
     flex-wrap: wrap;
 }
 
@@ -94,6 +107,7 @@ ul.frames li {
 }
 
 .div-lower-button {
+    margin: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,6 +118,12 @@ ul.frames li {
     display: none;
 }
 
+#toggle-chat-switch{
+    display: flex;
+    font-size: small;
+}
+
+
 .control-button{
     white-space: normal;
     background-color: #3b3c40;
@@ -112,11 +132,12 @@ ul.frames li {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 12px;
+    font-size: small;
     border-radius: 5px;
     font-family: monospace;
     border: 2px solid transparent;
     width: fit-content;
+    min-width: 80px;
 }
 
 .control-button-disconnect:hover{
@@ -208,9 +229,67 @@ ul.frames li {
     border-radius: 50%;
   }
 
-#chat{
-    display: none;
+#chat-main{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    font-family: monospace;
+    border-style: dashed;
+    background: lightskyblue;
 }
+
+.io-box{
+    margin: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.hidden {
+    visibility: hidden !important;
+  }
+  
+.showing {
+    visibility: visible !important;
+}
+
+.io-button{
+    width: 60px;
+    height: 33px;
+    margin: 3px;
+}
+
+.io-input{
+    max-width: 40vw;
+    margin: 3px;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-family: monospace;
+    font-size: x-small;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    font-family: monospace;
+    font-size: x-small;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    font-family: monospace;
+    font-size: x-small;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    font-family: monospace;
+    font-size: x-small;
+  }
+
+.input-box-extras{
+    display: flex;
+    max-height: 35px;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
 
 @media (min-width: 770px) {
 
@@ -241,12 +320,14 @@ ul.frames li {
         border-style: solid;
         padding: 18px;
         background: blanchedalmond;
-        max-height: 200px;
+        max-height: 230px;
     }
 
     .switch-box{
         margin: 10px;
         display: flex;
+        width: 95%;
+        justify-content: space-between;
     }
 
     #side-car-div{
@@ -254,8 +335,61 @@ ul.frames li {
         margin-top: 20px;
     }
 
-    #chat{
-        display: block;
+
+
+
+    #chat-main{
+        padding: 17px;
+        display: flex;
+        border-style: dashed;
+        max-width: 500px;
+        font-family: monospace;
+        min-height: 100px;
+        flex-direction: column;
+    }
+
+
+
+    #sharing-title{
+        margin-top: 4px;
+        margin-left: 4px;
+        wdith: 100%;
+        display: flex;
+        height: 20px;
+        margin-bottom: 0;
+    }
+
+    #messages{
+        display: flex;
+        height: 47px;
+    }
+
+    #sender-title{
+        margin:4px
+    }
+
+    #sender-box{
+            width: 80px;
+    }
+
+    #content-box{
+        width:100%;
+        border-radius: 4px;
+        max-width:270px;
+    }
+
+    #message-content-text{
+        margin-left: 5px;
+        background-color: #99ccff;
+        width: 258px;
+        height: 40px;
+    }
+
+    #outgoing-box{
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        margin-top: 14px;
     }
 
 

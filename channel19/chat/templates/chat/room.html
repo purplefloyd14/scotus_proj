@@ -2,7 +2,7 @@
 
 {% load static %}
 
-<html lang="en">
+<html lang="en" id="whole-page">
     <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
     <head>
         <meta charset="UTF-8">
@@ -97,35 +97,55 @@
                             </tr>
                         </tbody>
                     </table>
+                   
                 </div>
                 <div class="bottom-box-controls-row">
                     <div class="div-lower-button"><button class="control-button control-button-mute" id="btn-toggle-audio">  Mute Mic</button>  </div>
                     <div class="div-lower-button"><button onclick=disconnectUser() class="control-button control-button-disconnect" id="btn-disconnect"</button> Disconnect </div>
                     <div class="div-lower-button"><button class="control-button control-button-copy" id="btn-copy-link"><img id='link-logo-img' src="{% static 'img/link-img9.png' %}"/>Copy Room URL</button>  </div>
+                    <div class="div-lower-button"><button class="control-button control-button-copy" id="new-peer-button">Reset Connection</button></div>
                     <div class="div-lower-button switch-box">
                         <div class="switch-label-box">
-                            <text class="switch-label-text">Play sound</text>
-                            <text class="switch-label-text">on join: </text>
+                            <text class="switch-label-text">Play sound on join:</text>
                         </div>
                         <label class="switch">
                             <input id="alert-input" type="checkbox" autocomplete="off">
                             <span class="slider round"></span>
                         </label>
                     </div>
+                    <div id="toggle-chat-switch" class="div-lower-button switch-box">
+                        <div class="switch-label-box">
+                            <text class="switch-label-text">Toggle Shareport:</text>
+                        </div>
+                        <label class="switch">
+                            <input id="toggle-chat-input" type="checkbox" autocomplete="off">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
                     
+                </div>
+                <div id="chat-main" class="hidden">
+                    <div id="messages" class="io-box">
+                        <input readonly id="message-content-text" class="io-input" placeholder="INBOUND"></input>
+                        <div class="input-box-extras">
+                            <p style='margin: 0;' id='sender-title'></p>
+                            <button class="io-button control-button" id="btn-copy-msg"><img id='link-logo-img' src="{% static 'img/link-img9.png' %}"/>Copy</button>
+                        </div>
+
+                    
+                        <!-- <p id="message-content-p">Content of messageContent of messageContent of messageContent of messageContent of messageContent of messageContent of messageContent of messageContent of messageContent of messageContent of messageContent of messageContent of message</p> -->
+                    </div>
+                    <div id="outgoing-box" class="io-box">
+                        <input id="msg" class="io-input" placeholder="OUTBOUND"></input>
+                        <button class="io-button control-button" id="btn-send-msg">Send<img id='link-logo-img' style='margin-left:5px' src="{% static 'img/send-logo2.png' %}"/></button>
+                    </div>
+                       
+                    <div id="talking-test"></div>
                 </div>
 
             </div>
             
-            <div id="chat">
-                <h3>Chat</h3>
-                <div id="messages">
-                    <ul id="message-list"></ul>
-                </div>
-                <div><input id="msg"><button id="btn-send-msg">Send Message</button></div>
-                <button id="new-peer-button">New Peer Signal</button>   
-                <div id="talking-test"></div>
-            </div>
+           
 
             <div class="audio-container">
                 <audio id='local-audio' autoplay playsinline></audio>

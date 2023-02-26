@@ -5,7 +5,7 @@ var mapPeers = {};
 //        }
 var peerTrack = {};
 var peerTrackDirectConnection = {};
-var currentBaseUrl = 'https://6f9f-45-85-144-74.ngrok.io'
+var currentBaseUrl = 'https://5c90-45-85-144-68.ngrok.io'
 
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");
@@ -26,7 +26,13 @@ var disconnectBtn = document.getElementById("btn-disconnect");
 var mainLogoImage = document.getElementById('main-logo-image');
 var timeElement = document.getElementById("time-now");
 var difference = document.getElementById("diff-now");
+var toggleChatInput = document.getElementById("toggle-chat-input");
+var chatItself = document.getElementById("chat-main");
 const notificationSound = document.getElementById("notification-sound");
+var wholePage = document.getElementById('whole-page');
+
+
+wholePage.classList.add('no-overflow');
 
 var heartbeatCheckObj = {
     "logging": false,
@@ -57,16 +63,35 @@ var secondsToDeath;
 var originalTimeToDeath;
 var timeAtPageLoad;
 
+
+
 newEntrantAlert.addEventListener('click', toggleAlert);
 
-// newEntrantAlert.hasAttribute('checked')
+
+function toggleChat() {
+    console.log('in here')
+    chatItself.classList.toggle("hidden");
+    chatItself.classList.toggle("showing");
+    wholePage.classList.toggle("no-overflow")
+}
+  
+toggleChatInput.addEventListener("click", toggleChat);
+toggleChatInput.removeEventListener("click", toggleChat);
+toggleChatInput.addEventListener("click", toggleChat);
+
+
+
+
+
 
 
 function toggleAlert(){
     console.log("clicking")
     if (newEntrantAlert.hasAttribute('checked')){
+        console.log("has checked")
         newEntrantAlert.removeAttribute('checked');
     } else {
+        console.log("not checked")
         newEntrantAlert.setAttribute("checked", 'true');
     }
 }
@@ -245,7 +270,7 @@ function getNewPublicUsername(roomID){
 var localStream = new MediaStream();
 const constraints = {
     audio: {
-      volume: 0.2,
+      volume: 0.8,
       autoGainControl: false,
       noiseSuppression: true,
       echoCancellation: true
@@ -343,6 +368,7 @@ var btnSendMsg = document.querySelector('#btn-send-msg');
 var messageList = document.querySelector('#message-list');
 var messageInput = document.querySelector('#msg');
 
+
 btnSendMsg.addEventListener('click', sendMsgOnClick);
 
 messageInput.addEventListener("keyup", function(e) {
@@ -355,27 +381,18 @@ messageInput.addEventListener("keyup", function(e) {
 });
 
 
-function sendMsgOnClick(){
-    var msgText = messageInput.value;
-    var li = document.createElement('li'); 
-    li.appendChild(document.createTextNode("Me: " + msgText));
-    messageList.append(li);
+btnCopyMsg = document.getElementById('btn-copy-msg');
 
-    var dataChannels = getDataChannels();
+btnCopyMsg.addEventListener("click", copyPortalInput);
 
-    message = JSON.stringify({
-        'action': 'message',
-        'content': msgText,
-        'user': username,
-    });
-    console.log('Sending message: '+ msgText + " from user: " + username);
-    for (index in dataChannels){
-        if (dataChannels[index].readyState === 'open') {
-            dataChannels[index].send(message); //send each peer the message object 
-        }
-    };
-
-    messageInput.value = '';
+function copyPortalInput(){
+    var dummy = document.createElement('input');
+    text = document.getElementById("message-content-text").value;
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummy);
 }
 
 function isOpen(ws) { return ws.readyState === ws.OPEN }
@@ -569,6 +586,41 @@ function addLocalTracks(connectionToPeer, peerUsername, role){
     return;
 }
 
+function updateMessageValue(sender, message){
+    console.log("here")
+    var messageContent = document.getElementById('message-content-text');
+    var senderIdentity = document.getElementById('sender-title');
+    if(sender==='Me'){
+        sender="Me123456";
+    }
+    senderIdentity.innerHTML= ("-"+sender.slice(0, -6));
+    messageContent.value = (message);
+}
+    
+
+
+function sendMsgOnClick(){
+    console.log("in here!!")
+    var msgText = messageInput.value;
+    console.log(`msg text = ${msgText}`);
+    updateMessageValue("Me", msgText); //update message portal for my own screen 
+    var dataChannels = getDataChannels();
+
+    message = JSON.stringify({
+        'action': 'message',
+        'content': msgText,
+        'user': username,
+    });
+    console.log('Sending message: '+ msgText + " from user: " + username);
+    for (index in dataChannels){
+        if (dataChannels[index].readyState === 'open') {
+            dataChannels[index].send(message); //send each peer the message object so they can get it 
+        }
+    };
+
+    messageInput.value = '';
+}
+
  
 function onMessageDirectConnection(event){
     //when the message event is triggered on the data channel and it executes this function, the eventListener will pass to this function a dictionary 
@@ -580,9 +632,7 @@ function onMessageDirectConnection(event){
         handleListItems(message.user, 'delete');
     }
     if (message.action === 'message'){
-        var li = document.createElement('li');
-        li.appendChild(document.createTextNode(message.user + ": " + message.content));
-        messageList.appendChild(li);
+        updateMessageValue(message.user, message.content);
     }
     if (message.action === 'heartbeat_over_direct_channel'){
         peerTrackDirectConnection[message.user] = message.time;
