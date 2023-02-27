@@ -45,7 +45,7 @@ html, body{
 
 #side-car-div{
     margin-top: 3vh;
-    height: 75vh;
+    height: 60vh;
     display: block;
     flex-direction: column;
     justify-content: space-evenly;
@@ -53,7 +53,7 @@ html, body{
 
 .center-main-container {
     display: block;
-    height: 94vh;
+    height: 60vh;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
@@ -236,6 +236,7 @@ ul.frames li {
     font-family: monospace;
     border-style: dashed;
     background: lightskyblue;
+    margin-bottom: 10px;
 }
 
 .io-box{
@@ -249,10 +250,6 @@ ul.frames li {
     visibility: hidden !important;
   }
   
-.showing {
-    visibility: visible !important;
-}
-
 .io-button{
     width: 60px;
     height: 33px;
@@ -288,6 +285,12 @@ ul.frames li {
     flex-direction: row;
     align-items: center;
     width: 100%;
+}
+
+#talking-test{
+    height: 1px;
+    width: 100%;
+    display: block;
 }
 
 
@@ -347,12 +350,6 @@ ul.frames li {
         align-items: center;
         max-height: 500px;
     }
-
-
-
-
-
-
 
 }
 

@@ -1,28 +1,30 @@
 {% load static %}
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Channel42</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/misc.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/404.css' %}">
 </head>
 <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
 <div class="tiny-top-bar">
-    <div>
+    <div class="top-button-div-el">
         <a href="/" class="top-bar-button">Home</a>
     </div>
 </div>
-<div class="total-page-container">
-    <div class="center-main-container">
-        <div class="logo-row-box">
-            <button class='about-image-button' type="submit" onclick="window.location.href='../';">
-                <img class='image-logo' src="{% static 'img/logo_white-min.png' %}" alt="">
-            </button>
-        </div>
-        <div class="main-content-box">
-            <h1 class='title-four-o-four'>404.</h1>
-            <div class="about-page-main-div">
+<div class="center-main-container">
+    <div class="logo-row-box">
+        <img class='image-logo' src="{% static 'img/logo_white-min.png' %}" alt="">
+    </div>
+    <div class="main-content-box">
+        <h1 class='title-four-o-four'>404.</h1>
+        <div class="about-page-main-div">
+            <div class="chunky-div">
                 <img class="chunky-img" src="{% static 'img/chunky.png' %}" alt="">
-                <p>The room either expired or never existed. That's okay: <br><br><a href="../">Generate one here.</a> </p>
             </div>
+            <div class="text-div">
+                <p class='p-404'>The room either expired or never existed. That's okay: <br><br><a href="../">Generate one here.</a> </p>
+            </div>
+            
         </div>
     </div>
 </div>

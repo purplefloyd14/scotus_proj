@@ -47,11 +47,11 @@ var iceConfig = {
     {
         urls: "stun:stun.l.google.com:19302"
     },
-    {
-        urls: "turn:relay.metered.ca:80",
-        username: "b1887ca5572e1e4e59cbf558",
-        credential: "ittq9D45Yd+SuGdn"
-    }
+    // {
+    //     urls: "turn:relay.metered.ca:80",
+    //     username: "b1887ca5572e1e4e59cbf558",
+    //     credential: "ittq9D45Yd+SuGdn"
+    // }
     ]
   };
 
@@ -65,14 +65,26 @@ var timeAtPageLoad;
 
 
 
+
+
 newEntrantAlert.addEventListener('click', toggleAlert);
 
 
 function toggleChat() {
     console.log('in here')
-    chatItself.classList.toggle("hidden");
-    chatItself.classList.toggle("showing");
-    wholePage.classList.toggle("no-overflow")
+    if(chatItself.classList.contains('hidden')){ //if chat is hidden, show it and go to the bottom
+        chatItself.classList.remove('hidden');
+        wholePage.classList.remove("no-overflow")
+        window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+    } else { //if chat is showing, hide it and go to the top 
+        chatItself.classList.add('hidden');
+        wholePage.classList.add("no-overflow")
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // chatItself.classList.toggle("hidden");
+    // chatItself.classList.toggle("showing");
+    // wholePage.classList.add("no-overflow")
+    // window.scrollTo({ top: 0, behavior: 'smooth' });
 }
   
 toggleChatInput.addEventListener("click", toggleChat);
@@ -593,7 +605,7 @@ function updateMessageValue(sender, message){
     if(sender==='Me'){
         sender="Me123456";
     }
-    senderIdentity.innerHTML= ("-"+sender.slice(0, -6));
+    senderIdentity.innerHTML= (" -"+sender.slice(0, -6));
     messageContent.value = (message);
 }
     
@@ -706,6 +718,9 @@ function copyURLtoClipboard(){
 
 createConnectedTalker();
 
+window.onbeforeunload = function () {
+    window.scrollTo(0,0);
+  }
 
 // function boolTalking() {
 //     threasholdVol = .2;

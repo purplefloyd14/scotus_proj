@@ -1,8 +1,9 @@
 {% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>Channel42</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/misc.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Channel 42</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}">
 </head>
 <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
 <div class="tiny-top-bar">
@@ -17,18 +18,90 @@
         <div class="main-content-box">
             <h1 class='about-title'>About.</h1>
             <div class="about-page-main-div">
-                <p class="about-page-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus luctus leo eu massa vestibulum dapibus volutpat nec nisi. Duis bibendum lacinia nunc, ut vestibulum felis volutpat sit amet.
-                    Proin vulputate libero a risus malesuada, quis pretium orci tempus. Morbi a auctor lorem. Phasellus tincidunt lobortis justo non elementum. Suspendisse eget sapien lorem. In vel dui orci. 
-                    Nulla facilisi. In pellentesque elit eu sem fermentum, id accumsan nisl ornare.
-                    Nam id venenatis tortor. Sed tempor ligula sed sem consectetur, nec faucibus ipsum rhoncus. Suspendisse eleifend turpis sapien, id gravida dui imperdiet in. 
-                   
+                <p class="about-page-text">
+
+                    Hey everyone, 
                     <br>
                     <br>
 
-                    Cras vehicula enim tellus, quis aliquet leo pretium sit amet. In dapibus, diam et accumsan dictum, turpis ligula iaculis mi, at maximus massa ipsum ac est. Nullam sit amet laoreet leo. 
-                    Sed volutpat molestie efficitur. Etiam vitae rhoncus arcu. Phasellus porta tortor non nisi tincidunt, sit amet efficitur justo elementum. 
-                    Duis hendrerit malesuada ligula, at ornare augue dapibus vel. Sed mollis leo ipsum, quis placerat nisi porta quis. Curabitur semper at ipsum ac semper. 
-                    Curabitur facilisis nunc at eros sodales accumsan.</p>
+                    I am a long-time redditor and a law student who likes to procrastinate by building software things. I have been working on this side project for a couple months and am happy to finally
+                    release it into the wild. 
+                    <br><br>
+
+                    Welcome to Channel 42. 
+                </p>
+                <h2 class="about-h2">
+                    What is Channel 42?
+                </h2>
+
+                <p class="about-page-text">
+                    Channel 42 is a temporary, disposable, authentication-free voice chat platform built to make reddit better. 
+                    
+                    <br><br> 
+                    It's ease of use was inspired by Imgur (another for-reddit-by-reddit project). 
+                    <br><br> 
+                    
+                    
+                    Go to the site, create a subchannel, and share the URL. 
+                    <br><br> 
+                    Anyone with the link is connected automatically.
+                    <br><br> 
+                    The roooms are capped at four participants and expire after two hours. 
+                    <br><br>
+                </p>
+                <h2 class="about-h2">
+                    What is Channel 42 for?
+                </h2>
+
+                <p class="about-page-text">
+                    Reddit is really good at bringing people with common interests together, it does an awesome job of connecting us
+                     - but a message board isn't always the best medium for efficient communication. Sometimes you just want to TALK. 
+                     <br><br> 
+                     Whether it is an earnest debate in r/changemyveiw 
+                    or an expert in a niche sub giving you an ELI5, talking can be a great way to exchange ideas quickly and easily across a variety of contexts. 
+                    <br><br> 
+                    But you don't always want to share 
+                    your personal info (socials, email, phone, discord, etc.) with someone just to chat with them for a few minutes. It's unneccessary. This is where Channel 42 comes in.
+                    <br><br>
+                    Reddit has done the hard part: helping us connect with others who share our interests - Channel 42 is just another communication layer that can be used when needed. 
+                    <br><br>
+                    
+                </p>
+                <h2 class="about-h2">
+                    How does Channel 42 work?
+                </h2>
+                <p class="about-page-text">
+                    Channel 42 uses webRTC (Google's open-source media streaming library) to setup p2p (peer-to-peer) connections between users in a room, resulting in a decentralized "Mesh" archetecture. All connections are end-to-end encrypted.  
+                    <br><br>
+                    Because it creates p2p connections, Channel 42 may not work with some VPNs. That is a tradeoff I made. I am open to other archetectures in the future if there is demand, but this is version 1.
+                    <br><br>
+                </p>
+                <h2 class="about-h2">
+                    Why "42"?
+                </h2>
+
+                <p class="about-page-text">
+                    It is the meaning of life. And the domain was available.
+                    <br><br>
+                </p>
+
+                <h2 class="about-h2">
+                    What's the stack?
+                </h2>
+                <p class="about-page-text">
+                    Channel  42 runs on a vanilla Javascript frontend and Python (Django) on the server side. Signaling is done using websockets. I wrote everything myself with help from many sources online. 
+                    All bugs are my own.
+                    <br><br>
+                    Channel 42 has been a labor of love. This is definitely the most ambitious software project I have worked on, and a lot of elbow grease has gone into it. It's been fun and I have learned a ton. 
+                    The logo is based on an old CB (Citizens' Band) Radio, and I made it in photoshop. 
+                </p>
+
+                <h3 class="about-h3">
+                    Bugs? Questions? Comments?
+                </h3>
+                <p class="about-page-text contact-p">
+                    reachout.channel42@gmail.com
+                </p>
             </div>
         </div>
     </div>

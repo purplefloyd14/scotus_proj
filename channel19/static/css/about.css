@@ -6,27 +6,39 @@
 
 .about-page-main-div {
    box-shadow: 10px 5px 5px grey;
-   font-size: 18px;
+   font-size: large;
    font-family: monospace;
    width: 100%;
    border-style: solid;
    display: flex;
    align-items: center;
    justify-content: center;
-   max-width: 1222px;
+   flex-direction: column;
 }
 
 .about-title { 
    align-self: flex-start;
 }
 
+.about-h2{
+   margin: 10px;
+}
+
+.about-h3{
+   margin: 10px;
+}
+
+.contact-p{
+   font-size: medium;
+}
+
 .top-bar-button {
-   font-size: 17px;
+   font-size: large;
 }
 
 html, body {
    height: 100%;
-   overflow: hidden;
+   /* overflow: hidden; */
 }
 
 .about-image-button{ 
@@ -44,14 +56,9 @@ html, body {
 
 .image-logo {
    display: flex;
-   height: 100%;
+   height: 70px;
 }
 
-.image-logo:hover {
-   display: flex;
-   height: 100%;
-   cursor: pointer;
-}
 
 .title-four-o-four { 
    align-self: flex-start;
@@ -75,6 +82,7 @@ html, body {
    font-family: monospace;
    max-width: 700px;
    width: 85%;
+   padding-bottom: 20px;
 }
 
 
@@ -112,9 +120,22 @@ html, body {
 
 
 
-@media (min-width: 320px) and (max-width: 999px) {
+@media (min-width: 770px) {
 
-   .tiny-top-bar {
+   .about-page-main-div {
+      box-shadow: 10px 5px 5px grey;
+      font-size: large;
+      font-family: monospace;
+      width: 100%;
+      border-style: solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-bottom: 50px;
+   }
+
+   /* .tiny-top-bar {
       height: 7%
    }
 
@@ -124,9 +145,9 @@ html, body {
       overflow-x: hidden;
    }
 
-   /* body {
+   body {
       position: relative;
-    } */
+    }
 
     html, body {
       overscroll-behavior-y: none;
@@ -157,6 +178,7 @@ html, body {
    align-items: center;
    justify-content: center;
    max-width: 1222px;
+   margin-bottom: 50px;
 }
 
 .top-button-div-el {
@@ -173,6 +195,6 @@ html, body {
 .main-content-box{
    max-width: none;
    padding-bottom: 10%;
-}
+} */
 
  }
