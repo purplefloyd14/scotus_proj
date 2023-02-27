@@ -60,12 +60,6 @@
     height: 70px;
  }
  
- .image-logo:hover {
-    display: flex;
-    height: 100%;
-    cursor: pointer;
- }
- 
  .title-four-o-four { 
     align-self: flex-start;
  }
