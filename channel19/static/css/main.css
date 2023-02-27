@@ -19,10 +19,6 @@ body{
     flex-direction: column;
 }
 
-html, body{
-    overscroll-behavior-y: none;
-}
-
 .tiny-top-bar {
     display: flex;
     align-items: flex-end;
@@ -124,6 +120,8 @@ ul.frames li {
 }
 
 
+
+
 .control-button{
     white-space: normal;
     background-color: #3b3c40;
@@ -152,6 +150,16 @@ ul.frames li {
 
 .control-button-copy:hover{
     border: 2px solid #3ac920;
+    cursor:pointer;
+}
+
+.control-button-copy-inbound:hover{
+    border: 2px solid #3ac920;
+    cursor:pointer;
+}
+
+.control-button-send-outbound:hover{
+    border: 2px solid #0B73D0;
     cursor:pointer;
 }
 
@@ -259,6 +267,10 @@ ul.frames li {
 .io-input{
     max-width: 40vw;
     margin: 3px;
+}
+
+.no-display{
+    display: none;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */

@@ -55,7 +55,7 @@
 
                 <p class="about-page-text">
                     Reddit is really good at bringing people with common interests together, it does an awesome job of connecting us
-                     - but a message board isn't always the best medium for efficient communication. Sometimes you just want to TALK. 
+                     - but once we've found someone we want to go back-and-forth with, a message board isn't always the best medium for efficient communication. Sometimes you just want to TALK. 
                      <br><br> 
                      Whether it is an earnest debate in r/changemyveiw 
                     or an expert in a niche sub giving you an ELI5, talking can be a great way to exchange ideas quickly and easily across a variety of contexts. 
@@ -64,17 +64,29 @@
                     your personal info (socials, email, phone, discord, etc.) with someone just to chat with them for a few minutes. It's unneccessary. This is where Channel 42 comes in.
                     <br><br>
                     Reddit has done the hard part: helping us connect with others who share our interests - Channel 42 is just another communication layer that can be used when needed. 
-                    <br><br>
                     
                 </p>
                 <h2 class="about-h2">
                     How does Channel 42 work?
                 </h2>
                 <p class="about-page-text">
-                    Channel 42 uses webRTC (Google's open-source media streaming library) to setup p2p (peer-to-peer) connections between users in a room, resulting in a decentralized "Mesh" archetecture. All connections are end-to-end encrypted.  
+                    Clicking "Generate Subchannel" on the home page will bring you to a brand new subchannel. You can click "Copy Room URL" (or just grab it from the URL bar in the browser) and then share that link. 
+                    
+                    You can share links via DM, or post them publicly right into a reddit thread. How you share them is up to you. Anyone with the link can enter the room and join the conversation (unless the room is full).
                     <br><br>
-                    Because it creates p2p connections, Channel 42 may not work with some VPNs. That is a tradeoff I made. I am open to other archetectures in the future if there is demand, but this is version 1.
+                    Because there is no traditional Auth, you should be mindful about where you share a link, depending on your goals. The rooms are capped at four participants because voice can get messy with too many people.
+                    This is something that could change in future releases. 
                     <br><br>
+                    When links are posted publicly, trolls may infiltrate. How to handle that is up to you, but remember you can always ditch the channel and make a new one, sharing by DM for example. 
+                    <br><br>
+                    My hope is that some public links will be useful, perhaps because they will be burried deep into comment sections such that only interested users would venture that far down and stumble across them. 
+                    I will be interested to see how the uses of Channel 42 develop. Its designed for reddit but maybe it would be good on StackOverflow, or for gaming. Time will tell. 
+                    <br><br>
+                    Because the subchannels only last for a couple hours, subreddits will probably want a moderator bot to auto-delete Channel 42 links that are older than that amount of time, 
+                    so that comment sections don't get littered with stale links. 
+                    I haven't ever made a bot before but if this becomes a problem I will be happy to contribute and/or write one. 
+                    <br><br>
+                    If you would like to chat longer than 2 hours you can: A) make a new subchannel or B) exchange info and chat on another platform. Its totally up to you: the Citizens' Band is for everyone. 
                 </p>
                 <h2 class="about-h2">
                     Why "42"?
@@ -86,10 +98,25 @@
                 </p>
 
                 <h2 class="about-h2">
+                    What is a shareport?
+                </h2>
+
+                <p class="about-page-text">
+                    Channel 42 is for voice chatting, but I wanted to give people a way to share links during their conversation if the need to. So I came up with the shareport. It just has one input and one output. 
+                    <br><br>
+                    Send a link outbound to the rest of the room, or copy one that has come inbound to your clipboard. 
+                    
+                </p>
+
+                <h2 class="about-h2">
                     What's the stack?
                 </h2>
                 <p class="about-page-text">
-                    Channel  42 runs on a vanilla Javascript frontend and Python (Django) on the server side. Signaling is done using websockets. I wrote everything myself with help from many sources online. 
+                    Channel 42 uses webRTC (Google's open-source media streaming library) to setup p2p (peer-to-peer) connections between users in a room, resulting in a decentralized "Mesh" archetecture. All connections are end-to-end encrypted.  
+                    <br><br>
+                    Because it creates p2p connections, Channel 42 may not work with some VPNs, or may take a long time to connect through a VPN. That is a tradeoff I made. I am open to other archetectures in the future if there is demand, but this is version 1.
+                    <br><br>
+                    Channel  42 runs on a vanilla Javascript frontend, and Python (Django) on the server side. Signaling is done using websockets. I wrote everything myself with help from many sources online. 
                     All bugs are my own.
                     <br><br>
                     Channel 42 has been a labor of love. This is definitely the most ambitious software project I have worked on, and a lot of elbow grease has gone into it. It's been fun and I have learned a ton. 

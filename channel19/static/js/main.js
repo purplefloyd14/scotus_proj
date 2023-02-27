@@ -34,6 +34,18 @@ var wholePage = document.getElementById('whole-page');
 
 wholePage.classList.add('no-overflow');
 
+// window.onbeforeunload = function () {
+//     window.scrollTo(0,0);
+//   }
+
+// document.addEventListener("load", (event) => {
+//     window.scrollTo(0,0);
+// });
+
+// window.onbeforeunload = () => {
+//     window.scrollTo(0, 0);
+//   }
+
 var heartbeatCheckObj = {
     "logging": false,
     "heartbeatFrequency": 1000, //how often to send the pulse | 1000 = 1 second
@@ -75,11 +87,11 @@ function toggleChat() {
     if(chatItself.classList.contains('hidden')){ //if chat is hidden, show it and go to the bottom
         chatItself.classList.remove('hidden');
         wholePage.classList.remove("no-overflow")
-        window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+        window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" }); //scroll down 
     } else { //if chat is showing, hide it and go to the top 
         chatItself.classList.add('hidden');
         wholePage.classList.add("no-overflow")
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' }); //scroll up 
     }
     // chatItself.classList.toggle("hidden");
     // chatItself.classList.toggle("showing");
@@ -88,8 +100,7 @@ function toggleChat() {
 }
   
 toggleChatInput.addEventListener("click", toggleChat);
-toggleChatInput.removeEventListener("click", toggleChat);
-toggleChatInput.addEventListener("click", toggleChat);
+
 
 
 
@@ -398,13 +409,15 @@ btnCopyMsg = document.getElementById('btn-copy-msg');
 btnCopyMsg.addEventListener("click", copyPortalInput);
 
 function copyPortalInput(){
-    var dummy = document.createElement('input');
+    // var dummy = document.createElement('input');
+    // dummy.classList.add('no-display');
     text = document.getElementById("message-content-text").value;
-    document.body.appendChild(dummy);
-    dummy.value = text;
-    dummy.select();
-    document.execCommand('copy');
-    document.body.removeChild(dummy);
+    window.navigator.clipboard.writeText(text);
+    // document.body.appendChild(dummy);
+    // dummy.value = text;
+    // dummy.select();
+    // document.execCommand('copy');
+    // document.body.removeChild(dummy);
 }
 
 function isOpen(ws) { return ws.readyState === ws.OPEN }
@@ -718,9 +731,7 @@ function copyURLtoClipboard(){
 
 createConnectedTalker();
 
-window.onbeforeunload = function () {
-    window.scrollTo(0,0);
-  }
+
 
 // function boolTalking() {
 //     threasholdVol = .2;

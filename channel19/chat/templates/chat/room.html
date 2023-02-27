@@ -6,12 +6,14 @@
     <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
     <head>
         <meta charset="UTF-8">
+        <script>history.scrollRestoration = "manual"</script>
         <title>Channel 42</title>
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta property="og:title" content="Channel42" />
         <!-- <meta property="og:description" content="Meet me on Channel42" /> -->
         <meta property="og:image" content="https://media.istockphoto.com/id/1190658706/vector/podcast-icon-like-on-air-live-podcast-badge-icon-stamp-logo-radio-broadcasting-or-streaming.jpg?s=612x612&w=0&k=20&c=FDjHNA44BTfz0UWfZpjswiwzUtxRflXiD0pXwS1phs8=" />
+
     </head>
     <body>
         <nav class="tiny-top-bar">
@@ -129,7 +131,7 @@
                         <input readonly id="message-content-text" class="io-input" placeholder="INBOUND"></input>
                         <div class="input-box-extras">
                             <p style='margin: 0;' id='sender-title'></p>
-                            <button class="io-button control-button" id="btn-copy-msg"><img id='link-logo-img' src="{% static 'img/link-img9.png' %}"/>Copy</button>
+                            <button class="io-button control-button control-button-send-outbound" id="btn-copy-msg"><img id='link-logo-img' src="{% static 'img/link-img9.png' %}"/>Copy</button>
                         </div>
 
                     
@@ -137,7 +139,7 @@
                     </div>
                     <div id="outgoing-box" class="io-box">
                         <input id="msg" class="io-input" placeholder="OUTBOUND"></input>
-                        <button class="io-button control-button" id="btn-send-msg">Send<img id='link-logo-img' style='margin-left:5px' src="{% static 'img/send-logo2.png' %}"/></button>
+                        <button class="io-button control-button control-button-copy-inbound" id="btn-send-msg">Send<img id='link-logo-img' style='margin-left:5px' src="{% static 'img/send-logo2.png' %}"/></button>
                     </div>
                        
                     
@@ -158,5 +160,6 @@
     </body>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <link rel="prefetch" href="{% static 'img/logo_white-red-min.png' %}">
+
 
 </html> 
