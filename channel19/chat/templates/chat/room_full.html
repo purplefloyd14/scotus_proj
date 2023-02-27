@@ -1,34 +1,31 @@
-
-<!DOCTYPE html>
-
 {% load static %}
-
-<html lang="en">
-    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
-    <head>
-        <meta charset="UTF-8">
-        <title>Channel 42</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/misc.css' %}">
-    </head>
-    <body>
-        <h1> Welcome to Channel 42 </h1>
-        <h2> -The Citizen's Band- </h2>
-
-        <div style="clear: both; width: 40%; padding: 10px; display: flex;">
-            <h3 style="float: left"> Subchannel URL: </h3>  &#20  &#20
-            <h3 style="float: right">{{room_name}}</h3>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Channel 42</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/room_full.css' %}">
+</head>
+<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+<div class="tiny-top-bar">
+    <div class="top-button-div-el">
+        <a href="/" class="top-bar-button">Home</a>
+    </div>
+</div>
+<div class="center-main-container">
+    <div class="logo-row-box">
+        <img class='image-logo' src="{% static 'img/logo_white-min.png' %}" alt="">
+    </div>
+    <div class="main-content-box">
+        <h1 class='title-four-o-four'>Room Full.</h1>
+        <div class="about-page-main-div">
+            <div class="chunky-div">
+                <img class="chunky-img" src="{% static 'img/office.png' %}" alt="">
+            </div>
+            <div class="text-div">
+                <p class='p-404'>This Room is at capacity. Try back later, or: <br><br><a href="../">Generate a new one here.</a> </p>
+            </div>
+            
         </div>
+    </div>
+</div>
 
-        <br>
-        <br>
-        <div class="full-room-main-box">
-            <h2>This room is full. </h2> <br><h2>Come back another time or generate a new room below.</h2>
-            <div class="bottom blue">
-                <form action="{% url 'chat:generate' %}" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Generate New Subchannel!">
-                </form>
-            </div>    
-        </div>
-    </body>
-</html> 
