@@ -54,6 +54,10 @@ def about(request):
     template_name = 'chat/about.html'
     return render(request, template_name)
 
+def swag(request):
+    template_name = 'chat/swag.html'
+    return render(request, template_name)
+
 def get_seconds_to_expiry(request, room_uuid):
     try:
         room = Room.objects.get(uuid=room_uuid)

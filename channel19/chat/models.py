@@ -8,6 +8,7 @@ import random
 def idgen():
     import string
     all_chars = string.digits + string.ascii_letters
+    all_chars = all_chars.replace("l", '') #remove the lowercase L (l) because it can be confused with uppercase I 
     return get_random_string(6, all_chars)
 
 def name_gen():

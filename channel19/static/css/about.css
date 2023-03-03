@@ -135,6 +135,11 @@ html, body {
       margin-bottom: 50px;
    }
 
+   .top-bar-button {
+      margin:15px;
+      font-size: large; 
+  }
+
    /* .tiny-top-bar {
       height: 7%
    }

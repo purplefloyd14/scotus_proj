@@ -37,13 +37,6 @@ You need to change ALLOWED_HOSTS and CSRF_TRUSTED_HOSTS in settings.py to use ng
 1/23/23:
 Ended at 1:37:00 (before chat was implemented)
 
-names: (.com)
-ch31 - $400 
-ch14 - min. $250 
-ch48 - $400 
-channel14 - 8k 
-
-
 
 
 ISSUES TO TEST (SOLVED OR WORKING ON):

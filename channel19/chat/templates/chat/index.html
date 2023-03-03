@@ -26,12 +26,24 @@ VH: Relative to the viewport’s height
     <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Channel 42" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Channel 42 - Home" />
+    <meta property="og:image" content="{% static 'img/square-logo.png' %}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Channel 42" />
+    <meta name="twitter:description" content="Channel 42 - Home" />
+    <meta name="twitter:image" content="{% static 'img/square-logo.png' %}" />
 </head>
 <body>
     <nav class="tiny-top-bar">
         <div class="top-bar-button">
             <a href="/about" class="about-button">About</a>
         </div>
+        <div class="top-bar-button">
+            <a href="/swag" class="about-button">Swag</a>
+        </div>
+        
     </nav>
     <div class="center-main-container">
         <div class="logo-box">

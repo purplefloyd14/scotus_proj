@@ -254,6 +254,13 @@ ul.frames li {
     align-items: flex-end;
 }
 
+#sender-id-box{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
 .hidden {
     visibility: hidden !important;
   }
@@ -313,7 +320,9 @@ ul.frames li {
     }
 
     .top-bar-button {
-        margin-left:0px;
+        margin: 5px;
+        margin-left:10px;
+        font-size: large
     }
 
     .data-table{

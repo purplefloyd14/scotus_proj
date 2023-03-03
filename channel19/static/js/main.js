@@ -5,7 +5,7 @@ var mapPeers = {};
 //        }
 var peerTrack = {};
 var peerTrackDirectConnection = {};
-var currentBaseUrl = 'https://5c90-45-85-144-68.ngrok.io'
+var currentBaseUrl = 'https://a2c6-45-85-144-93.ngrok.io'
 
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");
@@ -30,6 +30,8 @@ var toggleChatInput = document.getElementById("toggle-chat-input");
 var chatItself = document.getElementById("chat-main");
 const notificationSound = document.getElementById("notification-sound");
 var wholePage = document.getElementById('whole-page');
+var basicConnStatus = document.getElementById("basic-conn-status");
+
 
 
 wholePage.classList.add('no-overflow');
@@ -215,14 +217,14 @@ function updateActiveTalkers(){
     numUsersConnected = JSON.parse(xhttp.responseText);
     userCount.innerHTML = numUsersConnected.talker_count;
 }
-setInterval(updateActiveTalkers, 1000);
+// setInterval(updateActiveTalkers, 1000);
 
 
 function monitorMapPeers(){
     numConnectedUsers = Object.keys(mapPeers).length + 1;
     userCountJS.innerHTML = numConnectedUsers;
 }
-setInterval(monitorMapPeers, 2000);
+// setInterval(monitorMapPeers, 2000);
 
 
 
@@ -355,6 +357,7 @@ function createConnectedTalker(){
         webSocket = new WebSocket(endPoint);
 
         webSocket.addEventListener('open', (e) => {
+            basicConnStatus.innerHTML = "Online"
             console.log(`${username} <--> Server - Websocket Connection Opened!`); 
             sendSignal('new-peer', {}); //hey everybody - I am a new peer (this is the websockets implimentation which has been depricated)
         //     setInterval( function() { sendSignal("heartbeat", {
@@ -367,6 +370,7 @@ function createConnectedTalker(){
             console.log('Connection Closed!'); 
         });
         webSocket.addEventListener('error', (e) => {
+            basicConnStatus.innerHTML = "Error"
             console.log('Error Occurred!'); 
         });
 
@@ -409,15 +413,9 @@ btnCopyMsg = document.getElementById('btn-copy-msg');
 btnCopyMsg.addEventListener("click", copyPortalInput);
 
 function copyPortalInput(){
-    // var dummy = document.createElement('input');
-    // dummy.classList.add('no-display');
     text = document.getElementById("message-content-text").value;
     window.navigator.clipboard.writeText(text);
-    // document.body.appendChild(dummy);
-    // dummy.value = text;
-    // dummy.select();
-    // document.execCommand('copy');
-    // document.body.removeChild(dummy);
+
 }
 
 function isOpen(ws) { return ws.readyState === ws.OPEN }
@@ -516,7 +514,6 @@ function createOfferer(peerUsername, receiverChannelName){
     });
     connectionToPeer.addEventListener('icecandidate', (event)=>{
         if(event.candidate){
-            console.log("IP details leaked from ICE candidate in Offerer: " + event.candidate.candidate.split(" ")[4]);
             // console.log(`Offerer ${username} has a new ICE Candidate`)
             // console.log("New ICE candidate: ", JSON.stringify(connectionToPeer.localDescription));
             return; //when gathering is finished, the event.candidate object will be null. in that case we send offer
@@ -577,7 +574,6 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
     
     connectionToPeer.addEventListener('icecandidate', (event)=>{
         if(event.candidate){
-            console.log("IP details leaked from ICE candidate in Answerer: " + event.candidate.candidate.split(" ")[4]);
             // console.log("New ICE candidate: ", JSON.stringify(connectionToPeer.localDescription));
             // console.log(`Answerer ${username} has a new ICE Candidate`);
             return;
@@ -612,6 +608,9 @@ function addLocalTracks(connectionToPeer, peerUsername, role){
 }
 
 function updateMessageValue(sender, message){
+    //we come here when the onMessageDirectConnection function routes us here
+    //that will be in the case where the action is 'message' 
+    //this function handles the updating of the shareport on each recipients UI 
     console.log("here")
     var messageContent = document.getElementById('message-content-text');
     var senderIdentity = document.getElementById('sender-title');
@@ -619,7 +618,12 @@ function updateMessageValue(sender, message){
         sender="Me123456";
     }
     senderIdentity.innerHTML= (" -"+sender.slice(0, -6));
-    messageContent.value = (message);
+    if (message != ''){
+        messageContent.value = (message); //dont update the OUTBOUND port if the message is blank
+    }
+    if (message === '' && sender==="Me123456"){ //if *YOU* send a blank message, it will clear *YOUR* OUTBOUND port. 
+        messageContent.value = (message);
+    }
 }
     
 

@@ -17,7 +17,7 @@ img {
 .top-bar-button {
     color: black;
     font-family: monospace;
-    margin: 1%;
+    margin: 2%;
     font-size: 2vh;
 }
 
@@ -30,6 +30,7 @@ img {
     height: 90vh;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .logo-box {
@@ -94,6 +95,12 @@ img {
 
     .generate-button {
         font-size:125%;
+    }
+
+    .top-bar-button {
+        margin-left:0px;
+        margin-top:5px;
+        font-size: large;
     }
 }
 

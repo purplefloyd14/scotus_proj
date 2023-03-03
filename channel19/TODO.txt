@@ -42,3 +42,26 @@ Include dictionary somewhere.
 ______
 ______
 ______.
+
+
+
+
+Todosoon: 
+
+Store. 
+
+Simpler about page. 
+
+Talking red symbol. 
+
+Countdown timer bug 
+
+revamp "members present" mechanism to incorporate 3 sources of info. 
+
+todolater: 
+
+create testing suite 
+
+make a crontab DB sweeper that runs every X hours. 
+
+refactor JS into multiple files
