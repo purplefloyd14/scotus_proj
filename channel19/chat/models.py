@@ -46,7 +46,7 @@ class Talker(models.Model):
     talker_name = models.CharField(max_length=7, choices=NAME_CHOICES, default=choose_random_name)
 
     class Meta:
-        unique_together = ['room_id', 'talker_name']
+        unique_together = ['room', 'talker_name']
 
     def save(self, *args, **kwargs):
         max_children = settings.MAX_USERS_PER_ROOM
