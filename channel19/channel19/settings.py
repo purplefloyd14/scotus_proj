@@ -32,7 +32,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = ['68.183.116.159', ]
 # ALLOWED_HOSTS = []
 
-CSRF_TRUSTED_ORIGINS = ['https://localhost', 'http://localhost', 'http://68.183.116.159/']
+CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0:8000/','https://localhost', 'http://localhost', 'http://68.183.116.159/']
 
 
 # Application definition
@@ -152,9 +152,9 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 AWS_LOCATION = config('AWS_LOCATION')
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 STATIC_URL = '%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
 TEMP = os.path.join(BASE_DIR, 'temp')
