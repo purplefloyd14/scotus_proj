@@ -341,12 +341,14 @@ function createConnectedTalker(){
 
             if(audioTracks[0].enabled){
                 btnToggleAudio.innerHTML = "Mute Mic";
-                mainLogoImage.src="{% static 'img/logo_white-min.png' %}"
+                mainLogoImage.src=talkIcon;
+                // mainLogoImage.src="{% static 'img/logo_white-min.png' %}"
                 // mainLogoImage.src='../static/img/logo_white-min.png'
                 return;
             }
             btnToggleAudio.innerHTML = "Unmute";
-            mainLogoImage.src="{% static 'img/logo_white-red-min.png' %}"
+            mainLogoImage.src = mutedIcon;
+            // mainLogoImage.src="{% static 'img/logo_white-red-min.png' %}"
             // mainLogoImage.src='../static/img/logo_white-red-min.png'
         });
     })
