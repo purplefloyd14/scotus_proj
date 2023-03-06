@@ -42,3 +42,10 @@ Ended at 1:37:00 (before chat was implemented)
 ISSUES TO TEST (SOLVED OR WORKING ON):
 Timing - different clients count at different speeds. A test should make sure that the clients are in sync over long time scales. 
 
+
+gunicorn stuff: 
+https://github.com/mitchtabian/HOWTO-django-channels-daphne#helpful-commands
+
+
+debugging: 1:14:29
+https://www.youtube.com/watch?v=14zdpWW6eqw
