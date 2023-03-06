@@ -352,7 +352,7 @@ function createConnectedTalker(){
         console.log('Error accessing media devices!', error);
     }).then(() =>{
         //go into the signaling stuff only after you have permissioned the media 
-        var endPoint = wsStart + loc.host.slice(4)  + ":8001" + loc.pathname + '/' + username; //changed to add 8001 for PROD see video at 42 mins https://www.youtube.com/watch?v=14zdpWW6eqw tutoral: https://github.com/mitchtabian/HOWTO-django-channels-daphne 
+        var endPoint = wsStart + loc.host  + ":8001" + loc.pathname + '/' + username; //changed to add 8001 for PROD see video at 42 mins https://www.youtube.com/watch?v=14zdpWW6eqw tutoral: https://github.com/mitchtabian/HOWTO-django-channels-daphne 
         console.log("Websocket endpoint: ", endPoint);
         webSocket = new WebSocket(endPoint);
 
