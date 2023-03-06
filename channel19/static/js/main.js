@@ -61,11 +61,11 @@ var iceConfig = {
     {
         urls: "stun:stun.l.google.com:19302"
     },
-    // {
-    //     urls: "turn:relay.metered.ca:80",
-    //     username: "b1887ca5572e1e4e59cbf558",
-    //     credential: "ittq9D45Yd+SuGdn"
-    // }
+    {
+        urls: "turn:relay.metered.ca:80",
+        username: "b1887ca5572e1e4e59cbf558",
+        credential: "ittq9D45Yd+SuGdn"
+    }
     ]
   };
 
