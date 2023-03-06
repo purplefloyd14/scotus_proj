@@ -49,3 +49,17 @@ https://github.com/mitchtabian/HOWTO-django-channels-daphne#helpful-commands
 
 debugging: 1:14:29
 https://www.youtube.com/watch?v=14zdpWW6eqw
+
+
+####---- Useful Server Commands: ----####
+
+service gunicorn restart
+sudo systemctl status gunicorn
+
+service daphne restart
+systemctl status daphne.service
+
+sudo systemctl restart redis.service
+sudo systemctl status redis
+
+systemctl status on_boot.service
