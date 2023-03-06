@@ -5,7 +5,7 @@ var mapPeers = {};
 //        }
 var peerTrack = {};
 var peerTrackDirectConnection = {};
-var currentBaseUrl = window.location.hostname;
+var currentBaseUrl = window.location.origin
 
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");
