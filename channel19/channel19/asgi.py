@@ -7,6 +7,8 @@ from django.core.asgi import get_asgi_application
 from decouple import config
 import chat.routing
 
+#in Channel19
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", f'{config("PROJECT_NAME")}.settings')
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "channel19.settings")
 # Initialize Django ASGI application early to ensure the AppRegistry

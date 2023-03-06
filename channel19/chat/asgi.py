@@ -3,6 +3,8 @@ ASGI entrypoint. Configures Django and then runs the application
 defined in the ASGI_APPLICATION setting.
 """
 
+#In Chat 
+
 import os
 import django
 from decouple import config
