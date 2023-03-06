@@ -5,7 +5,7 @@ var mapPeers = {};
 //        }
 var peerTrack = {};
 var peerTrackDirectConnection = {};
-var currentBaseUrl = window.location.origin
+var currentBaseUrl = window.location.origin;
 
 var labelUsername = document.querySelector("#label-username");
 var usernameInput = document.querySelector("#username");
@@ -190,7 +190,6 @@ function calculateCountdown(seconds) {
 function getCreatedDate(){ //this is fired once at the beginning by createConnectedTalker
     expiryClock = document.getElementById('expiry_clock');
     xhttp.open('GET', `${currentBaseUrl}/cb/${currentRoomUuid}/get_seconds_to_expiry`, false);
-    debugger;
     xhttp.send();
     var response = JSON.parse(xhttp.responseText);
     timeAtPageLoad =  Math.floor(Date.now()/1000); //Date.now returns milliseconds, so /1000 to get seconds
