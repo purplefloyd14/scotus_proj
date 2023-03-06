@@ -341,7 +341,7 @@ function createConnectedTalker(){
 
             if(audioTracks[0].enabled){
                 btnToggleAudio.innerHTML = "Mute Mic";
-                mainLogoImage.src=talkIcon;
+                mainLogoImage.src= talkIcon;
                 // mainLogoImage.src="{% static 'img/logo_white-min.png' %}"
                 // mainLogoImage.src='../static/img/logo_white-min.png'
                 return;
