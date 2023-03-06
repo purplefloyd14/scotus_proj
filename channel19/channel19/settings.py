@@ -29,7 +29,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['68.183.116.159', ]
+ALLOWED_HOSTS = ["68.183.116.159", "channel42.io", "www.channel42.io"]
 # ALLOWED_HOSTS = []
 
 CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0:8000','https://localhost', 'http://localhost', 'http://68.183.116.159:8000']
