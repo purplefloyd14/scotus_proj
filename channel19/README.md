@@ -63,3 +63,12 @@ sudo systemctl restart redis.service
 sudo systemctl status redis
 
 systemctl status on_boot.service
+
+
+sudo journalctl is where all the logs are consolidated to. That's usually where I check.
+sudo tail -F /var/log/nginx/error.log View the last entries in the error log
+sudo journalctl -u nginx Nginx process logs
+sudo less /var/log/nginx/access.log Nginx access logs
+sudo less /var/log/nginx/error.log Nginx error logs
+sudo journalctl -u gunicorn gunicorn application logs
+sudo journalctl -u gunicorn.socket check gunicorn socket logs
