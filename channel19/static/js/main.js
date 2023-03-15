@@ -518,8 +518,6 @@ function createOfferer(peerUsername, receiverChannelName){
     });
     connectionToPeer.addEventListener('icecandidate', (event)=>{
         if(event.candidate){
-            // console.log(`Offerer ${username} has a new ICE Candidate`)
-            // console.log("New ICE candidate: ", JSON.stringify(connectionToPeer.localDescription));
             return; //when gathering is finished, the event.candidate object will be null. in that case we send offer
         }
         sendSignal('new-offer', {
@@ -578,8 +576,6 @@ function createAnswerer(offer, peerUsername, receiverChannelName){ // 1:26
     
     connectionToPeer.addEventListener('icecandidate', (event)=>{
         if(event.candidate){
-            // console.log("New ICE candidate: ", JSON.stringify(connectionToPeer.localDescription));
-            // console.log(`Answerer ${username} has a new ICE Candidate`);
             return;
         }
         sendSignal('new-answer', {
