@@ -64,6 +64,9 @@ sudo systemctl status redis
 
 systemctl status on_boot.service
 
+If you update js/css you need to become user 'django' and then cd into channel19 on server and then do 'python manage.py collectstatic' (as venv)
+If you update anything else (html, python) you need to become user 'root' on server and then run 'service gunicorn restart' to restart the server 
+
 
 sudo journalctl is where all the logs are consolidated to. That's usually where I check.
 sudo tail -F /var/log/nginx/error.log View the last entries in the error log
