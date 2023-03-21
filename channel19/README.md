@@ -77,12 +77,12 @@ sudo journalctl -u gunicorn gunicorn application logs
 sudo journalctl -u gunicorn.socket check gunicorn socket logs
 
 
-TO DELETE ALL ROOMS WITHOUT TALKERS 
+TO DELETE ALL ROOMS WITHOUT TALKERS:
 Room.objects.filter(talker__isnull=True).delete()
 
 
 
-TO DELETE ALL ROOMS OLDER THAN TWO HOURS 
+TO DELETE ALL ROOMS OLDER THAN TWO HOURS: 
 from django.utils import timezone
 from myapp.models import Room
 
