@@ -75,3 +75,17 @@ sudo less /var/log/nginx/access.log Nginx access logs
 sudo less /var/log/nginx/error.log Nginx error logs
 sudo journalctl -u gunicorn gunicorn application logs
 sudo journalctl -u gunicorn.socket check gunicorn socket logs
+
+
+TO DELETE ALL ROOMS WITHOUT TALKERS 
+Room.objects.filter(talker__isnull=True).delete()
+
+
+
+TO DELETE ALL ROOMS OLDER THAN TWO HOURS 
+from django.utils import timezone
+from myapp.models import Room
+
+time_threshold = timezone.now() - timezone.timedelta(hours=2)
+rooms_to_delete = Room.objects.filter(creation_date__lt=time_threshold)
+rooms_to_delete.delete()

@@ -2,6 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.crypto import get_random_string
 from django.conf import settings
+from django.utils import timezone
 import random 
 
 
@@ -34,7 +35,7 @@ class Room(models.Model):
 class Talker(models.Model):
 
     def __str__(self):
-        return self.guid
+        return (f'Room: {self.room} - User: {self.guid}')
 
     def choose_random_name():
         return random.choice(NAME_CHOICES)[1]
