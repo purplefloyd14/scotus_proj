@@ -66,7 +66,8 @@ var iceConfig = {
         username: "b1887ca5572e1e4e59cbf558",
         credential: "ittq9D45Yd+SuGdn"
     }
-    ]
+    ],
+    iceTransportPolicy: 'relay'
   };
 
 var xhttp = new XMLHttpRequest();
