@@ -1,2 +1,691 @@
 LOG CLEARED AND RESTARTED JAN 24, 2023
 --------------------------------------
+INFO:root: ------------------------------------------------------------------ 
+2023-02-21 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/21-1333 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-02-21 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-02-21 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-21 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-21 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-21 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-21 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-21 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-21 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-21 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-21 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-21 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-22 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/21-1496 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-02-22 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-02-22 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-22 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-22 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-22 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-22 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-22 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-22 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-22 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-22 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-22 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-23 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-23 15:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-23 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-23 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-23 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-23 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-23 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-23 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-23 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-23 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-23 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-23 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-27 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-10 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-02-27 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-02-27 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-27 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-27 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-27 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-27 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-27 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-27 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-27 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-27 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 847 items.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-28 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 2 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-506 to local XML
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-535 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-02-28 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-02-28 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-28 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-28 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-28 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-28 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-28 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-28 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-28 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-02-28 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-02-28 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-01 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/156-Orig to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-03-01 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-03-01 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-01 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-01 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-01 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-01 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-01 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-01 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-01 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-01 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-01 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-02 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-02 15:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-02 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-02 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-02 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-02 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-02 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-02 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-02 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-02 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-02 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-02 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-20 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/21-1484 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-03-20 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-03-20 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-20 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-20 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-20 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-20 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-20 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-20 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-20 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-20 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-20 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-21 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/21-1043 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-03-21 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-03-21 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-105 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-03-21 16:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-03-21 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-21 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-21 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-21 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-21 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-21 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-21 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-21 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-22 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-148 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-03-22 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-03-22 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-22 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-22 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-22 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-22 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-22 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-22 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-22 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-22 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-22 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-23 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-23 15:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-23 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-23 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-23 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-23 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-23 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-23 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-23 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-23 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-23 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-23 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-27 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/21-757 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-03-27 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-03-27 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-179 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-03-27 16:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-03-27 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-27 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-27 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-27 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-27 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-27 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-27 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-27 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-28 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 2 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/21-1576 to local XML
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-49 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-03-28 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-03-28 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-28 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-28 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-28 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-28 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-28 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-28 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-28 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-28 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-28 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-29 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 2 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-196 to local XML
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/21-1599 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-03-29 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-03-29 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-29 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-29 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-29 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-29 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-29 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-29 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-29 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-29 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-29 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-30 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-30 15:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-30 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-30 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-30 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-30 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-30 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-30 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-30 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-30 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-03-30 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-03-30 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-17 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-23 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-04-17 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-04-17 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-17 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-17 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-17 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-17 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-200 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-04-17 18:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-04-17 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-17 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-17 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-17 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-18 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 2 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-174 to local XML
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/21-1326 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-04-18 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-04-18 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-18 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-18 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-18 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-18 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-18 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-18 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-18 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-18 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-18 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-19 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-138 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-04-19 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-04-19 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-19 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-19 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-19 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-19 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-19 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-19 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-19 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-19 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-19 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-20 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-20 15:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-20 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-20 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-20 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-20 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-20 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-20 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-20 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-20 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-20 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-20 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-24 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 2 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-210 to local XML
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-227 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-04-24 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-04-24 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-24 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-24 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-24 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-24 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-24 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-24 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-24 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-24 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-24 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-25 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-381 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-04-25 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-04-25 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-25 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-25 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-25 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-25 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-25 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-25 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-25 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-25 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-25 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-26 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:We need to update. XML is missing 1 items.
+INFO:root:Making updates for 2022
+INFO:root:adding https://www.supremecourt.gov/oral_arguments/audio/2022/22-166 to local XML
+INFO:root:Finished adding new elements to local XML.
+INFO:root:Starting push to github
+INFO:root:Pushing local xml to: https://purplefloyd14.github.io/prod.xml
+INFO:root:2023-04-26 15:31 | github push complete
+INFO:root: ------------------------------------------------------------------ 
+2023-04-26 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-26 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-26 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-26 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-26 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-26 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-26 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-26 19:31 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-26 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-26 20:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-27 15:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-27 15:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-27 16:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-27 16:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-27 17:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-27 17:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-27 18:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-27 18:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-27 19:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-27 19:30 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-04-27 20:30 | Starting Update Process..
+INFO:root:Checking for updates: Comparing XML @ https://purplefloyd14.github.io/prod.xml against Court website
+INFO:root:2023-04-27 20:31 | We're good - no update needed.
+INFO:root: ------------------------------------------------------------------ 
+2023-10-02 15:30 | Starting Update Process..
+INFO:root: ------------------------------------------------------------------ 
+2023-10-02 16:30 | Starting Update Process..
+INFO:root: ------------------------------------------------------------------ 
+2023-10-02 17:30 | Starting Update Process..
+INFO:root: ------------------------------------------------------------------ 
+2023-10-02 18:30 | Starting Update Process..
+INFO:root: ------------------------------------------------------------------ 
+2023-10-02 19:30 | Starting Update Process..
+INFO:root: ------------------------------------------------------------------ 
+2023-10-02 20:30 | Starting Update Process..

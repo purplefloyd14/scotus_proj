@@ -3,7 +3,7 @@
   <channel>
     <title>The Supreme Court: Oral Arguments</title>
     <description>A public good: every Supreme Court Oral Argument since 2010. Making the Highest Court more accessible for a modern audience. If you'd like to support the law student who created this project instead of studying you can do so here: https://www.patreon.com/purplefloyd</description>
-    <itunes:image href="purplefloyd14.github.io/cover_image2.jpg" />
+    <itunes:image href="https://purplefloyd14.github.io/cover_image2.jpg" />
     <language>en-us</language>
     <itunes:category>Government</itunes:category>
     <itunes:explicit>false</itunes:explicit>
@@ -17,10 +17,285 @@
     <copyright>Unprotected Under 17 U.S. Code § 105</copyright>
     <item>
       <itunes:episodeType>full</itunes:episodeType>
+      <title>Tyler v. Hennepin County</title>
+      <description>Tyler v. Hennepin County | 04/26/23 | Docket #: 22-166</description>
+      <enclosure url="https://www.supremecourt.gov/media/audio/mp3files/22-166.mp3" length="7359" type="audio/mpeg" />
+      <guid isPermaLink="False">22-166</guid>
+      <pubDate>Wed, 26 Apr 2023 19:30:53 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-166</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Yegiazaryan v. Smagin</title>
+      <description>Yegiazaryan v. Smagin | 04/25/23 | Docket #: 22-381</description>
+      <enclosure length="20" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-381.mp3" />
+      <guid ispermalink="False">22-381</guid>
+      <pubDate>Tue, 25 Apr 2023 19:30:55 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-381</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Lac du Flambeau Band v. Coughlin</title>
+      <description>Lac du Flambeau Band v. Coughlin | 04/24/23 | Docket #: 22-227</description>
+      <enclosure length="7361" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-227.mp3" />
+      <guid ispermalink="False">22-227</guid>
+      <pubDate>Mon, 24 Apr 2023 19:30:56 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-227</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Dupree v. Younger</title>
+      <description>Dupree v. Younger | 04/24/23 | Docket #: 22-210</description>
+      <enclosure length="7354" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-210.mp3" />
+      <guid ispermalink="False">22-210</guid>
+      <pubDate>Mon, 24 Apr 2023 19:30:53 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-210</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Counterman v. Colorado</title>
+      <description>Counterman v. Colorado | 04/19/23 | Docket #: 22-138</description>
+      <enclosure length="7355" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-138.mp3" />
+      <guid ispermalink="False">22-138</guid>
+      <pubDate>Wed, 19 Apr 2023 19:30:54 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-138</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>U.S., ex rel. Schutte v. SuperValu Inc.</title>
+      <description>U.S., ex rel. Schutte v. SuperValu Inc. | 04/18/23 | Docket #: 21-1326</description>
+      <enclosure length="7370" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/21-1326.mp3" />
+      <guid ispermalink="False">21-1326</guid>
+      <pubDate>Tue, 18 Apr 2023 19:30:56 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/21-1326</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Groff v. DeJoy</title>
+      <description>Groff v. DeJoy | 04/18/23 | Docket #: 22-174</description>
+      <enclosure length="20" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-174.mp3" />
+      <guid ispermalink="False">22-174</guid>
+      <pubDate>Tue, 18 Apr 2023 19:30:54 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-174</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Slack Technologies, LLC v. Pirani</title>
+      <description>Slack Technologies, LLC v. Pirani | 04/17/23 | Docket #: 22-200</description>
+      <enclosure length="20" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-200.mp3" />
+      <guid ispermalink="False">22-200</guid>
+      <pubDate>Mon, 17 Apr 2023 22:30:54 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-200</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Pugin v. Garland</title>
+      <description>Pugin v. Garland | 04/17/23 | Docket #: 22-23</description>
+      <enclosure length="20" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-23.mp3" />
+      <guid ispermalink="False">22-23</guid>
+      <pubDate>Mon, 17 Apr 2023 19:30:54 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-23</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Karcho Polselli v. IRS</title>
+      <description>Karcho Polselli v. IRS | 03/29/23 | Docket #: 21-1599</description>
+      <enclosure length="7359" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/21-1599.mp3" />
+      <guid ispermalink="False">21-1599</guid>
+      <pubDate>Wed, 29 Mar 2023 19:30:57 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/21-1599</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Samia v. United States</title>
+      <description>Samia v. United States | 03/29/23 | Docket #: 22-196</description>
+      <enclosure length="7350" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-196.mp3" />
+      <guid ispermalink="False">22-196</guid>
+      <pubDate>Wed, 29 Mar 2023 19:30:54 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-196</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Lora v. United States</title>
+      <description>Lora v. United States | 03/28/23 | Docket #: 22-49</description>
+      <enclosure length="7350" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-49.mp3" />
+      <guid ispermalink="False">22-49</guid>
+      <pubDate>Tue, 28 Mar 2023 19:30:56 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-49</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Smith v. United States</title>
+      <description>Smith v. United States | 03/28/23 | Docket #: 21-1576</description>
+      <enclosure length="7353" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/21-1576.mp3" />
+      <guid ispermalink="False">21-1576</guid>
+      <pubDate>Tue, 28 Mar 2023 19:30:54 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/21-1576</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>United States v. Hansen</title>
+      <description>United States v. Hansen | 03/27/23 | Docket #: 22-179</description>
+      <enclosure length="7353" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-179.mp3" />
+      <guid ispermalink="False">22-179</guid>
+      <pubDate>Mon, 27 Mar 2023 20:30:52 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-179</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Amgen Inc. v. Sanofi</title>
+      <description>Amgen Inc. v. Sanofi | 03/27/23 | Docket #: 21-757</description>
+      <enclosure length="20" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/21-757.mp3" />
+      <guid ispermalink="False">21-757</guid>
+      <pubDate>Mon, 27 Mar 2023 19:30:53 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/21-757</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Jack Daniel's Properties, Inc. v. VIP Products</title>
+      <description>Jack Daniel's Properties, Inc. v. VIP Products | 03/22/23 | Docket #: 22-148</description>
+      <enclosure length="20" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-148.mp3" />
+      <guid ispermalink="False">22-148</guid>
+      <pubDate>Wed, 22 Mar 2023 19:30:51 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-148</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Coinbase, Inc. v. Bielski</title>
+      <description>Coinbase, Inc. v. Bielski | 03/21/23 | Docket #: 22-105</description>
+      <enclosure length="20" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-105.mp3" />
+      <guid ispermalink="False">22-105</guid>
+      <pubDate>Tue, 21 Mar 2023 20:30:52 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-105</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Abitron Austria GmbH v. Hetronic International, Inc.</title>
+      <description>Abitron Austria GmbH v. Hetronic International, Inc. | 03/21/23 | Docket #: 21-1043</description>
+      <enclosure length="20" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/21-1043.mp3" />
+      <guid ispermalink="False">21-1043</guid>
+      <pubDate>Tue, 21 Mar 2023 19:30:52 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/21-1043</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Arizona v. Navajo Nation</title>
+      <description>Arizona v. Navajo Nation | 03/20/23 | Docket #: 21-1484</description>
+      <enclosure length="7356" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/21-1484.mp3" />
+      <guid ispermalink="False">21-1484</guid>
+      <pubDate>Mon, 20 Mar 2023 19:30:53 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/21-1484</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>New York v. New Jersey</title>
+      <description>New York v. New Jersey | 03/01/23 | Docket #: 156-Orig</description>
+      <enclosure length="20" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/156-Orig.mp3" />
+      <guid ispermalink="False">156-Orig</guid>
+      <pubDate>Wed, 01 Mar 2023 20:30:52 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/156-Orig</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Dept. of Education v. Brown</title>
+      <description>Dept. of Education v. Brown | 02/28/23 | Docket #: 22-535</description>
+      <enclosure length="7358" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-535.mp3" />
+      <guid ispermalink="False">22-535</guid>
+      <pubDate>Tue, 28 Feb 2023 20:30:55 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-535</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Biden v. Nebraska</title>
+      <description>Biden v. Nebraska | 02/28/23 | Docket #: 22-506</description>
+      <enclosure length="20" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-506.mp3" />
+      <guid ispermalink="False">22-506</guid>
+      <pubDate>Tue, 28 Feb 2023 20:30:53 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-506</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Dubin v. United States</title>
+      <description>Dubin v. United States | 02/27/23 | Docket #: 22-10</description>
+      <enclosure length="7347" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/22-10.mp3" />
+      <guid ispermalink="False">22-10</guid>
+      <pubDate>Mon, 27 Feb 2023 20:30:53 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/22-10</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Twitter, Inc. v. Taamneh</title>
+      <description>Twitter, Inc. v. Taamneh | 02/22/23 | Docket #: 21-1496</description>
+      <enclosure length="7357" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/21-1496.mp3" />
+      <guid ispermalink="False">21-1496</guid>
+      <pubDate>Wed, 22 Feb 2023 20:30:53 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/21-1496</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
+      <title>Gonzalez v. Google LLC</title>
+      <description>Gonzalez v. Google LLC | 02/21/23 | Docket #: 21-1333</description>
+      <enclosure length="7356" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/21-1333.mp3" />
+      <guid ispermalink="False">21-1333</guid>
+      <pubDate>Tue, 21 Feb 2023 20:30:53 -0000</pubDate>
+      <link>https://www.supremecourt.gov/oral_arguments/audio/2022/21-1333</link>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:season>2022</itunes:season>
+    </item>
+    <item>
+      <itunes:episodetype>full</itunes:episodetype>
       <title>Perez v. Sturgis Public Schools</title>
       <description>Perez v. Sturgis Public Schools | 01/18/23 | Docket #: 21-887</description>
-      <enclosure url="https://www.supremecourt.gov/media/audio/mp3files/21-887.mp3" length="20" type="audio/mpeg" />
-      <guid isPermaLink="False">21-887</guid>
+      <enclosure length="20" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/21-887.mp3" />
+      <guid ispermalink="False">21-887</guid>
       <pubDate>Wed, 18 Jan 2023 20:30:52 -0000</pubDate>
       <link>https://www.supremecourt.gov/oral_arguments/audio/2022/21-887</link>
       <itunes:explicit>false</itunes:explicit>
@@ -1505,7 +1780,7 @@
       <title>Florida v. Georgia</title>
       <description>Florida v. Georgia | 02/22/21 | Docket #: 142-Orig</description>
       <enclosure length="7361" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/142-Orig_2.mp3" />
-      <guid ispermalink="False">142-Orig</guid>
+      <guid ispermalink="False">142-Orig_2</guid>
       <pubDate>Mon, 22 Feb 2021 06:05:13 -0000</pubDate>
       <link>https://www.supremecourt.gov/oral_arguments/audio/2020/142-Orig_2</link>
       <itunes:explicit>false</itunes:explicit>
@@ -2724,9 +2999,9 @@
     <item>
       <itunes:episodetype>full</itunes:episodetype>
       <title>Knick v. Township of Scott</title>
-      <description>Knick v. Township of Scott | 01/16/19 | Docket #: 17-647</description>
+      <description>Knick v. Township of Scott | 01/16/19 | Docket #: 17-647 (Reargued) </description>
       <enclosure length="7369" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/17-647rearg.mp3" />
-      <guid ispermalink="False">17-647</guid>
+      <guid ispermalink="False">17-647 (Reargued)</guid>
       <pubDate>Wed, 16 Jan 2019 06:02:05 -0000</pubDate>
       <link>https://www.supremecourt.gov/oral_arguments/audio/2018/17-647rearg</link>
       <itunes:explicit>false</itunes:explicit>
@@ -3197,9 +3472,9 @@
     <item>
       <itunes:episodetype>full</itunes:episodetype>
       <title>Jennings v. Rodriguez</title>
-      <description>Jennings v. Rodriguez | 10/03/17 | Docket #: 15-1204</description>
+      <description>Jennings v. Rodriguez | 10/03/17 | Docket #: 15-1204 (Reargued)</description>
       <enclosure length="7359" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/15-1204rearg.mp3" />
-      <guid ispermalink="False">15-1204</guid>
+      <guid ispermalink="False">15-1204 (Reargued)</guid>
       <pubDate>Tue, 03 Oct 2017 05:00:57 -0000</pubDate>
       <link>https://www.supremecourt.gov/oral_arguments/audio/2017/15-1204rearg</link>
       <itunes:explicit>false</itunes:explicit>
@@ -3219,9 +3494,9 @@
     <item>
       <itunes:episodetype>full</itunes:episodetype>
       <title>Sessions v. Dimaya</title>
-      <description>Sessions v. Dimaya | 10/02/17 | Docket #: 15-1498</description>
+      <description>Sessions v. Dimaya | 10/02/17 | Docket #: 15-1498 (Reargued) </description>
       <enclosure length="7356" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/15-1498rearg.mp3" />
-      <guid ispermalink="False">15-1498</guid>
+      <guid ispermalink="False">15-1498 (Reargued)</guid>
       <pubDate>Mon, 02 Oct 2017 05:00:54 -0000</pubDate>
       <link>https://www.supremecourt.gov/oral_arguments/audio/2017/15-1498rearg</link>
       <itunes:explicit>false</itunes:explicit>
@@ -5452,9 +5727,9 @@
     <item>
       <itunes:episodetype>full</itunes:episodetype>
       <title>Johnson v. United States</title>
-      <description>Johnson v. United States | 11/05/14 | Docket #: 13-7120</description>
+      <description>Johnson v. United States | 11/05/14 | Docket #: 13-7120 (Reargument)</description>
       <enclosure length="7354" type="audio/mpeg" url="https://www.supremecourt.gov/media/audio/mp3files/13-7120rearg.mp3" />
-      <guid ispermalink="False">13-7120</guid>
+      <guid ispermalink="False">13-7120 (Reargument) </guid>
       <pubDate>Wed, 05 Nov 2014 05:55:46 -0000</pubDate>
       <link>https://www.supremecourt.gov/oral_arguments/audio/2014/13-7120rearg</link>
       <itunes:explicit>false</itunes:explicit>
